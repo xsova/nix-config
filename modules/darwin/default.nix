@@ -2,7 +2,7 @@
 
 {
   imports = [ 
-    ../shared/users
+    ../common/users
     ./homebrew
     ./system
     ./skhd
