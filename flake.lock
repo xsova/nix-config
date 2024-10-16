@@ -68,7 +68,7 @@
         "type": "github"
       }
     },
-    "home": {
+    "home-manager": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -230,7 +230,7 @@
     "root": {
       "inputs": {
         "hardware": "hardware",
-        "home": "home",
+        "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nix-index": "nix-index",
         "nixpkgs": "nixpkgs",
