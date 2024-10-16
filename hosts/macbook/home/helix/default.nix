@@ -3,9 +3,9 @@
 {
   programs.helix = {
     enable = true;
-    catppuccin.enable = true;
     settings = {      
       editor = {
+        theme = "catppuccin-macchiatto";
         mouse = true;
         auto-save = true;
         cursorline = false;

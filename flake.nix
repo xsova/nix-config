@@ -6,7 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     
     # Include Home Manager and make it follow (mirro) the version nixpkgs uses.
-    home = {
+    home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -41,6 +41,7 @@
           { system.configurationRevision = self.rev or self.dirtyRev or null; }
           nix-index.darwinModules.nix-index
           ./hosts/macbook/modules/default.nix
+          home-manager.darwinModules.home-manager
           ./hosts/macbook/home/default.nix
         ];
       };
