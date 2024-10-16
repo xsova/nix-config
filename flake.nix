@@ -16,11 +16,19 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    
+    # Tool to quickly locate the package providing a certain file in nixpkgs.
     nix-index = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows  = "nixpkgs";
     };
+
+    # Source urls for things not in nixpkgs / that I want a different or more up-to-date version of.
+    pinix.url = "github:remi-dupre/pinix"; # Tool to see nix rebuild progress similar to pacman in Arch linux.
+    wezterm.url = "github:wez/wezterm?dir=nix"; # Tmuxer and terminal emulator.
+
+    # Firmware/tools that are device specific for nixOS.
+    hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = inputs: {
@@ -44,6 +52,7 @@
         modules = [
           { system.configurationRevision = self.rev or self.dirtyRev or null; }
           nix-index.nixosModules.nix-index
+          hardware.nixosModules.framework-13-7040-amd # Specifically utilizing module for AMD Framework Laptop 13
           ./hosts/framework/modules/default.nix
           ./hosts/framework/home/default.nix
         ];
