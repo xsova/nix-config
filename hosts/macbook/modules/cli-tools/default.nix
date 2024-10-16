@@ -18,7 +18,9 @@
     lsd
     lsof
     ripgrep
+    tree
     unzip
     wget
+    home-manager
   ];
 }

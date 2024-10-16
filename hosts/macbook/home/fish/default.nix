@@ -25,7 +25,6 @@
       "gsh" = "git stash";
       "gst" = "git status -sb";
       "gwhoami" = "echo \"user.name: \" (git config user.name) && echo \"user.email: (git config user.email)\"";
-      "rg" = "batgrep";
       "fzf" = {
         setCursor = true;
         expansion = "fzf --preview \"bat --color=always --style=numbers --line-range=:500 {}\"";
@@ -68,6 +67,7 @@
         setCursor = true;
         expansion = "cd ~/Developer/Github/%";
       };
+      "d" = "(cd ~/nix && git add -A) && darwin-rebuild switch --flake ~/nix#macbook";
     };
     functions = {
       parse_nix = ''
@@ -80,19 +80,10 @@
         '';
     };
     shellInit = ''
-      set -q XDG_CONFIG_HOME;    or set -Ux XDG_CONFIG_HOME $HOME/.config
-      set -q XDG_DATA_HOME;      or set -Ux XDG_DATA_HOME $HOME/.local/share
-      set -q XDG_STATE_HOME;     or set -Ux XDG_STATE_HOME $HOME/.local/state
-      set -q XDG_CACHE_HOME;     or set -Ux XDG_CACHE_HOME $HOME/.cache
       set -q __fish_config_dir;  or set -Ux __fish_config_dir $XDG_CONFIG_HOME/fish
       set -q __fish_data_dir;    or set -Ux __fish_data_dir $XDG_DATA_HOME/fish
       set -q __fish_cache_dir;   or set -Ux __fish_cache_dir $XDG_CACHE_HOME/fish
       set -q __fish_plugins_dir; or set -Ux __fish_plugins_dir $__fish_config_dir/plugins
-      set -q EDITOR;             or set -gx EDITOR hx
-      set -q VISUAL;             or set -gx VISUAL code
-      set -q MANPAGER;           or set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
-      set -q HOSTNAME;           or set -gx HOSTNAME (hostname -s)
-      set -q IWD;                or set -g  IWD $PWD
       set -q fisher_path;        or set -gx fisher_path $__fish_config_dir/.fisher
       
       fish_add_path --path ~/.local/bin

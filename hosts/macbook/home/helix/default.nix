@@ -4,8 +4,8 @@
   programs.helix = {
     enable = true;
     settings = {      
+      theme = "catppuccin_macchiato";
       editor = {
-        theme = "catppuccin-macchiatto";
         mouse = true;
         auto-save = true;
         cursorline = false;

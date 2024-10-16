@@ -6,7 +6,7 @@ components = [
   "rustc-codegen-cranelift", 
   "miri", 
   "llvm-tools", 
-  "rust-docs-json" 
+  "rust-docs-json", 
 ]
 targets = [
   # "wasm32-unknown-unknown",
