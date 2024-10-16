@@ -9,8 +9,8 @@
     ./cli-tools
     ./programming-languages
     ./rust
+    ./services/default.nix
   ];
   system.stateVersion = 5;
-  services.nix-daemon.enable = true;
 }
 
