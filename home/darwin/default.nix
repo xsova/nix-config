@@ -2,10 +2,10 @@
 
 {
   imports = [
-    inputs.catppuccin.homeManagerModules.catppuccin
+    # inputs.catppuccin.homeManagerModules.catppuccin
     ../shared
     ./skhd/default.nix
     ./yabai/default.nix
   ];
-  system.stateVersion = 5;
+  # system.stateVersion = 5;
 }

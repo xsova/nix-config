@@ -2,134 +2,45 @@
   description = "Nix flake for NixOS on a laptop, desktop, server, and Macbook (NixDarwin)";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager = {
+    # Specify the nixpkgs repository to use.
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    
+    # Include Home Manager and make it follow (mirro) the version nixpkgs uses.
+    home = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    darwin = {
-      url = "github:lnl7/nix-darwin/master";
+
+    # Include Nix Darwin and make it follow nixpkgs.
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hyprland.url = "github:hyprwm/Hyprland";
-    agenix.url = "github:ryantm/agenix";
-    nix-colors.url = "github:misterio77/nix-colors";
-    index = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = inputs:
-    let
-      user = "bryce";
-      hostName1 = "framework";
-      hostName2 = "srv";
-      hostName3 = "desktop";
-      hostName4 = "macbook";
-    in with inputs;
-    {
-      nixosConfigurations = {
-        ${hostName1} = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/framework/default.nix
-            catppuccin.nixosModules.catppuccin
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.${user} = import ./home/framework/default.nix;
-              extraSpecialArgs = { inherit inputs; };
-            }
-          ];
-        };
-
-        ${hostName2} = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/server/default.nix
-            catppuccin.nixosModules.catppuccin
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.${user} = import ./home/server/default.nix;
-              extraSpecialArgs = { inherit inputs; };
-            }
-          ];
-        };
-
-        ${hostName3} = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/desktop/default.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.${user} = import ./home/desktop/default.nix;
-              extraSpecialArgs = { inherit inputs; };
-            }
-          ];
-        };
-      };
-
-      darwinConfigurations = {
-        ${hostName4} = darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/macbook
-            index.darwinModules.nix-index
-            home-manager.darwinModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.${user} = import ./home/darwin;
-              extraSpecialArgs = { inherit inputs; };
-            }
-          ];
-        };
-      };
-
-      homeConfigurations = {
-        "${user}@${hostName1}" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit outputs; };
-          modules = [
-            ./home/framework/default.nix
-          ];
-        };
-        "${user}@${hostName2}" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit outputs; };
-          modules = [
-            ./home/server/default.nix
-          ];
-        };
-        "${user}@${hostName3}" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit outputs; };
-          modules = [
-            ./home/desktop/default.nix
-          ];
-        };
-        "${user}@${hostName4}" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-          extraSpecialArgs = { inherit outputs; };
-          modules = [
-            ./home/darwin/default.nix
-          ];
-        };
+  outputs = inputs: {
+    # `with` is similar to `using namespace` in c++
+    nixosConfigurations = with inputs; { 
+      framework = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; }; # Allows modules to use inputs as args
+        modules = [
+          { system.configurationRevision = self.rev or self.dirtyRev or null; }
+          ./hosts/framework/modules/default.nix
+          ./hosts/framework/home/default.nix
+        ];
       };
     };
+    darwinConfigurations = with inputs; {
+      macbook = nixpkgs.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = { inherit inputs; };
+        modules = [
+          { system.configurationRevision = self.rev or self.dirtyRev or null; }
+          ./hosts/macbook/modules/default.nix
+          ./hosts/macbook/home/default.nix
+        ];
+      };
+    };
+  };
 }

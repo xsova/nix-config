@@ -15,8 +15,8 @@
     htop.enable = true;
   };
 
-  catppuccin = {
-    enable = true;
-    flavor = true;
-  };
+  # catppuccin = {
+  #   enable = true;
+  #   flavor = true;
+  # };
 }
