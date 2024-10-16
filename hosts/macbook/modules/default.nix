@@ -9,8 +9,9 @@
     ./cli-tools
     ./programming-languages
     ./rust
-    ./services/default.nix
+    ./services
+    ./system
+    ./security # TODO: Check out nix-darwin security options
   ];
-  system.stateVersion = 5;
 }
 
