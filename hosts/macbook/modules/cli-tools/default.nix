@@ -3,20 +3,22 @@
 {
   environment.systemPackages = with pkgs; [
     autojump
+    bat
     coreutils
     curl
-    wget
     diffutils
-    git
     gawk
-    gzip
+    git
     gnugrep
     gnumake
     gnused
+    gzip
     jq
     killall
     lsd
     lsof
+    ripgrep
     unzip
+    wget
   ];
 }
