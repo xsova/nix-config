@@ -32,7 +32,7 @@
       };
     };
     darwinConfigurations = with inputs; {
-      macbook = nixpkgs.lib.darwinSystem {
+      macbook = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = { inherit inputs; };
         modules = [
