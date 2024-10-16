@@ -16,9 +16,26 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-index = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows  = "nixpkgs";
+    };
   };
 
   outputs = inputs: {
+    darwinConfigurations = with inputs; {
+      macbook = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = { inherit inputs; };
+        modules = [
+          { system.configurationRevision = self.rev or self.dirtyRev or null; }
+          nix-index.darwinModules.nix-index
+          ./hosts/macbook/modules/default.nix
+          ./hosts/macbook/home/default.nix
+        ];
+      };
+    };
     # `with` is similar to `using namespace` in c++
     nixosConfigurations = with inputs; { 
       framework = nixpkgs.lib.nixosSystem {
@@ -26,19 +43,9 @@
         specialArgs = { inherit inputs; }; # Allows modules to use inputs as args
         modules = [
           { system.configurationRevision = self.rev or self.dirtyRev or null; }
+          nix-index.nixosModules.nix-index
           ./hosts/framework/modules/default.nix
           ./hosts/framework/home/default.nix
-        ];
-      };
-    };
-    darwinConfigurations = with inputs; {
-      macbook = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = { inherit inputs; };
-        modules = [
-          { system.configurationRevision = self.rev or self.dirtyRev or null; }
-          ./hosts/macbook/modules/default.nix
-          ./hosts/macbook/home/default.nix
         ];
       };
     };
