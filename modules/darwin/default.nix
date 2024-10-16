@@ -3,18 +3,18 @@
 {
   imports = [ 
     ../common/users
-    ./homebrew
-    ./system
-    ./skhd
-    ./programming-languages
-    ./lsp
+    # ./homebrew
+    # ./system
+    # ./skhd
+    # ./programming-languages
+    # ./lsp
     ./fonts
-    ./gc
-    ./nix-settings
-    ./services
-    ./rust
-    ./vpn
-    ./packages
+    # ./gc
+    # ./nix-settings
+    # ./services
+    # ./rust
+    # ./vpn
+    # ./packages
   ];
 
 

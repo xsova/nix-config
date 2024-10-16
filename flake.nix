@@ -18,6 +18,11 @@
     hyprland.url = "github:hyprwm/Hyprland";
     agenix.url = "github:ryantm/agenix";
     nix-colors.url = "github:misterio77/nix-colors";
+    index = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = inputs:
@@ -35,6 +40,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./hosts/framework/default.nix
+            catppuccin.nixosModules.catppuccin
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -50,6 +56,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./hosts/server/default.nix
+            catppuccin.nixosModules.catppuccin
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
