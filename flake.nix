@@ -26,6 +26,7 @@
     # Source urls for things not in nixpkgs / that I want a different or more up-to-date version of.
     pinix.url = "github:remi-dupre/pinix"; # Tool to see nix rebuild progress similar to pacman in Arch linux.
     wezterm.url = "github:wez/wezterm?dir=nix"; # Tmuxer and terminal emulator.
+    rust-overlay.url = "github:oxalica/rust-overlay";
 
     # Firmware/tools that are device specific for nixOS.
     hardware.url = "github:NixOS/nixos-hardware/master";
