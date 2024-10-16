@@ -6,6 +6,7 @@
     onActivation.cleanup = "zap";
     global.autoUpdate = true;
     brews = [
+      "ollama"
       "borders"
       "qmk/qmk/qmk"
     ];

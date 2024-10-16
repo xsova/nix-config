@@ -12,6 +12,7 @@
     ./services
     ./system
     ./security # TODO: Check out nix-darwin security options
+    ./users
   ];
 }
 
