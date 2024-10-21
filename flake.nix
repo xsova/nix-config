@@ -15,8 +15,13 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows  = "nixpkgs";
     };
-    pinix.url = "github:remi-dupre/pinix"; # Tool to see nix rebuild progress similar to pacman in Arch linux.
-    wezterm.url = "github:wez/wezterm?dir=nix"; # Tmuxer and terminal emulator.
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+    pinix.url = "github:remi-dupre/pinix";
+    wezterm.url = "github:wez/wezterm?dir=nix";
     rust-overlay.url = "github:oxalica/rust-overlay";
     hardware.url = "github:NixOS/nixos-hardware/master";
   };
@@ -34,17 +39,16 @@
         ];
       };
     };
-    # `with` is similar to `using namespace` in c++
     nixosConfigurations = with inputs; { 
       framework = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; }; # Allows modules to use inputs as args
+        specialArgs = { inherit inputs; };
         modules = [
           { system.configurationRevision = self.rev or self.dirtyRev or null; }
+          home-manager.nixosModules.home-manager
           nix-index.nixosModules.nix-index
-          hardware.nixosModules.framework-13-7040-amd # Specifically utilizing module for AMD Framework Laptop 13
-          ./hosts/framework/modules/default.nix
-          ./hosts/framework/home/default.nix
+          hardware.nixosModules.framework-13-7040-amd
+          ./hosts/framework
         ];
       };
     };
