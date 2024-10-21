@@ -35,7 +35,7 @@
           { system.configurationRevision = self.rev or self.dirtyRev or null; }
           nix-index.darwinModules.nix-index
           home-manager.darwinModules.home-manager
-          ./hosts/macbook/modules/default.nix
+          ./hosts/macbook
         ];
       };
     };
