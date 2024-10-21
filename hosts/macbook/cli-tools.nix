@@ -22,5 +22,7 @@
     unzip
     wget
     home-manager
+    m-cli
+    gh
   ];
 }

@@ -3,6 +3,9 @@
 {
   programs.fish = {
     enable = true;
+    shellAliases = {
+      "darwin-rebuild" = "sudo pinix darwin-rebuild"
+    };
     shellAbbrs = {
       "cdd" = {
         setCursor = true;
