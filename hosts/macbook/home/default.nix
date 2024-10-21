@@ -2,18 +2,17 @@
 
 {
   home-manager = {
-    # useUserPackages = true;
     useGlobalPkgs = true;
     users.bryce = {
       imports = [
-        ./home
-        ./helix
-        ./programs
-        ./path
-        ./env
-        ./fish
-        ./wezterm
-        ./zellij
+        ./home.nix
+        ./helix.nix
+        ./programs.nix
+        ./path.nix
+        ./env.nix
+        ./fish.nix
+        ./wezterm.nix
+        ./zellij.nix
       ];
     };
   };

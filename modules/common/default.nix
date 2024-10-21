@@ -2,16 +2,16 @@
 
 {
   imports = [
-    ./nix-settings
-    ./users
-    ./home-manager
-    ./networking
-    ./security/default.nix # FIXME: Add in security hardening stuff that is common
-    ./locale
-    ./fonts
-    ./services
-    ./packages
-    ./time
-    ./system
+    ./nix-settings.nix
+    ./users.nix
+    ./home-manager.nix
+    ./networking.nix
+    ./security.nix # FIXME: Add in security hardening stuff that is common
+    ./locale.nix
+    ./fonts.nix
+    ./services.nix
+    ./packages.nix
+    ./time.nix
+    ./system.nix
   ];
 }
