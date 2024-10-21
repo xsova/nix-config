@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ../home/default.nix
     ./homebrew.nix
     ./lsp.nix
     ./devtools.nix
