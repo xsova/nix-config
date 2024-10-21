@@ -5,9 +5,9 @@
     ./homebrew.nix
     ./lsp.nix
     ./devtools.nix
-    ./nix.nix-settings
-    ./cli.nix-tools
-    ./programming.nix-languages
+    ./nix-settings.nix
+    ./cli-tools.nix
+    ./programming-languages.nix
     ./rust.nix
     ./services.nix
     ./system.nix
