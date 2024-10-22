@@ -9,8 +9,7 @@
       hyprexpo
     ];
     systemd = {
-      variables = [ "--all" ];
-      extraCommands = [
+      variables = [ "--all" ]; extraCommands = [
         "systemctl --user stop graphical-session.target"
         "systemctl --user start hyprland-session.target"
       ];
@@ -97,7 +96,6 @@
           gesture_distance = 300;
           gesture_positive = false;
         };
-      };
       bindm = [
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resizewindow"
@@ -138,5 +136,6 @@
         )
         10)
       );
+      };
     };
 }

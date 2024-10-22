@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ../../home/hyprland.nix
     ./boot.nix
     ./configuration.nix
     ./desktop.nix

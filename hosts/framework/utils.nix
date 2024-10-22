@@ -7,6 +7,7 @@
     neovim
     helix
     wget
+    ollama
     git
     curl
     htop
@@ -33,4 +34,5 @@
     fish.enable = true;
     starship.enable = true;
   };
+  services.ollama.enable = true;
 }

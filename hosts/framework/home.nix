@@ -6,6 +6,7 @@
     users.bryce.home.stateVersion = "24.05";
     extraSpecialArgs = { inherit inputs; };
     useGlobalPkgs = true;
+    
     users.bryce = {
       imports = [
         # ../../home/hyprland.nix
@@ -17,7 +18,9 @@
         ../../home/fish.nix
         ../../home/wezterm.nix
         # ../../home/zellij.nix
+        ../../home/hyprland.nix
       ];
+     
       xdg.userDirs = {
           enable = true;
           createDirectories = true;
