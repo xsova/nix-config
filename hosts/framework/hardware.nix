@@ -3,6 +3,7 @@
 {
   programs.light.enable = true;
   hardware = {
+    bluetooth.enable = false;
     wirelessRegulatoryDatabase = true;
     cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
     keyboard.qmk.enable = true;
@@ -22,18 +23,31 @@
     };
   };
   environment.systemPackages = with pkgs; [
+    # Screen
     wlsunset
     brightnessctl
+
+    # Keyboard
     qmk-udev-rules
+
+    # Mobo/kernel
     linuxKernel.packages.linux_zen.framework-laptop-kmod
     linux-firmware
+
+    # Audio
     alsa-lib
     alsa-utils
     flac
     pulsemixer
-    brightnessctl
   ];
-  services.fstrim.enable = true;
+  services = {
+    fstrim.enable = true;
+    fprintd = {
+      enable = true;
+      tod.enable = true;
+      tod.driver = pkgs.libfprint-2-tod1-goodix-550a;
+    };
+  };
   powerManagement.powertop.enable = false;
   services.power-profiles-daemon.enable = true;
   boot.extraModprobeConfig = ''

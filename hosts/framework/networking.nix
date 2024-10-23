@@ -1,7 +1,6 @@
 { pkgs, ... }:
 
 {
-  # Enable Encrypted DNS
   networking = {
     networkmanager = {
       enable = true;
@@ -32,6 +31,7 @@
     dhcpcd.extraConfig = "nohook resolv.conf";
     networkmanager.dns = "none";
   };
+  # DNS
   services.dnscrypt-proxy2 = {
     enable = true;
     settings = {
@@ -52,8 +52,4 @@
   systemd.services.dnscrypt-proxy2.serviceConfig = {
     StateDirectory = "dnscrypt-proxy";
   };
-  environment.systemPackages = with pkgs; [
-    iwgtk
-    impala
-  ];
 }

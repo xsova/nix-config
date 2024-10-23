@@ -5,7 +5,7 @@
     enable = true;
     extraConfig = ''
       return {      
-        front_end = "WebGpu",
+        enable_wayland = true,
         font = wezterm.font('JetBrains Mono'),
         window_padding = {
           left = 15,

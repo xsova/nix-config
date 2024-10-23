@@ -1,15 +1,6 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    wezterm
-    firefox
-    vscode
-    gimp
-    libreoffice
-    mullvad-browser
-  ];
-
   services = {
     pipewire = {
       enable = true;
@@ -26,24 +17,19 @@
       autoRepeatDelay = 200;
       autoRepeatInterval = 30;
     };
+    keyd = {
+      enable = true;
+      keyboards = {
+        default = {
+          ids = [ "*" ];
+          settings.main = {
+            capslock = "overload(control, esc)";
+          };
+        };
+      };
+    };  
     libinput.enable = true;
   };
   console.useXkbConfig = true;
-  services.keyd = {
-    enable = true;
-    keyboards = {
-      default = {
-        ids = [ "*" ];
-        settings.main = {
-          capslock = "overload(control, esc)";
-        };
-      };
-    };
-  };
-  hardware = {
-    # pulseaudio.enable = true;
-    bluetooth.enable = true;
-  };
-
   security.rtkit.enable = true;
 }

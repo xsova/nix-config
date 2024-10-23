@@ -3,12 +3,12 @@
 {
   imports = [
     ./boot.nix
+    ./cli.nix
     ./configuration.nix
     ./desktop.nix
-    ./devtools.nix
     ./display-manager.nix
     ./environment-variables.nix
-    ./fingerprint-scanner.nix
+    ./gui.nix
     ./hardware-configuration.nix
     ./hardware.nix
     ./home.nix
@@ -16,12 +16,12 @@
     ./locale.nix
     ./lsp.nix
     ./networking.nix
+    ./programs.nix
     ./programming-languages.nix
-    ./sound.nix
     ./security.nix
     ./services.nix
+    ./sound.nix
     ./ssh.nix
-    ./utils.nix
     ./wayland.nix
   ];
 }
