@@ -127,6 +127,14 @@
             workingDirectory.mode = "auto";
           };
         };
+        emmet-lsp = {
+          command = "emmet-language-server";
+          args = [ "--stdio" ];
+        };
+        copilot = {
+          command = "helix-gpt";
+          args = [ "--handler" "copilot" "--copilotApiKey" "" ];
+        };
       };
     };
   }; 

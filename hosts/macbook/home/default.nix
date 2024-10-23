@@ -6,6 +6,7 @@
     users.bryce = {
       imports = [
         ./home.nix
+        ./alacritty.nix
         ./helix.nix
         ./programs.nix
         ./path.nix

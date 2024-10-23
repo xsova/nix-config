@@ -24,6 +24,8 @@
     wezterm.url = "github:wez/wezterm?dir=nix";
     rust-overlay.url = "github:oxalica/rust-overlay";
     hardware.url = "github:NixOS/nixos-hardware/master";
+    ragenix.url = "github:yaxitech/ragenix";
+    # secrets = { url = "github:xsova/nix-secrets"; flake = false; };
   };
 
   outputs = inputs: {
@@ -34,7 +36,7 @@
         modules = [
           { system.configurationRevision = self.rev or self.dirtyRev or null; }
           nix-index.darwinModules.nix-index
-          home-manager.darwinModules.home-manager
+          home-manager.darwinModules.home-manager { imports = [ ./hosts/macbook/home ]; }
           ./hosts/macbook
         ];
       };

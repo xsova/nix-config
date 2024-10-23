@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="664ebc6b-9f13-496a-a83b-cee9cbe9641d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/flake.lock" beforeDir="false" afterPath="$PROJECT_DIR$/flake.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flake.nix" beforeDir="false" afterPath="$PROJECT_DIR$/flake.nix" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/fish.nix" beforeDir="false" afterPath="$PROJECT_DIR$/home/fish.nix" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/home.nix" beforeDir="false" afterPath="$PROJECT_DIR$/home/home.nix" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hosts/macbook/default.nix" beforeDir="false" afterPath="$PROJECT_DIR$/hosts/macbook/default.nix" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hosts/macbook/home.nix" beforeDir="false" afterPath="$PROJECT_DIR$/hosts/macbook/home.nix" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/common/default.nix" beforeDir="false" afterPath="$PROJECT_DIR$/modules/common/default.nix" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/common/devtools.nix" beforeDir="false" afterPath="$PROJECT_DIR$/modules/common/devtools.nix" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/common/fonts.nix" beforeDir="false" afterPath="$PROJECT_DIR$/modules/nixos/fonts.nix" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/common/home-manager.nix" beforeDir="false" afterPath="$PROJECT_DIR$/modules/common/home-manager.nix" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/common/packages.nix" beforeDir="false" afterPath="$PROJECT_DIR$/modules/common/packages.nix" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/common/programming-languages.nix" beforeDir="false" afterPath="$PROJECT_DIR$/modules/common/programming-languages.nix" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/darwin/default.nix" beforeDir="false" afterPath="$PROJECT_DIR$/modules/darwin/default.nix" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/darwin/yabai.nix" beforeDir="false" afterPath="$PROJECT_DIR$/modules/darwin/yabai.nix" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2nkiBTugpokNNXcXUIsTTu2wYse" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/modules/nixos" />
+      <recent name="$PROJECT_DIR$/home" />
+      <recent name="$PROJECT_DIR$/modules/darwin" />
+      <recent name="$PROJECT_DIR$/modules/common" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="664ebc6b-9f13-496a-a83b-cee9cbe9641d" name="Changes" comment="" />
+      <created>1729523338665</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729523338665</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

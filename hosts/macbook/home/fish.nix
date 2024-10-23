@@ -4,7 +4,7 @@
   programs.fish = {
     enable = true;
     shellAliases = {
-      "darwin-rebuild" = "sudo pinix darwin-rebuild"
+      "darwin-rebuild" = "pinix darwin-rebuild";
     };
     shellAbbrs = {
       "cdd" = {

@@ -25,7 +25,7 @@
       # hyper = cmd + ctrl + shift + opt(alt)
       
       # Open terminal
-      cmd - return               : wezterm-gui
+      cmd - return               : alacritty
       cmd + shift - return       : open -a "Arc"
       cmd + shift + alt - return : open -a "Aqua"
       hyper - return             : open -a "Terminal"

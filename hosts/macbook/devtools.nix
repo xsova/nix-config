@@ -7,5 +7,6 @@
     gnumake # FOSS make
     wezterm # Terminal emulator
     zellij # Terminal multiplexer
+    alacritty
   ];
 }

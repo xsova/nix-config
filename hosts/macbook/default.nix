@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./secrets.nix
     ./homebrew.nix
     ./lsp.nix
     ./devtools.nix
