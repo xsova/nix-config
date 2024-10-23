@@ -3,6 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     kitty
+    tig
     vim
     neovim
     helix

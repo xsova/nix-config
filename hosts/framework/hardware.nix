@@ -25,7 +25,8 @@
     pkgs.linuxKernel.packages.linux_zen.framework-laptop-kmod
   ];
   services.fstrim.enable = true;
-  powerManagement.powertop.enable = true;
+  powerManagement.powertop.enable = false;
+  services.power-profiles-daemon.enable = true;
   boot.extraModprobeConfig = ''
     blacklist noveau
     options noveau modeset=0
@@ -42,4 +43,5 @@
   '';
   boot.blacklistedKernelModules = [ "nouveau" "nvidia" "nvidia_drm" "nvidia_modeset" ];
   zramSwap.enable = true;
+  services.colord.enable = true;
 }

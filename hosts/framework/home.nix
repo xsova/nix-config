@@ -18,6 +18,7 @@
         ../../home/fish.nix
         ../../home/wezterm.nix
         # ../../home/zellij.nix
+        ../../home/framework.nix
         ../../home/hyprland.nix
         ../../home/hyprlock.nix
       ];
