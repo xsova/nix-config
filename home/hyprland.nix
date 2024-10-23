@@ -16,15 +16,23 @@
     };
     settings = {
       "$mod" = "SUPER";
-      general = {
-        gaps_in = 5;
-        gaps_out = 5;
-        border_size = 1;
-        "col.active_border"   = "rgba(88888888)";
-        "col.inactive_border" = "rgba(00000088)";
-        allow_tearing = true;
-        resize_on_border = true;
-      };
+      # general = {
+      #   gaps_in = 5;
+      #   gaps_out = 5;
+      #   border_size = 1;
+      #   "col.active_border"   = "rgba(88888888)";
+      #   "col.inactive_border" = "rgba(00000088)";
+      #   allow_tearing = true;
+      #   resize_on_border = true;
+      #   lock_cmd = "pidof hyprlock || hyprlock";
+      #   before_sleep_command = "loginctl lock-session";
+      #   after_sleep_command = "hyprctl dispatch dpms on";
+      # };
+      # listener = {
+      #   timeout = 180;
+      #   on-timeout = "brightnessctl -s set 15%";
+      #   on-resume = "brightnessctl -r";
+      # };
       decoration = {
         rounding = 16;
         blur = {
@@ -88,14 +96,14 @@
         #     "rgb()"
         #   ];
         };
-        hyprexpo = {
-          columns = 3;
-          gap_size = 4;
-          bg_col = "rgb(00000000)";
-          enable_gesture = true;
-          gesture_distance = 300;
-          gesture_positive = false;
-        };
+        # hyprexpo = {
+        #   columns = 3;
+        #   gap_size = 4;
+        #   bg_col = "rgb(00000000)";
+        #   enable_gesture = true;
+        #   gesture_distance = 300;
+        #   gesture_positive = false;
+        # };
       bindm = [
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resizewindow"

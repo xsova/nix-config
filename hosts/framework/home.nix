@@ -19,6 +19,7 @@
         ../../home/wezterm.nix
         # ../../home/zellij.nix
         ../../home/hyprland.nix
+        ../../home/hyprlock.nix
       ];
      
       xdg.userDirs = {
