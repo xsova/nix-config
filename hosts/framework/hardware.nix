@@ -1,6 +1,7 @@
 { pkgs, config, ... }:
 
 {
+  programs.light.enable = true;
   hardware = {
     wirelessRegulatoryDatabase = true;
     cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
@@ -20,9 +21,17 @@
       ];
     };
   };
-  environment.systemPackages = [
-    pkgs.qmk-udev-rules
-    pkgs.linuxKernel.packages.linux_zen.framework-laptop-kmod
+  environment.systemPackages = with pkgs; [
+    wlsunset
+    brightnessctl
+    qmk-udev-rules
+    linuxKernel.packages.linux_zen.framework-laptop-kmod
+    linux-firmware
+    alsa-lib
+    alsa-utils
+    flac
+    pulsemixer
+    brightnessctl
   ];
   services.fstrim.enable = true;
   powerManagement.powertop.enable = false;

@@ -6,6 +6,7 @@
     ./configuration.nix
     ./desktop.nix
     ./devtools.nix
+    ./display-manager.nix
     ./environment-variables.nix
     ./fingerprint-scanner.nix
     ./hardware-configuration.nix
@@ -16,11 +17,11 @@
     ./lsp.nix
     ./networking.nix
     ./programming-languages.nix
-    ./screen.nix
     ./sound.nix
     ./security.nix
     ./services.nix
     ./ssh.nix
     ./utils.nix
+    ./wayland.nix
   ];
 }

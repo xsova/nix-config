@@ -25,15 +25,15 @@
   };
   services.fail2ban.enable = true;
   security.pam.services.hyprlock = {};
-  # security.polkit.enable = true;
+  security.polkit.enable = true;
   programs.browserpass.enable = true;
   services.clamav = {
     daemon.enable = true;
-    fangfrisch.enable = true;
-    fangfrisch.interval = "daily";
-    updater.enable = true;
-    updater.interval = "daily"; #man systemd.time
-    updater.frequency = 12;
+    # fangfrisch.enable = true;
+    # fangfrisch.interval = "daily";
+    # updater.enable = true;
+    # updater.interval = "daily"; #man systemd.time
+    # updater.frequency = 12;
   };
   programs.firejail = {
     enable = true;

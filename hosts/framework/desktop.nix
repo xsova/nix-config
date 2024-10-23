@@ -19,9 +19,26 @@
     };
     xserver = {
       enable = true;
-      xkb.layout = "us";
+      xkb = {
+        layout = "us";
+        options = "caps:escape";
+      };
+      autoRepeatDelay = 200;
+      autoRepeatInterval = 30;
     };
     libinput.enable = true;
+  };
+  console.useXkbConfig = true;
+  services.keyd = {
+    enable = true;
+    keyboards = {
+      default = {
+        ids = [ "*" ];
+        settings.main = {
+          capslock = "overload(control, esc)";
+        };
+      };
+    };
   };
   hardware = {
     # pulseaudio.enable = true;
