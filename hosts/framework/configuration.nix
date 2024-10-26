@@ -33,6 +33,14 @@
       shell = pkgs.fish;
       home = "/home/bryce";
     };
+    ethan = {
+      initialPassword = "poop";
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+      name = "ethan";
+      shell = pkgs.fish;
+      home = "/home/ethan";
+    };
   };
   
   time.timeZone = "America/Chicago";

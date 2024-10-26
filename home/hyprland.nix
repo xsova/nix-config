@@ -111,7 +111,8 @@
       ];
       bind = [
         "$mod, F, exec, firefox"
-        "$mod, RETURN, exec, wezterm start --always-new-process"
+        "$mod, SPACE, exec, rofi -show drun"
+        "$mod, RETURN, exec, alacritty"
         "$mod, D, exec, rofi -show drun"
         "$mod, Q, killactive"
         "$mod, G, togglegroup"
