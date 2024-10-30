@@ -1,7 +1,6 @@
 { ... }:
 
 {
-  programs.zellij = {
-  };
+  programs.zellij = {};
 }
 

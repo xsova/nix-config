@@ -2,6 +2,9 @@
 
 {
   environment.systemPackages = with pkgs; [
+    gnupg
+    direnv
+    openssh
     autojump
     bat
     coreutils
@@ -24,5 +27,6 @@
     home-manager
     m-cli
     gh
+    yubikey-agent
   ];
 }

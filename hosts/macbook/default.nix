@@ -16,6 +16,7 @@
     ./users.nix
     ./skhd.nix
     ./yabai.nix
+    ./jankyborders.nix
     ./pinix.nix
   ];
 }

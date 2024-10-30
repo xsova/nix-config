@@ -1,6 +1,8 @@
-{ ... }:
+{ lib, pkgs, ... }:
 
 {
+  launchd.user.agents.yabai.serviceConfig.EnvironmentVariables.SHELL = lib.getExe pkgs.dash;
+  launchd.user.agents.skhd.serviceConfig.EnvironmentVariables.SHELL = lib.getExe pkgs.dash;
   services.skhd = {
     skhdConfig = ''
       # CONFIGURATION FOR SKHD -- Keybindings for yabai wm and other stuff.
@@ -24,18 +26,46 @@
       # I don't have a number row on my base layer, and use thumb keys to access arrows, symbols, numbers, f-keys, etc. All keys are distange <= 1 from homerow
       # hyper = cmd + ctrl + shift + opt(alt)
       
-      # Open terminal
+      # Open apps
       cmd - return               : alacritty
       cmd + shift - return       : open -a "Arc"
       cmd + shift + alt - return : open -a "Aqua"
       hyper - return             : open -a "Terminal"
       
+
+      # Change spaces
+      alt - 1                    : yabai -m space --switch 1
+      alt - 2                    : yabai -m space --switch 2
+      alt - 3                    : yabai -m space --switch 3
+      alt - 4                    : yabai -m space --switch 4
+      alt - 5                    : yabai -m space --switch 5
+      alt - 6                    : yabai -m space --switch 6
+      alt - 7                    : yabai -m space --switch 7
+      alt - 8                    : yabai -m space --switch 8
+      alt - 9                    : yabai -m space --switch 9
+      alt - 0                    : yabai -m space --switch 10
+
+      # Move window to space
+      alt + ctrl - 1            : yabai -m window --space 1
+      alt + ctrl - 2            : yabai -m window --space 2
+      alt + ctrl - 3            : yabai -m window --space 3
+      alt + ctrl - 4            : yabai -m window --space 4
+      alt + ctrl - 5            : yabai -m window --space 5
+      alt + ctrl - 6            : yabai -m window --space 6
+      alt + ctrl - 7            : yabai -m window --space 7
+      alt + ctrl - 8            : yabai -m window --space 8
+      alt + ctrl - 9            : yabai -m window --space 9
+      alt + ctrl - 0            : yabai -m window --space 10
+
       #  Focus window
       alt - h                    : yabai -m window --focus west
       alt - t                    : yabai -m window --focus south
       alt - s                    : yabai -m window --focus north
       alt - n                    : yabai -m window --focus east
-      
+      alt - b                    : yabai -m window --focus prev
+      alt - e                    : yabai -m winodw --focus next
+      alt - r                    : yabai -m space --rotate 90
+
       #  Swap managed window
       shift + alt - h            : yabai -m window --swap west
       shift + alt - t            : yabai -m window --swap south
@@ -53,38 +83,38 @@
       #                          `1:1` = spans 1 column horizontally and vertically.
       
       # Toggle floating, fill    screen
-      ctrl  + alt - return       : yabai -m window --toggle float --grid 1:1:0:0:1:1 # Full screen
-      ctrl  + alt - left         : yabai -m window --toggle float --grid 1:2:0:0:1:1 # Left half
-      ctrl  + alt - right        : yabai -m window --toggle float --grid 1:2:1:0:1:1 # Right half
-      ctrl  + alt - up           : yabai -m window --toggle float --grid 2:1:0:0:1:1 # Top half
-      ctrl  + alt - down         : yabai -m window --toggle float --grid 2:1:1:0:1:1 # Bottom half
+      ctrl + alt - return        : yabai -m window --toggle float --grid 1:1:0:0:1:1 # Full screen
+      ctrl + alt - left          : yabai -m window --toggle float --grid 1:2:0:0:1:1 # Left half
+      ctrl + alt - right         : yabai -m window --toggle float --grid 1:2:1:0:1:1 # Right half
+      ctrl + alt - up            : yabai -m window --toggle float --grid 2:1:0:0:1:1 # Top half
+      ctrl + alt - down          : yabai -m window --toggle float --grid 2:1:1:0:1:1 # Bottom half
       
       #  Fourths
-      ctrl  + alt - h            : yabai -m window --toggle float --grid 1:4:0:0:1:1 # First fourth
-      ctrl  + alt - t            : yabai -m window --toggle float --grid 1:4:1:0:1:1 # Second fourth
-      ctrl  + alt - s            : yabai -m window --toggle float --grid 1:4:2:0:1:1 # Third fourth
-      ctrl  + alt - n            : yabai -m window --toggle float --grid 1:4:3:0:1:1 # Fourth fourth
-      ctrl  + alt - l            : yabai -m window --toggle float --grid 1:4:0:0:3:1 # First through third fourths
-      ctrl  + alt - v            : yabai -m window --toggle float --grid 1:4:1:0:3:1 # Second through last fourths
+      ctrl + alt - h             : yabai -m window --toggle float --grid 1:4:0:0:1:1 # First fourth
+      ctrl + alt - t             : yabai -m window --toggle float --grid 1:4:1:0:1:1 # Second fourth
+      ctrl + alt - s             : yabai -m window --toggle float --grid 1:4:2:0:1:1 # Third fourth
+      ctrl + alt - n             : yabai -m window --toggle float --grid 1:4:3:0:1:1 # Fourth fourth
+      ctrl + alt - l             : yabai -m window --toggle float --grid 1:4:0:0:3:1 # First through third fourths
+      ctrl + alt - v             : yabai -m window --toggle float --grid 1:4:1:0:3:1 # Second through last fourths
       
       #  Thirds
-      ctrl  + alt - i            : yabai -m window --toggle float --grid 1:3:0:0:1:1 # Left third
-      ctrl  + alt - e            : yabai -m window --toggle float --grid 1:3:1:0:1:1 # Middle third
-      ctrl  + alt - a            : yabai -m window --toggle float --grid 1:3:2:0:1:1 # Right third
-      ctrl  + alt - y            : yabai -m window --toggle float --grid 1:3:0:0:2:1 # Left 2/3
-      ctrl  + alt - u            : yabai -m window --toggle float --grid 1:3:1:0:2:1 # Right 2/3
+      ctrl + alt - i             : yabai -m window --toggle float --grid 1:3:0:0:1:1 # Left third
+      ctrl + alt - e             : yabai -m window --toggle float --grid 1:3:1:0:1:1 # Middle third
+      ctrl + alt - a             : yabai -m window --toggle float --grid 1:3:2:0:1:1 # Right third
+      ctrl + alt - y             : yabai -m window --toggle float --grid 1:3:0:0:2:1 # Left 2/3
+      ctrl + alt - u             : yabai -m window --toggle float --grid 1:3:1:0:2:1 # Right 2/3
       
-      # Insertion point based    on focused container
-      ctrl  + alt + shift - l    : yabai -m window --insert west
-      ctrl  + alt + shift - d    : yabai -m window --insert south
-      ctrl  + alt + shift - w    : yabai -m window --insert north
-      ctrl  + alt + shift - v    : yabai -m window --insert east
+      # Insertion point based     on focused container
+      ctrl + alt + shift - l     : yabai -m window --insert west
+      ctrl + alt + shift - d     : yabai -m window --insert south
+      ctrl + alt + shift - w     : yabai -m window --insert north
+      ctrl + alt + shift - v     : yabai -m window --insert east
       
       #  Resize windowm
-      ctrl  - sound_up           : yabai -m window --resize left:-20:0 # Make the left side bigger by 20px
-      ctrl  - sound_down         : yabai -m window --resize left:20:0 # Make the left side smaller by 20px
-      cmd   - sound_up           : yabai -m window --resize right:20:0 # Make the right side bigger by 20px
-      cmd   - sound_down         : yabai -m window --resize right:-20:0 # Make the right side smaller by 20px
+      ctrl - sound_up            : yabai -m window --resize left:-20:0 # Make the left side bigger by 20px
+      ctrl - sound_down          : yabai -m window --resize left:20:0 # Make the left side smaller by 20px
+      cmd  - sound_up            : yabai -m window --resize right:20:0 # Make the right side bigger by 20px
+      cmd  - sound_down          : yabai -m window --resize right:-20:0 # Make the right side smaller by 20px
       
       #  Move displays
       ctrl + alt  - next          : yabai -m window --display next; yabai -m window --focus recent
@@ -94,25 +124,14 @@
       ctrl - next                 : yabai -m display --focus next
       ctrl - previous             : yabai -m display --focus prev
       
-      #  Change space(s)
-      hyper - b                  : yabai -m space --focus 1
-      hyper - v                  : yabai -m space --focus 2
-      hyper - p                  : yabai -m window --space next
-      hyper - g                  : yabai -m window --space prev
-      
-      # Rotate tree
-      alt - r                    : yabai -m space --rotate 90
-      
       #  Balance windows
-      shift + alt - a            : yabai -m space --balance
+      shift + alt - r            : yabai -m space --balance
       
       # Restart skhd
-      cmd + shift + alt - r      : skhd --restart-service
+      meh - r                    : skhd --restart-service
       
       #  Stop/Start/Restart ya   bai
-      hyper - r                  : yabai --restart-service
-      hyper - k                  : yabai --stop-service
-      hyper - s                  : yabai --start-service
+      hyper - r                  : launchctl kickstart -k "org.nixos.yabai"
       
       #  Toggle window split t   ype
       hyper - t                  : yabai -m window --toggle split
