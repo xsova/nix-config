@@ -73,7 +73,10 @@
         kb_layout = "us";
         follow_mouse = 1;
         accel_profile = "flat";
-        touchpad.scroll_factor = 0.1;
+        touchpad = {
+          scroll_factor = 0.1;
+          natural_scroll = true;
+        };
       };
       misc = {
         disable_autoreload = false;
