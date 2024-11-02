@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ inputs, pkgs, config, ... }:
 
 {
   programs.light.enable = true;
@@ -12,6 +12,8 @@
       enable = true;
       extraPackages = with pkgs; [
         amdvlk
+        fw-ectool
+        framework-tool
         libva
         libvdpau
         libvdpau-va-gl
@@ -33,6 +35,7 @@
     # Mobo/kernel
     linuxKernel.packages.linux_zen.framework-laptop-kmod
     linux-firmware
+    inputs.fw-fanctrl.nixosModules.default
 
     # Audio
     alsa-lib
@@ -67,4 +70,18 @@
   boot.blacklistedKernelModules = [ "nouveau" "nvidia" "nvidia_drm" "nvidia_modeset" ];
   zramSwap.enable = true;
   services.colord.enable = true;
+  # programs.fw-fanctrl = {
+  #   "mine" = {
+  #     fanSpeedUpdateFrequency = 5;
+  #     movingAverageInterval = 30;
+  #     speedCurve = [
+  #       { temp = 0; speed = 0; }
+  #       { temp = 35; speed = 0; }
+  #       { temp = 40; speed = 20; }
+  #       { temp = 50; speed = 40; }
+  #       { temp = 80; speed = 80; }
+  #       { temp = 90; speed = 100; }
+  #     ];
+  #   };
+  # };
 }

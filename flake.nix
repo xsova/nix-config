@@ -25,6 +25,10 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
     hardware.url = "github:NixOS/nixos-hardware/master";
     ragenix.url = "github:yaxitech/ragenix";
+    fw-fanctrl = {
+      url = "github:TamtamHero/fw-fanctrl/packaging/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # secrets = { url = "github:xsova/nix-secrets"; flake = false; };
     lix = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
