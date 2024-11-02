@@ -19,6 +19,7 @@
     gzip
     jq
     killall
+    lazygit
     lsd
     lsof
     ripgrep
