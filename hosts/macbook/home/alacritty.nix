@@ -40,10 +40,10 @@
       };
       font = {                                                                    # If the family is not specified, all will fall back to `font.normal`.
         normal = { 
-          family = "TerminalVector";
-          style = "Normal";
-          # family = "MD IO Trial";
-          # style = "Regular";
+          # family = "TerminalVector";
+          # style = "Normal";
+          family = "MD IO Trial";
+          style = "Regular";
         };
         # bold = {
         #   family = "MD IO Trial";
@@ -57,7 +57,7 @@
         #   family = "MD IO Trial";
         #   style = "Bold Italic";
         # };
-        size = 16.0;                                                              # Font size in points.
+        size = 14.0;                                                              # Font size in points.
         offset = {
           x = 0;
           y = 0;

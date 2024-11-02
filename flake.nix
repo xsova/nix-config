@@ -26,6 +26,10 @@
     hardware.url = "github:NixOS/nixos-hardware/master";
     ragenix.url = "github:yaxitech/ragenix";
     # secrets = { url = "github:xsova/nix-secrets"; flake = false; };
+    lix = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: {
@@ -37,6 +41,7 @@
           { system.configurationRevision = self.rev or self.dirtyRev or null; }
           nix-index.darwinModules.nix-index
           home-manager.darwinModules.home-manager { imports = [ ./hosts/macbook/home ]; }
+          lix.nixosModules.default
           ./hosts/macbook
         ];
       };

@@ -41,8 +41,16 @@
       "cdc" =     { setCursor = true; expansion = "cd ~/.config/%"; };
       "-h" =      { position = "anywhere"; expansion = "-h 2>&1 | bat --language=help --style=plain"; };
       "--help" =  { position = "anywhere"; expansion = "--help 2>&1 | bat --language=help --style=plain"; };
+      "nx" =      { position = "anywhere"; expansion = "~/nix"; };
+      "msp" =     { position = "anywhere"; expansion = "~/work/exchange-automated-ui/"; };
     };
-    functions = {};
+    functions = {
+      __setup_hm_session_vars = ''
+        if test -f "$HOME/.nix-profile/profile.d/hm-session-vars.sh"
+          source "$HOME/.nix-profile/profile.d/hm-session-vars.sh"
+        end
+      '';
+    };
     shellInit = ''
       set -q __fish_config_dir;  or set -Ux __fish_config_dir $XDG_CONFIG_HOME/fish
       set -q __fish_data_dir;    or set -Ux __fish_data_dir $XDG_DATA_HOME/fish
@@ -63,6 +71,7 @@
     in ''
       fish_add_path --move --prepend --path ${mkBinSearchPath profiles}
       set fish_user_paths $fish_user_paths
+      __setup_hm_session_vars
     '';
   };  
 }

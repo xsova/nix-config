@@ -2,6 +2,7 @@
 
 {
   environment.systemPackages = with pkgs; [
+    cacert
     gnupg
     direnv
     openssh
