@@ -20,6 +20,7 @@
       "visual-studio-code"
       "balenaetcher"
       "steam"
+      "fleet"
     ];
     taps = [
       "homebrew/bundle"

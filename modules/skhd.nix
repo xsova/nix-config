@@ -1,9 +1,13 @@
 { lib, pkgs, ... }:
 
 {
-  launchd.user.agents.yabai.serviceConfig.EnvironmentVariables.SHELL = lib.getExe pkgs.dash;
-  launchd.user.agents.skhd.serviceConfig.EnvironmentVariables.SHELL = lib.getExe pkgs.dash;
+  launchd.user.agents = {
+    yabai.serviceConfig.EnvironmentVariables.SHELL = lib.getExe pkgs.dash;
+    skhd.serviceConfig.EnvironmentVariables.SHELL = lib.getExe pkgs.dash;
+    spacebar.serviceConfig.EnvironmentVariables.SHELL = lib.getExe pkgs.dash;
+  };
   services.skhd = {
+    enable = true;
     skhdConfig = ''
       # CONFIGURATION FOR SKHD -- Keybindings for yabai wm and other stuff.
       
@@ -28,10 +32,6 @@
       
       # Open apps
       cmd - return               : alacritty
-      cmd + shift - return       : open -a "Arc"
-      cmd + shift + alt - return : open -a "Aqua"
-      hyper - return             : open -a "Terminal"
-      
 
       # Change spaces
       alt - 1                    : yabai -m space --switch 1
@@ -44,7 +44,9 @@
       alt - 8                    : yabai -m space --switch 8
       alt - 9                    : yabai -m space --switch 9
       alt - 0                    : yabai -m space --switch 10
-
+      ctrl - left                : yabai -m space --focus next
+      ctrl - right               : yabai -m spage --focus prev
+      
       # Move window to space
       alt + ctrl - 1            : yabai -m window --space 1
       alt + ctrl - 2            : yabai -m window --space 2
@@ -144,3 +146,4 @@
     '';
   };
 }
+

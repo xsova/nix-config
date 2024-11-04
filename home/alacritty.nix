@@ -301,3 +301,4 @@
 # SelectLastTab: Select the last tab.
 # CopySelection: Copy from the selection buffer.
 # PasteSelection: Paste from the selection buffer.
+

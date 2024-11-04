@@ -21,7 +21,6 @@
       inputs.hyprland.follows = "hyprland";
     };
     pinix.url = "github:remi-dupre/pinix";
-    wezterm.url = "github:wez/wezterm?dir=nix";
     rust-overlay.url = "github:oxalica/rust-overlay";
     hardware.url = "github:NixOS/nixos-hardware/master";
     ragenix.url = "github:yaxitech/ragenix";

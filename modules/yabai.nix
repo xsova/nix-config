@@ -10,7 +10,7 @@
       mouse_modifier = "ctrl";
       mouse_action1 = "move";
       mouse_action2 = "resize";
-      top_padding = 10;
+      top_padding = 32;
       bottom_padding = 10;
       left_padding = 10;
       right_padding = 10;
@@ -19,7 +19,7 @@
       window_topmost = "on";
       window_opacity = "on";
       focus_follows_mouse = "autoraise";
-      mouse_follows_focus = "true";
+      mouse_follows_focus = "false";
       debug_output = "false";
       active_window_opacity = 1.0;
       normal_window_opacity = 0.90;
@@ -32,8 +32,7 @@
       yabai -m signal --add event=space_changed action="yabai -m window --focus first"
       yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
       sudo yabai --load-sa
-      
-      # Create spaces on startup
+      yabai -m config external_bar all:0:26
       function mkSpace {
         local i="$1"
         local label="$2"
@@ -56,11 +55,20 @@
       for _ in $(yabai -m query --spaces | jq '.[].index | select(. > 6)'); do
         yabai -m space --destroy 11
       done
+      # Automatically set space for certain apps.
+      yabai -m rule --add app=""
       yabai -m rule --add app="^Arc$" space=^3
-      yabai -m rule --add app="^Chromium$" space=^7
+      yabai -m rule --add app="^Chromium$" title="^Playwright Inspector$" space=^7
+      yabai -m rule --add app="^Chromium$" space=^8
       yabai -m rule --add app="^System Preferences$"
       yabai -m rule --add app="Chromium" manage=off
       yabai -m rule --add title="Playwright Inspector" space=^2 manage=off
+      yabai -m rule --add app="^(LuLu|Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice|App Store|Steam|Alfred|Activity Monitor)$" manage=off
+      yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+      yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
+      yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
+      yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Select file to save to" manage=off
     '';
   };
 }
+

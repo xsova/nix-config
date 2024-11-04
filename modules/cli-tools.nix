@@ -1,7 +1,8 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
+    (inputs.pinix.packages.${pkgs.stdenv.hostPlatform.system}.pinix)
     cacert
     gnupg
     direnv
@@ -30,5 +31,6 @@
     m-cli
     gh
     yubikey-agent
+    fzf
   ];
 }

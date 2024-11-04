@@ -1,0 +1,7 @@
+{ ... }:
+
+{
+  programs.fish = {
+    useBabelfish = true;
+  };
+}
