@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, lib, inputs, ... }:
 
 {
   programs.helix = {
@@ -94,6 +94,10 @@
           name = "go";
           language-servers = [ "golangci-lint-langserver" ];
         }
+        {
+          name = "nix";
+          formatter.command = lib.getExe pkgs.alejandra;
+        }
       ];
       language-server = {
         fish-lsp = {
@@ -103,6 +107,15 @@
         golangci-lint-langserver = {
           command = "golangci-lint-langserver";
           args = [ "--stdio" ];
+        };
+        nil = {
+          command = lib.getExe pkgs.nil;
+          config.nil.nix = {
+            binary = lib.getExe pkgs.nix;
+            flake = {
+              autoEvalInputs = true;
+            };
+          };
         };
         eslint = {
           command = "golangci-lint-langserver";

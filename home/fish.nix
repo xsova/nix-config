@@ -67,7 +67,7 @@
     loginShellInit = let
       profiles = [
         "/etc/profiles/per-user/$USER"
-        "$HOME/.nix-profile"
+        "${builtins.getEnv "HOME"}/.nix-profile"
         "(set -q XDG_STATE_HOME; and echo $XDG_STATE_HOME; or echo $HOME/.local/state)/nix/profile"
         "/run/current-system/sw"
         "/nix/var/nix/profiles/default"

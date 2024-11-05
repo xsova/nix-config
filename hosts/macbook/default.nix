@@ -31,7 +31,7 @@
       font-awesome_6
       fira-code
       fira-code-symbols
-      custom-font.dank-mono  
+      # custom-font.dank-mono  
   ];
   nix = {
     settings = {
@@ -54,6 +54,10 @@
   };
   services.nix-daemon.enable = true;
   environment = {
+    systemPackages = [
+      pkgs.m-cli
+      pkgs.pinentry_mac
+    ];
     etc."nix/inputs/nixpkgs".source = "${inputs.nixpkgs}";
     extraInit = let
       homeManagerSessionVars = 
