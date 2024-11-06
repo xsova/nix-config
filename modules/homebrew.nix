@@ -21,6 +21,10 @@
       "balenaetcher"
       "steam"
       "fleet"
+      "sf-symbols"
+      "font-jetbrains-mono-nerd-font"
+      "font-jetbrains-mono"
+      "background-music"
     ];
     taps = [
       "homebrew/bundle"

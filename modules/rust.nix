@@ -17,7 +17,7 @@
     cargo-license
     cargo-tarpaulin
     cargo-cross
-    cargo-zigbuild
+    # cargo-zigbuild
     cargo-nextest
     cargo-spellcheck
     cargo-modules

@@ -8,6 +8,6 @@
     nodePackages_latest.pnpm
     bun
     lua
-    zig
+    # zig
   ];
 }

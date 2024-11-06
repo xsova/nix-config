@@ -35,7 +35,10 @@
       "cdd" =     { setCursor = true; expansion = "cd ~/Developer/%"; };
       "fzf" =     { setCursor = true; expansion = "fzf --preview \"bat --color=always --style=numbers --line-range=:500 {}\""; };
       "tail -f" = { setCursor = true; expansion = "tail -f % | bat --paging=never -l log"; };
-      "enx" =     { setCursor = true; expansion = "$EDITOR ~/.config/nix-darwin/%"; };
+      "enx" =     { setCursor = true; expansion = "hx ~/nix/%"; };
+      "esk" =     "hx ~/nix/modules/skhd.nix";
+      "ey" =      "hx ~/nix/modules/yabai.nix";
+      "cnx" =     { setCursor = true; expansion = "cd ~/nix/%"; };
       ".c" =      { setCursor = true; position = "anywhere"; expansion = "~/.config/%"; };
       ".n" =      { setCursor = true; position = "anywhere"; expansion = "~/nix/%"; };
       "mb" =      { setCursor = true; position = "anywhere"; expansion = "~/nix/hosts/macbook/%"; };
@@ -43,7 +46,6 @@
       "cdc" =     { setCursor = true; expansion = "cd ~/.config/%"; };
       "-h" =      { position = "anywhere"; expansion = "-h 2>&1 | bat --language=help --style=plain"; };
       "--help" =  { position = "anywhere"; expansion = "--help 2>&1 | bat --language=help --style=plain"; };
-      "nx" =      { position = "anywhere"; expansion = "~/nix"; };
       "msp" =     { position = "anywhere"; expansion = "~/work/exchange-automated-ui/"; };
     };
     functions = {

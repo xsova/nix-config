@@ -57,6 +57,7 @@
     systemPackages = [
       pkgs.m-cli
       pkgs.pinentry_mac
+      pkgs.cava
     ];
     etc."nix/inputs/nixpkgs".source = "${inputs.nixpkgs}";
     extraInit = let

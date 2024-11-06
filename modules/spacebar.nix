@@ -16,8 +16,8 @@
       padding_right = 20;
       spacing_left = 25;
       spacing_right = 15;
-      text_font = ''"MD IO Trial:Regular:12.0"'';
-      icon_font = ''"JetBrains Mono Nerd:Solid:12.0"'';
+      text_font = "JetBrainsMono Nerd Font:Regular:12.0";
+      icon_font = "JetBrains Mono Nerd Font:Regular:12.0";
       background_color = "0xff202020";
       foreground_color = "0xffa8a8a8";
       power_icon_color = "0xffcd950c";
@@ -35,7 +35,7 @@
       space_icon_color_tertiary = "0xfffff9b0";
       clock_icon = "";
       dnd_icon = "";
-      clock_format = ''"%d/%m/%y %R"'';
+      clock_format = ''"%m/%d/%y %r"'';
       right_shell = "on";
       right_shell_icon = "";
       right_shell_command = "whoami";
