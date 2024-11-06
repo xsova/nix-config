@@ -18,6 +18,7 @@
         ../../../home/fish.nix
         ../../../home/helix.nix
         ../../../home/environment.nix
+        ../../../home/starship.nix
       ];
       home = {
         username = "bryce";

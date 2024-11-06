@@ -4,7 +4,7 @@
   launchd.user.agents = {
     yabai.serviceConfig.EnvironmentVariables.SHELL = lib.getExe pkgs.dash;
     # skhd.serviceConfig.EnvironmentVariables.SHELL = lib.getExe pkgs.dash;
-    # spacebar.serviceConfig.EnvironmentVariables.SHELL = lib.getExe pkgs.dash;
+    spacebar.serviceConfig.EnvironmentVariables.SHELL = lib.getExe pkgs.dash;
   };
   services.skhd = {
     enable = true;
