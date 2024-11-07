@@ -1,18 +1,18 @@
 { ... }: 
 
 let
-  username = "";
+  username = "bryce";
 in {
   home-manager = {
     useGlobalPkgs = true;
 
     users.bryce = {
       imports = [
-        # ../../../home/alacritty.nix
-        # ../../../home/fish.nix
-        # ../../../home/helix.nix
-        # ../../../home/environment.nix
-        # ../../../home/starship.nix
+        ../../../home/alacritty.nix   # Configurations for Alacritty (terminal emulator)
+        ../../../home/fish.nix        # Configurations for fish shell
+        ../../../home/helix.nix       # Configurations for Helix text editor
+        ../../../home/environment.nix # Environment variables
+        ../../../home/starship.nix    # Starship prompt for shell
       ];
       home = {
         username = "bryce";

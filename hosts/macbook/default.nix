@@ -2,7 +2,6 @@
 
 {
   imports = [
-    inputs.ragenix.darwinModules.default
     ../../modules/rust.nix
     ../../modules/homebrew.nix
     ../../modules/secrets.nix
@@ -13,8 +12,9 @@
     ../../modules/skhd.nix
     ../../modules/yabai.nix
     ../../modules/jankyborders.nix
-    ../../modules/spacebar.nix
+    # ../../modules/spacebar.nix
     ../../modules/fish.nix
+    ../../modules/sketchybar.nix
   ];
   security.pam.enableSudoTouchIdAuth = true;
   users.users.bryce = {

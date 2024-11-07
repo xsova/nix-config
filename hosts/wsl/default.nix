@@ -1,9 +1,18 @@
 { pkgs, inputs, ... }:
 
 let 
-  hostname = ""; # FIXME: Add hostname
-  username = ""; # FIXME: Add username
+  hostname = "wsl"; # FIXME: Add hostname
+  username = "bryce"; # FIXME: Add username
 in {
+
+  # Import module/files to add them to your system.
+  imports = [
+    ../../modules/cli-tools.nix # Random CLI packages
+    ../../modules/lsp.nix # Language servers
+    ../../modules/fish.nix
+    ../../modules/gui.nix # Random GUI packages/apps
+  ];
+
   time.timeZone = "America/Los_Angeles";
 
   networking.hostName = "${hostname}";
@@ -20,11 +29,11 @@ in {
     isNormalUser = true;
     shell = pkgs.fish;
     extraGroups = [
-      "wheel"
+      "wheel" # Gives `sudo` privalege
     ];
   };
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.05"; # DO NOT CHANGE
 
   wsl = {
     enable = true;
@@ -33,8 +42,7 @@ in {
     wslConf.network.generateHosts = false;
     defaultUser = username;
     startMenuLaunchers = true;
-
-    docker-desktop.enable = false;
+    docker-desktop.enable = false; # Enable if you don't want to run docker in wsl
   };
 
   virtualisation.docker = {
@@ -43,10 +51,7 @@ in {
     autoPrune.enable = true;
   };
 
-  # FIXME: uncomment the next block to make vscode running in Windows "just work" with NixOS on WSL
-  # solution adapted from: https://github.com/K900/vscode-remote-workaround
-  # more information: https://github.com/nix-community/NixOS-WSL/issues/238 and https://github.com/nix-community/NixOS-WSL/issues/294
-  systemd.user = {
+  systemd.user = { # Should make VSCode _just work_ in wsl
     paths.vscode-remote-workaround = {
       wantedBy = ["default.target"];
       pathConfig.PathChanged = "%h/.vscode-server/bin";
