@@ -102,6 +102,9 @@
         onEvent = "fish_command_not_found";
         body = "command_not_found_handle $argv";
       };
+      lsd = ''
+        
+      '';
     };
     shellInit = ''
       set -q __fish_config_dir;  or set -Ux __fish_config_dir $XDG_CONFIG_HOME/fish

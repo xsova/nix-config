@@ -37,6 +37,10 @@
       url = "github:kamadorueda/alejandra/3.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: {
@@ -54,6 +58,18 @@
       };
     };
     nixosConfigurations = with inputs; { 
+      wsl = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          { system.configurationRevision = self.rev or self.dirtyRev or null; }
+          nix-index.nixosModules.nix-index # Indexing for finding nixpkgs faster
+          nixos-wsl.nixosModules.wsl # WSL stuff
+          lix.nixosModules.default # Use Lix instead of Nix
+          home-manager.nixosModules.home-manager { imports = [ ./hosts/wsl/home ]; } # Home manager configurations
+          ./hosts/wsl # Host configurations
+        ];
+      };
       framework = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
