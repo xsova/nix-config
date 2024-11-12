@@ -52,10 +52,11 @@
           source "$HOME/.nix-profile/profile.d/hm-session-vars.sh"
         end
       '';
-      __fish_command_not_found_handler = {
-        onEvent = "fish_command_not_found";
-        body = "command_not_found_handle $argv";
-      };
+      # __fish_command_not_found_handler = {
+      #   onEvent = "fish_command_not_found";
+      #   body = "command_not_found_handle $argv";
+      # };
+      
     };
     shellInit = ''
       set -q __fish_config_dir;  or set -Ux __fish_config_dir $XDG_CONFIG_HOME/fish
