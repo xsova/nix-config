@@ -1,8 +1,11 @@
-{lib, ...}: {
+{ lib, ... }:
+
+{
   programs.fish = {
     enable = true;
     shellAliases = {};
     preferAbbrs = true;
+    # useBabelfish = true;
     shellAbbrs = {
       "g" = "git";
       "ga" = "git add";
@@ -27,70 +30,21 @@
       "ls." = "ls -ld .*";
       "h" = "hx";
       "e" = "$EDITOR";
-      "esk" = "hx ~/nix/modules/skhd.nix";
-      "ey" = "hx ~/nix/modules/yabai.nix";
-      "ef" = "hx ~/nix/home/fish.nix";
       "d" = "(cd ~/nix && git add -A) && darwin-rebuild switch --flake ~/nix#macbook";
-      "cddg" = {
-        setCursor = true;
-        expansion = "cd ~/Developer/Github/%";
-      };
-      "cdd" = {
-        setCursor = true;
-        expansion = "cd ~/Developer/%";
-      };
-      "fzf" = {
-        setCursor = true;
-        expansion = "fzf --preview \"bat --color=always --style=numbers --line-range=:500 {}\"";
-      };
-      "tail -f" = {
-        setCursor = true;
-        expansion = "tail -f % | bat --paging=never -l log";
-      };
-      "enx" = {
-        setCursor = true;
-        expansion = "hx ~/nix/%";
-      };
-      "cnx" = {
-        setCursor = true;
-        expansion = "cd ~/nix/%";
-      };
-      ".c" = {
-        setCursor = true;
-        position = "anywhere";
-        expansion = "~/.config/%";
-      };
-      ".n" = {
-        setCursor = true;
-        position = "anywhere";
-        expansion = "~/nix/%";
-      };
-      "mb" = {
-        setCursor = true;
-        position = "anywhere";
-        expansion = "~/nix/hosts/macbook/%";
-      };
-      "fw" = {
-        setCursor = true;
-        position = "anywhere";
-        expansion = "~/nix/hosts/framework/%";
-      };
-      "cdc" = {
-        setCursor = true;
-        expansion = "cd ~/.config/%";
-      };
-      "-h" = {
-        position = "anywhere";
-        expansion = "-h 2>&1 | bat --language=help --style=plain";
-      };
-      "--help" = {
-        position = "anywhere";
-        expansion = "--help 2>&1 | bat --language=help --style=plain";
-      };
-      "msp" = {
-        position = "anywhere";
-        expansion = "~/work/exchange-automated-ui/";
-      };
+      "cddg" =    { setCursor = true; expansion = "cd ~/Developer/Github/%"; };
+      "cdd" =     { setCursor = true; expansion = "cd ~/Developer/%"; };
+      "fzf" =     { setCursor = true; expansion = "fzf --preview \"bat --color=always --style=numbers --line-range=:500 {}\""; };
+      "tail -f" = { setCursor = true; expansion = "tail -f % | bat --paging=never -l log"; };
+      "enx" =     { setCursor = true; expansion = "$EDITOR ~/.config/nix-darwin/%"; };
+      ".c" =      { setCursor = true; position = "anywhere"; expansion = "~/.config/%"; };
+      ".n" =      { setCursor = true; position = "anywhere"; expansion = "~/nix/%"; };
+      "mb" =      { setCursor = true; position = "anywhere"; expansion = "~/nix/hosts/macbook/%"; };
+      "fw" =      { setCursor = true; position = "anywhere"; expansion = "~/nix/hosts/framework/%"; };
+      "cdc" =     { setCursor = true; expansion = "cd ~/.config/%"; };
+      "-h" =      { position = "anywhere"; expansion = "-h 2>&1 | bat --language=help --style=plain"; };
+      "--help" =  { position = "anywhere"; expansion = "--help 2>&1 | bat --language=help --style=plain"; };
+      "nx" =      { position = "anywhere"; expansion = "~/nix"; };
+      "msp" =     { position = "anywhere"; expansion = "~/work/exchange-automated-ui/"; };
     };
     functions = {
       __setup_hm_session_vars = ''
@@ -98,13 +52,11 @@
           source "$HOME/.nix-profile/profile.d/hm-session-vars.sh"
         end
       '';
-      __fish_command_not_found_handler = {
-        onEvent = "fish_command_not_found";
-        body = "command_not_found_handle $argv";
-      };
-      lsd = ''
-        
-      '';
+      # __fish_command_not_found_handler = {
+      #   onEvent = "fish_command_not_found";
+      #   body = "command_not_found_handle $argv";
+      # };
+      
     };
     shellInit = ''
       set -q __fish_config_dir;  or set -Ux __fish_config_dir $XDG_CONFIG_HOME/fish
@@ -116,7 +68,7 @@
     loginShellInit = let
       profiles = [
         "/etc/profiles/per-user/$USER"
-        "${builtins.getEnv "HOME"}/.nix-profile"
+        "$HOME/.nix-profile"
         "(set -q XDG_STATE_HOME; and echo $XDG_STATE_HOME; or echo $HOME/.local/state)/nix/profile"
         "/run/current-system/sw"
         "/nix/var/nix/profiles/default"
@@ -128,5 +80,6 @@
       set fish_user_paths $fish_user_paths
       __setup_hm_session_vars
     '';
-  };
+  };  
 }
+
