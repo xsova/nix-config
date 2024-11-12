@@ -7,7 +7,7 @@
     global.autoUpdate = true;
     brews = [
       "ollama"
-      "borders"
+      # "borders"
       "qmk/qmk/qmk"
     ];
     casks = [
@@ -21,10 +21,11 @@
       "balenaetcher"
       "steam"
       "fleet"
-      "sf-symbols"
-      "font-jetbrains-mono-nerd-font"
-      "font-jetbrains-mono"
-      "background-music"
+      "yubico-authenticator"
+      "zen-browser"
+      "sizzy"
+      "protonvpn"
+      "launchcontrol"
     ];
     taps = [
       "homebrew/bundle"
