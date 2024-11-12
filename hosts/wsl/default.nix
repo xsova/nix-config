@@ -76,7 +76,6 @@ in {
       # ];
 
       accept-flake-config = true;
-      auto-optimise-store = true;
     };
 
     registry = {

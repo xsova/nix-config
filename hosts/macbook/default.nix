@@ -38,7 +38,6 @@
       allowed-users = [ "root" "bryce" ];
       experimental-features = [ "nix-command" "flakes" ];
       warn-dirty = false;
-      auto-optimise-store = true;
       cores = 6;
       max-jobs = 10;
       sandbox = false;
