@@ -16,7 +16,7 @@
     marksman
     markdown-oxide
     nil
-    zls
+    # zls
     gopls
     delve
     emmet-language-server
