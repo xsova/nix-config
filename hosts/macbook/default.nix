@@ -38,7 +38,6 @@
       allowed-users = [ "root" "bryce" ];
       experimental-features = [ "nix-command" "flakes" ];
       warn-dirty = false;
-      auto-optimise-store = true;
       cores = 6;
       max-jobs = 10;
       sandbox = false;
@@ -129,7 +128,6 @@
     computerName = "Bryce's MacBook Pro";
     hostName = "macbook";
     knownNetworkServices = [ "Wi-Fi" ];
-    dns = [ "9.9.9.9" "1.1.1.1" "8.8.8.8" ];
   };
 }
 
