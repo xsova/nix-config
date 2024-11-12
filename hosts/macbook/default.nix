@@ -128,7 +128,6 @@
     computerName = "Bryce's MacBook Pro";
     hostName = "macbook";
     knownNetworkServices = [ "Wi-Fi" ];
-    dns = [ "9.9.9.9" "1.1.1.1" "8.8.8.8" ];
   };
 }
 
