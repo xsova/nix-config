@@ -4,9 +4,7 @@
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      auto-optimise-store = true;
     };
-    optimise.automatic = true;
     gc = {
       Hour = 3;
       Minute = 15;
