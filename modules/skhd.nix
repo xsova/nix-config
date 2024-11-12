@@ -2,8 +2,8 @@
 
 {
   launchd.user.agents = {
-    yabai.serviceConfig.EnvironmentVariables.SHELL = lib.getExe pkgs.dash;
-    # skhd.serviceConfig.EnvironmentVariables.SHELL = lib.getExe pkgs.dash;
+    yabai.serviceConfig.EnvironmentVariables.SHELL = lib.getExe pkgs.zsh;
+    skhd.serviceConfig.EnvironmentVariables.SHELL = lib.getExe pkgs.dash;
     spacebar.serviceConfig.EnvironmentVariables.SHELL = lib.getExe pkgs.dash;
   };
   services.skhd = {
@@ -48,16 +48,16 @@
       ctrl - right               : yabai -m spage --focus prev
       
       # Move window to space
-      alt + shift - 1            : yabai -m window --space 1
-      alt + shift - 2            : yabai -m window --space 2
-      alt + shift - 3            : yabai -m window --space 3
-      alt + shift - 4            : yabai -m window --space 4
-      alt + shift - 5            : yabai -m window --space 5
-      alt + shift - 6            : yabai -m window --space 6
-      alt + shift - 7            : yabai -m window --space 7
-      alt + shift - 8            : yabai -m window --space 8
-      alt + shift - 9            : yabai -m window --space 9
-      alt + shift - 0            : yabai -m window --space 10
+      alt + ctrl - 1            : yabai -m window --space 1
+      alt + ctrl - 2            : yabai -m window --space 2
+      alt + ctrl - 3            : yabai -m window --space 3
+      alt + ctrl - 4            : yabai -m window --space 4
+      alt + ctrl - 5            : yabai -m window --space 5
+      alt + ctrl - 6            : yabai -m window --space 6
+      alt + ctrl - 7            : yabai -m window --space 7
+      alt + ctrl - 8            : yabai -m window --space 8
+      alt + ctrl - 9            : yabai -m window --space 9
+      alt + ctrl - 0            : yabai -m window --space 10
 
       #  Focus window
       alt - h                    : yabai -m window --focus west
