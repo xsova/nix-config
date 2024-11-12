@@ -50,6 +50,8 @@
             c = ["toggle_comments"];
             "." = ["file_picker_in_current_buffer_directory"];
             t = ":format";
+            n = ["search_next"];
+            N = ["search_prev"];
           };
           g = {
             b = [ "find_till_char" "collapse_selection" ];
@@ -63,7 +65,7 @@
           T = "half_page_down";
           s = "move_visual_line_up";
           S = "half_page_up";
-          p = "select_regex"; # 'p'ick
+          p = "select_regex"; # 'p'ickError: Could not get runtime dependencies from /opt/homebrew/Library/Taps/qmk/homebrew-qmk/Formula/qmk.rb!
         };
         insert.esc = ["collapse_selection" "normal_mode"];
         select = {
