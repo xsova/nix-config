@@ -1,6 +1,4 @@
-{ lib, ... }:
-
-{
+{lib, ...}: {
   programs.fish = {
     enable = true;
     shellAliases = {};
@@ -31,20 +29,72 @@
       "h" = "hx";
       "e" = "$EDITOR";
       "d" = "(cd ~/nix && git add -A) && darwin-rebuild switch --flake ~/nix#macbook";
-      "cddg" =    { setCursor = true; expansion = "cd ~/Developer/Github/%"; };
-      "cdd" =     { setCursor = true; expansion = "cd ~/Developer/%"; };
-      "fzf" =     { setCursor = true; expansion = "fzf --preview \"bat --color=always --style=numbers --line-range=:500 {}\""; };
-      "tail -f" = { setCursor = true; expansion = "tail -f % | bat --paging=never -l log"; };
-      "enx" =     { setCursor = true; expansion = "$EDITOR ~/.config/nix-darwin/%"; };
-      ".c" =      { setCursor = true; position = "anywhere"; expansion = "~/.config/%"; };
-      ".n" =      { setCursor = true; position = "anywhere"; expansion = "~/nix/%"; };
-      "mb" =      { setCursor = true; position = "anywhere"; expansion = "~/nix/hosts/macbook/%"; };
-      "fw" =      { setCursor = true; position = "anywhere"; expansion = "~/nix/hosts/framework/%"; };
-      "cdc" =     { setCursor = true; expansion = "cd ~/.config/%"; };
-      "-h" =      { position = "anywhere"; expansion = "-h 2>&1 | bat --language=help --style=plain"; };
-      "--help" =  { position = "anywhere"; expansion = "--help 2>&1 | bat --language=help --style=plain"; };
-      "nx" =      { position = "anywhere"; expansion = "~/nix"; };
-      "msp" =     { position = "anywhere"; expansion = "~/work/exchange-automated-ui/"; };
+      "cddg" = {
+        setCursor = true;
+        expansion = "cd ~/Developer/Github/%";
+      };
+      "cdd" = {
+        setCursor = true;
+        expansion = "cd ~/Developer/%";
+      };
+      "fzf" = {
+        setCursor = true;
+        expansion = "fzf --preview \"bat --color=always --style=numbers --line-range=:500 {}\"";
+      };
+      "tail -f" = {
+        setCursor = true;
+        expansion = "tail -f % | bat --paging=never -l log";
+      };
+      "enx" = {
+        setCursor = true;
+        expansion = "$EDITOR ~/.config/nix-darwin/%";
+      };
+      ".c" = {
+        setCursor = true;
+        position = "anywhere";
+        expansion = "~/.config/%";
+      };
+      ".n" = {
+        setCursor = true;
+        position = "anywhere";
+        expansion = "~/nix/%";
+      };
+      "mb" = {
+        setCursor = true;
+        position = "anywhere";
+        expansion = "~/nix/hosts/macbook/%";
+      };
+      "fw" = {
+        setCursor = true;
+        position = "anywhere";
+        expansion = "~/nix/hosts/framework/%";
+      };
+      "cdc" = {
+        setCursor = true;
+        expansion = "cd ~/.config/%";
+      };
+      "-h" = {
+        position = "anywhere";
+        expansion = "-h 2>&1 | bat --language=help --style=plain";
+      };
+      "--help" = {
+        position = "anywhere";
+        expansion = "--help 2>&1 | bat --language=help --style=plain";
+      };
+      "nx" = {
+        setCursor = true;
+        position = "anywhere";
+        expansion = "~/nix/%";
+      };
+      "msp" = {
+        position = "anywhere";
+        expansion = "~/Developer/exchange-automated-ui/";
+      };
+      "mspt" = {
+        setCursor = true;
+        position = "anywhere";
+        expansion = "~/Developer/exchange-automated-ui/src/tests/%";
+      };
     };
     functions = {
       __setup_hm_session_vars = ''
@@ -56,7 +106,6 @@
       #   onEvent = "fish_command_not_found";
       #   body = "command_not_found_handle $argv";
       # };
-      
     };
     shellInit = ''
       set -q __fish_config_dir;  or set -Ux __fish_config_dir $XDG_CONFIG_HOME/fish
@@ -80,6 +129,5 @@
       set fish_user_paths $fish_user_paths
       __setup_hm_session_vars
     '';
-  };  
+  };
 }
-
