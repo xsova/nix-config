@@ -19,7 +19,7 @@
       window_topmost = "on";
       window_opacity = "on";
       focus_follows_mouse = "autoraise";
-      mouse_follows_focus = "false";
+      mouse_follows_focus = "true";
       debug_output = "false";
       active_window_opacity = 1.0;
       normal_window_opacity = 0.90;
