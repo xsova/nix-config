@@ -1,6 +1,9 @@
-{ pkgs, lib, inputs, ... }:
-
 {
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   imports = [
     ../../modules/rust.nix
     ../../modules/homebrew.nix
@@ -12,8 +15,6 @@
     ../../modules/skhd.nix
     ../../modules/yabai.nix
     ../../modules/jankyborders.nix
-    # ../../modules/spacebar.nix
-    ../../modules/fish.nix
     ../../modules/sketchybar.nix
   ];
   security.pam.enableSudoTouchIdAuth = true;
@@ -23,20 +24,20 @@
     shell = pkgs.fish;
   };
   fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" "Iosevka" ]; })
-      noto-fonts
-      noto-fonts-color-emoji
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-      font-awesome_6
-      fira-code
-      fira-code-symbols
-      # custom-font.dank-mono  
+    (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono" "Iosevka"];})
+    noto-fonts
+    noto-fonts-color-emoji
+    noto-fonts-cjk-sans
+    noto-fonts-emoji
+    font-awesome_6
+    fira-code
+    fira-code-symbols
+    # custom-font.dank-mono
   ];
   nix = {
     settings = {
-      allowed-users = [ "root" "bryce" ];
-      experimental-features = [ "nix-command" "flakes" ];
+      allowed-users = ["root" "bryce"];
+      experimental-features = ["nix-command" "flakes"];
       warn-dirty = false;
       cores = 6;
       max-jobs = 10;
@@ -45,10 +46,16 @@
     };
     registry.nixpkgs.flake = inputs.nixpkgs;
   };
-  programs.gnupg = {
-    agent = {
+  programs = {
+    fish = {
       enable = true;
-      enableSSHSupport = true;
+      useBabelfish = true;
+    };
+    gnupg = {
+      agent = {
+        enable = true;
+        enableSSHSupport = true;
+      };
     };
   };
   services.nix-daemon.enable = true;
@@ -60,11 +67,10 @@
     ];
     etc."nix/inputs/nixpkgs".source = "${inputs.nixpkgs}";
     extraInit = let
-      homeManagerSessionVars = 
-        "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh";
-      in ''
-        [[ -f ${homeManagerSessionVars} ]] && source ${homeManagerSessionVars}
-      '';
+      homeManagerSessionVars = "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh";
+    in ''
+      [[ -f ${homeManagerSessionVars} ]] && source ${homeManagerSessionVars}
+    '';
   };
   nixpkgs = {
     config.allowUnfree = true;
@@ -127,7 +133,6 @@
   networking = {
     computerName = "Bryce's MacBook Pro";
     hostName = "macbook";
-    knownNetworkServices = [ "Wi-Fi" ];
+    knownNetworkServices = ["Wi-Fi"];
   };
 }
-
