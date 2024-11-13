@@ -44,6 +44,8 @@
           # style = "Normal";
           family = "MD IO Trial";
           style = "Regular";
+          # family = "JetbrainsMono Nerd Font";
+          # style = "Regular";
         };
         # bold = {
         #   family = "MD IO Trial";
@@ -57,7 +59,7 @@
         #   family = "MD IO Trial";
         #   style = "Bold Italic";
         # };
-        size = 14.0;                                                              # Font size in points.
+        size = 13.0;                                                              # Font size in points.
         offset = {
           x = 0;
           y = 0;

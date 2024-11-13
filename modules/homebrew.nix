@@ -6,7 +6,11 @@
     onActivation.cleanup = "zap";
     global.autoUpdate = true;
     brews = [
-      "ollama"
+      {
+        name = "ollama";
+        start_service = true;
+        restart_service = "changed";
+      }
       # "borders"
       "qmk/qmk/qmk"
     ];
@@ -26,6 +30,7 @@
       "sizzy"
       "protonvpn"
       "launchcontrol"
+      "betterdisplay"
     ];
     taps = [
       "homebrew/bundle"

@@ -33,6 +33,8 @@
       # Open apps
       cmd - return               : alacritty
 
+      # Screen managemenet
+      ctrl + shift - n           : yabai -m screen --
       # Change spaces
       alt - 1                    : yabai -m space --switch 1
       alt - 2                    : yabai -m space --switch 2
