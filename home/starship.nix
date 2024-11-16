@@ -32,7 +32,7 @@
         modified = "~";
         deleted = "x";
         untracked = "?";
-        stashed = "\$";
+        stashed = "_";
       };
     };
   };

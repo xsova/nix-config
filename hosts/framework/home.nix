@@ -6,7 +6,10 @@
     users.bryce.home.stateVersion = "24.05";
     extraSpecialArgs = { inherit inputs; };
     useGlobalPkgs = true;
-    
+    users.root.home.stateVersion = "24.05";
+    users.root.programs.fish.aliases = {
+      "nixos-rebuild" = "pinix nixos-rebuild";
+    };
     users.bryce = {
       imports = [
         # ../../home/hyprland.nix

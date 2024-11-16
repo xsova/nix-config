@@ -33,7 +33,7 @@
       # hyper = cmd + ctrl + shift + opt(alt)
 
       # Open apps
-      cmd - return               : alacritty
+      cmd - return               : alacritty 
 
       # Screen managemenet
       alt - c                    : yabai -m display --focus last

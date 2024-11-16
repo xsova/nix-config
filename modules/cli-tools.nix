@@ -38,6 +38,9 @@
     # System
     home-manager  # Nix tool to manage configs.
 
+    # Shells
+    nushell
+
     # Security
     gnupg         # To manage GNUPG keys.
     # pinentry      # To input keys.
