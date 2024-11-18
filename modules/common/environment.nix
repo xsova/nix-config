@@ -4,7 +4,7 @@
   ...
 }: {
   environment = {
-    systemPackages = [pkgs.m-cli pkgs.pinentry_mac pkgs.cava];
+    systemPackages = [pkgs.m-cli pkgs.pinentry_mac];
     etc."nix/inputs/nixpkgs".source = "${inputs.nixpkgs}";
     extraInit = let
       homeManagerSessionVars = "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh";

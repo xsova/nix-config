@@ -1,24 +1,12 @@
-{ pkgs, user, ... }:
-
-{
-  imports = [ 
-    ../common/users
-    # ./homebrew
-    # ./system
-    # ./skhd
-    # ./programming-languages
-    # ./lsp
-    ./fonts
-    # ./gc
-    # ./nix-settings
-    # ./services
-    # ./rust
-    # ./vpn
-    # ./packages
+{...}: {
+  imports = [
+    ./jankyborders.nix
+    ./nixpkgs.nix
+    ./sketchybar.nix
+    ./skhd.nix
+    ./system-configuration.nix
+    ./yabai.nix
+    ./homebrew.nix
+    ./fh.nix
   ];
-
-
-  nixpkgs.config.allowUnfree = true;
-  nix.package = pkgs.nixFlakes;
 }
-

@@ -1,17 +1,16 @@
-{ ... }:
-
-{
+{...}: {
   imports = [
-    ./nix-settings.nix
-    ./users.nix
-    ./home-manager.nix
-    ./networking.nix
-    ./security.nix # FIXME: Add in security hardening stuff that is common
-    ./locale.nix
+    ./cli.nix
+    # ./direnv.nix
+    ./environment.nix
     ./fonts.nix
-    ./services.nix
+    ./nix-settings.nix
     ./packages.nix
+    ./programs.nix
+    ./rust.nix
+    ./security.nix
+    # ./services.nix
     ./time.nix
-    ./system.nix
+    ./developer
   ];
 }
