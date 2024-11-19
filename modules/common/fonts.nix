@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  fonts.packages = with pkgs; [
+  packages = with pkgs; [
     (nerdfonts.override {
       fonts = [
         "FiraCode"

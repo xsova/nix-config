@@ -1,220 +1,243 @@
-{ pkgs, lib, ... }:
-
 {
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      general = {
-        working_directory = "None";                                               # Directory the shell is started in.
-        live_config_reload = true;                                                # Whether changes require restart.
-        ipc_socket = true;                                                        # Unix only.
+  pkgs,
+  lib,
+  ...
+}: {
+  enable = true;
+  settings = {
+    general = {
+      working_directory = "None"; # Directory the shell is started in.
+      live_config_reload = true; # Whether changes require restart.
+      ipc_socket = true; # Unix only.
+    };
+    window = {
+      dimensions = {
+        # Number of lines/columns (not pixels) in the terminal.
+        columns = 0;
+        lines = 0;
       };
-      window = {
-        dimensions = {                                                            # Number of lines/columns (not pixels) in the terminal.
-          columns = 0;
-          lines = 0;
-        };
-        position = "None";                                                        # Window startup position. "None" | { x = <integer>; y = <integer>; }; (has no effect on Wayland)
-        padding = {                                                               # Blank space added around the wendow in pixels. 
-          x = 10;
-          y = 10;
-        };
-        dynamic_padding = false;                                                  # Default is false
-        decorations = "Buttonless";                                               # Window decorations. "Full": Borders and title bar | "None": Neither borders nor title bar | "Transparent": Title bar, transparent (macOS) | "Buttonless": Title bar, transparent background and no title bar buttons. (macOS).
-        opacity = 0.8;                                                            # Background opacity as a floating point number from 0.0 to 1.0.
-        blur = true;                                                              # Request compositor to blur content behind transparent windows.
-        startup_mode = "Windowed";                                                # Window mode on open. "Windowed" | "Maximized" | "Fullscreen" | "SimpleFullscreen" (macOS)
-        title = "Alacritty";                                                      # Window title.
-        dynamic_title = true;                                                     # Allow terminal applications to change Alacritty's window title.
-        class = {                                                                 # Window class.
-          instance = "Alacritty";
-          general = "Alacritty";
-        };
-        decorations_theme_variant = "None";                                       # Override variant theme of the system theme/GTK theme/Wayland client side decorations. "Dark" | "Light" | "None"
-        resize_increments = false;                                                # Prefer resizing window by discrete steps equal to cell dimensions.
-        option_as_alt = "Both";                                                   # Make option key behave as alt (macOS)
+      position = "None"; # Window startup position. "None" | { x = <integer>; y = <integer>; }; (has no effect on Wayland)
+      padding = {
+        # Blank space added around the wendow in pixels.
+        x = 10;
+        y = 10;
       };
-      scrolling = {
-        history = 10000;                                                          # Maximum number of lines in the scrollback buffer.
-        multiplier = 3;                                                           # Number of lines scrolled per scroll input.
+      dynamic_padding = false; # Default is false
+      decorations = "Buttonless"; # Window decorations. "Full": Borders and title bar | "None": Neither borders nor title bar | "Transparent": Title bar, transparent (macOS) | "Buttonless": Title bar, transparent background and no title bar buttons. (macOS).
+      opacity = 0.8; # Background opacity as a floating point number from 0.0 to 1.0.
+      blur = true; # Request compositor to blur content behind transparent windows.
+      startup_mode = "Windowed"; # Window mode on open. "Windowed" | "Maximized" | "Fullscreen" | "SimpleFullscreen" (macOS)
+      title = "Alacritty"; # Window title.
+      dynamic_title = true; # Allow terminal applications to change Alacritty's window title.
+      class = {
+        # Window class.
+        instance = "Alacritty";
+        general = "Alacritty";
       };
-      font = {                                                                    # If the family is not specified, all will fall back to `font.normal`.
-        normal = { 
-          # family = "TerminalVector";
-          # style = "Normal";
-          family = "MD IO Trial";
-          style = "Regular";
-          # family = "JetbrainsMono Nerd Font";
-          # style = "Regular";
-        };
-        # bold = {
-        #   family = "MD IO Trial";
-        #   style = "Bold";
-        # };
-        # italic = {
-        #   family = "MD IO Trial";
-        #   style = "Italic";
-        # };
-        # bold_italic = {
-        #   family = "MD IO Trial";
-        #   style = "Bold Italic";
-        # };
-        size = 13.0;                                                              # Font size in points.
-        offset = {
-          x = 0;
-          y = 0;
-        };                                                                        # Extra space around each character. y can be thought as line spacing, and x as letter spacing.
-        glyph_offset = {
-          x = 0;
-          y = 0;
-        };                                                                        # Determines the locations of the glyphs within their cells with the default being at the bottom.
-        builtin_box_drawing = true;                                               # When true, Alacritty will use a custom built-in font for box drawing characters (U+2500-U+259F), legacy computing symbols (U+1FB00-U+1FB3B), and powerline symbols (U+E0B0-U+E0B3).
+      decorations_theme_variant = "None"; # Override variant theme of the system theme/GTK theme/Wayland client side decorations. "Dark" | "Light" | "None"
+      resize_increments = false; # Prefer resizing window by discrete steps equal to cell dimensions.
+      option_as_alt = "Both"; # Make option key behave as alt (macOS)
+    };
+    scrolling = {
+      history = 10000; # Maximum number of lines in the scrollback buffer.
+      multiplier = 3; # Number of lines scrolled per scroll input.
+    };
+    font = {
+      # If the family is not specified, all will fall back to `font.normal`.
+      normal = {
+        # family = "TerminalVector";
+        # style = "Normal";
+        family = "MD IO Trial";
+        style = "Regular";
+        # family = "JetbrainsMono Nerd Font";
+        # style = "Regular";
       };
-      colors = {                                                                  # Colors are specified using their hexadecimal values with a `#` prefix: #RRGGBB.
-        cursor = {                                                                # Colors which should be used to draw the terminal cursor. Allowed values are hexadecimal colors like #RRGGBB, or "CellForeground"/"CellBackground".
-          text = "CellBackground"; 
-          cursor = "CellForeground";
-        };
-        vi_mode_cursor = {                                                        # Colors for the cursor when vi mode is active.
-          text = "CellBackground";
-          cursor = "CellForeground";
-        }; 
-        search = {
-          matches = {                                                             # Highlighting matched searched text.
-            foreground = "#181818";
-            background = "#ac4242";
-          };          
-          focused_match = {                                                       # Highlighting the focused matched searched text.
-            foreground = "#181818";
-            background = "#f4bf75";
-          };    
-        };
-        hints = {
-          start = {                                                               # First character in the hint label.
-            foreground = "#181818";
-            background = "#f4bf75";
-          };            
-          end = {                                                                 # All characters after the first one in the hint label.
-            foreground = "#181818";
-            background = "#ac4242";
-          };              
-        };
-        line_indicator = {                                                        # Color used for the indicator displaying the position in history during search and vi mode.
-          foreground = "None";
-          background = "None";
-        };           
-        footer_bar = {                                                            # Color used for the footer bar on the bottom, used by search input, hyperlink URI preview, etc.
+      # bold = {
+      #   family = "MD IO Trial";
+      #   style = "Bold";
+      # };
+      # italic = {
+      #   family = "MD IO Trial";
+      #   style = "Italic";
+      # };
+      # bold_italic = {
+      #   family = "MD IO Trial";
+      #   style = "Bold Italic";
+      # };
+      size = 13.0; # Font size in points.
+      offset = {
+        x = 0;
+        y = 0;
+      }; # Extra space around each character. y can be thought as line spacing, and x as letter spacing.
+      glyph_offset = {
+        x = 0;
+        y = 0;
+      }; # Determines the locations of the glyphs within their cells with the default being at the bottom.
+      builtin_box_drawing = true; # When true, Alacritty will use a custom built-in font for box drawing characters (U+2500-U+259F), legacy computing symbols (U+1FB00-U+1FB3B), and powerline symbols (U+E0B0-U+E0B3).
+    };
+    colors = {
+      # Colors are specified using their hexadecimal values with a `#` prefix: #RRGGBB.
+      cursor = {
+        # Colors which should be used to draw the terminal cursor. Allowed values are hexadecimal colors like #RRGGBB, or "CellForeground"/"CellBackground".
+        text = "CellBackground";
+        cursor = "CellForeground";
+      };
+      vi_mode_cursor = {
+        # Colors for the cursor when vi mode is active.
+        text = "CellBackground";
+        cursor = "CellForeground";
+      };
+      search = {
+        matches = {
+          # Highlighting matched searched text.
           foreground = "#181818";
-          background = "#d8d8d8";
-        };         
-        selection = {                                                             # Colors used for drawing selections.
-          text = "CellBackground";
-          background = "CellForeground";
-        };  
-        normal = {
-          black = "#181818";
-          red = "#ac4242";
-          green = "#90a959";
-          yellow = "#f4bf75";
-          blue = "#6a9fb5";
-          magenta = "#aa759f";
-          cyan = "#75b5aa";
-          white = "#d8d8d8";
+          background = "#ac4242";
         };
-        bright = {
-          black = "#6b6b6b";
-          red = "#c55555";
-          green = "#aac474";
-          yellow = "#feca88";
-          blue = "#82b8c8";
-          magenta = "#c28cb8";
-          cyan = "#93d3c3";
-          white = "#f8f8f8";
+        focused_match = {
+          # Highlighting the focused matched searched text.
+          foreground = "#181818";
+          background = "#f4bf75";
         };
-        dim = {                                                                   # If the dim colors are not set, they will be calculated automatically based on the `colors.normal` colors.
-          black = "#0f0f0f";
-          red = "#712b2b";
-          green = "#5f6f3a";
-          yellow = "#a17e4d";
-          blue = "#456877";
-          magenta = "#704d68";
-          cyan = "#4d7770";
-          white = "#8e8e8e";
-        };
-        indexed_colors = [];                                                      # The indexed colors include all colors from 16 to 256. When these are not set, they're filled with sensible defaults.
-        transparent_background_colors = false;                                    # Whether or not window.opacity applies to all cell backgrounds, or only to the default background. When set to true, all cells will be transparent regardless of their background color.
-        draw_bold_text_with_bright_colors = false;                                # When true, bold text is drawn using the bright color variants.
       };
-      bell = {
-        animation = "Linear";                                                     # Visual bell animations effect for flashing the screen when the visual bell is rung. "Ease" | "EaseOut" | "EaseOutSine" | "EaseOutQuad" | "EaseOutCubic" | "EaseOutQuart" | "EaseOutQuint" | "EaseOutExpo" | "EaseOutCirc" | "Linear"
-        duration = 0;                                                             # Duration of the visual bell flash in milliseconds. A `duration` of `0` will disable the visual bell animation.
-        color = "#ffffff";                                                        # Visual bell animation color.
-        command = "None";                                                         # | { program = ""; args = [ "" ]; }; This program is executed whenever the bell is rung.
+      hints = {
+        start = {
+          # First character in the hint label.
+          foreground = "#181818";
+          background = "#f4bf75";
+        };
+        end = {
+          # All characters after the first one in the hint label.
+          foreground = "#181818";
+          background = "#ac4242";
+        };
+      };
+      line_indicator = {
+        # Color used for the indicator displaying the position in history during search and vi mode.
+        foreground = "None";
+        background = "None";
+      };
+      footer_bar = {
+        # Color used for the footer bar on the bottom, used by search input, hyperlink URI preview, etc.
+        foreground = "#181818";
+        background = "#d8d8d8";
       };
       selection = {
-        semantic_escape_chars = ",│`|:\"' ()[]{}<>\t";                            # Contains all characters that are used as separators for 'semantic words' in Alacritty.
-        save_to_clipboard = false;                                                # Automatically copy selected text to primary clipboard.
+        # Colors used for drawing selections.
+        text = "CellBackground";
+        background = "CellForeground";
       };
-      cursor = {
-        style = { 
-          shape = "Block";                                                        # "Block" | "Underline" | "Beam"
-          blinking = "On";                                                        # "Never": Prevent the cursor from ever blinking | "Off": Disable blinking by default | "On": Enable blinking by default | "Always": Force the cursor to always blink.
-        };
-        vi_mode_style = "None";                                                   # | { shape = ""; blinking = true | false; }; If the vi mode cursor style is "None" or not specified, it will fall back to the active value of the normal cursor.
-        blink_interval = 750;                                                     # Cursor blinking interval in milliseconds.
-        blink_timeout = 5;                                                        # Time after which cursor stops blinking, in seconds.
-        unfocused_hollow = true;                                                  # When this is true, cursor will be rendered as a hollow box when the window is not focused.
-        thickness = 0.15;                                                         # Thickness of cursor relative to cell width as floating point number between 0.0 - 1.0;
+      normal = {
+        black = "#181818";
+        red = "#ac4242";
+        green = "#90a959";
+        yellow = "#f4bf75";
+        blue = "#6a9fb5";
+        magenta = "#aa759f";
+        cyan = "#75b5aa";
+        white = "#d8d8d8";
       };
-      terminal = {
-        shell = {
-          program = "${lib.getExe pkgs.fish}";                                    # Path to your preferred shell. If unspecified, Linux/BSD/macOS: $SHELL, Windows: "powershell".
-          args = ["-l"];                                                          # Args passed to the shell's command.
-        };
-        osc52 = "OnlyCopy";                                                       # Controls ability to write to the system clipboard with the osc 52 esc sequence. "Disabled" | "OnlyCopy" | "OnlyPaste" | "CopyPaste"
+      bright = {
+        black = "#6b6b6b";
+        red = "#c55555";
+        green = "#aac474";
+        yellow = "#feca88";
+        blue = "#82b8c8";
+        magenta = "#c28cb8";
+        cyan = "#93d3c3";
+        white = "#f8f8f8";
       };
-      mouse = {
-        hide_when_typing = false;
-                                                                                  # When an application running within alacritty captures the mouse, a modifier can be used to suppress mouse reporting.
-        bindings = [{                                                             # If no action is found for the event, actions for the event without the modifier are triggered instead.
-            mouse = "Right";                                                      # "Middle" | "Left" | "Right" | "Back" | "Forward" | <integer>
-            mods = "Control";
-            action = "Paste";                                                     # <keyboard.bindings.action> | "ExpandSelection" (expand selection to current mouse cursor location)
-        }];
+      dim = {
+        # If the dim colors are not set, they will be calculated automatically based on the `colors.normal` colors.
+        black = "#0f0f0f";
+        red = "#712b2b";
+        green = "#5f6f3a";
+        yellow = "#a17e4d";
+        blue = "#456877";
+        magenta = "#704d68";
+        cyan = "#4d7770";
+        white = "#8e8e8e";
       };
-      hints  = {                                                                  # Terminal hints can be used to find text or hyperlinks in the visible part of the terminal and pipe it to other applications.
-        alphabet = "jfkdls;ahgurieowpq";                                          # Keys used for the hint labels (this is the default value).
-        enabled = [{
-          command = "open";                                                       # On macOS; Command that will be executed when the 'hint' is clicked or selected via the 'binding'.
-          hyperlinks = true;                                                      # When this is true, all OSC 8 escape sequence hyperlinks will be included in the hints.
+      indexed_colors = []; # The indexed colors include all colors from 16 to 256. When these are not set, they're filled with sensible defaults.
+      transparent_background_colors = false; # Whether or not window.opacity applies to all cell backgrounds, or only to the default background. When set to true, all cells will be transparent regardless of their background color.
+      draw_bold_text_with_bright_colors = false; # When true, bold text is drawn using the bright color variants.
+    };
+    bell = {
+      animation = "Linear"; # Visual bell animations effect for flashing the screen when the visual bell is rung. "Ease" | "EaseOut" | "EaseOutSine" | "EaseOutQuad" | "EaseOutCubic" | "EaseOutQuart" | "EaseOutQuint" | "EaseOutExpo" | "EaseOutCirc" | "Linear"
+      duration = 0; # Duration of the visual bell flash in milliseconds. A `duration` of `0` will disable the visual bell animation.
+      color = "#ffffff"; # Visual bell animation color.
+      command = "None"; # | { program = ""; args = [ "" ]; }; This program is executed whenever the bell is rung.
+    };
+    selection = {
+      semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"; # Contains all characters that are used as separators for 'semantic words' in Alacritty.
+      save_to_clipboard = false; # Automatically copy selected text to primary clipboard.
+    };
+    cursor = {
+      style = {
+        shape = "Block"; # "Block" | "Underline" | "Beam"
+        blinking = "On"; # "Never": Prevent the cursor from ever blinking | "Off": Disable blinking by default | "On": Enable blinking by default | "Always": Force the cursor to always blink.
+      };
+      vi_mode_style = "None"; # | { shape = ""; blinking = true | false; }; If the vi mode cursor style is "None" or not specified, it will fall back to the active value of the normal cursor.
+      blink_interval = 750; # Cursor blinking interval in milliseconds.
+      blink_timeout = 5; # Time after which cursor stops blinking, in seconds.
+      unfocused_hollow = true; # When this is true, cursor will be rendered as a hollow box when the window is not focused.
+      thickness = 0.15; # Thickness of cursor relative to cell width as floating point number between 0.0 - 1.0;
+    };
+    terminal = {
+      shell = {
+        program = "${lib.getExe pkgs.fish}"; # Path to your preferred shell. If unspecified, Linux/BSD/macOS: $SHELL, Windows: "powershell".
+        args = ["-l"]; # Args passed to the shell's command.
+      };
+      osc52 = "OnlyCopy"; # Controls ability to write to the system clipboard with the osc 52 esc sequence. "Disabled" | "OnlyCopy" | "OnlyPaste" | "CopyPaste"
+    };
+    mouse = {
+      hide_when_typing = false;
+      # When an application running within alacritty captures the mouse, a modifier can be used to suppress mouse reporting.
+      bindings = [
+        {
+          # If no action is found for the event, actions for the event without the modifier are triggered instead.
+          mouse = "Right"; # "Middle" | "Left" | "Right" | "Back" | "Forward" | <integer>
+          mods = "Control";
+          action = "Paste"; # <keyboard.bindings.action> | "ExpandSelection" (expand selection to current mouse cursor location)
+        }
+      ];
+    };
+    hints = {
+      # Terminal hints can be used to find text or hyperlinks in the visible part of the terminal and pipe it to other applications.
+      alphabet = "jfkdls;ahgurieowpq"; # Keys used for the hint labels (this is the default value).
+      enabled = [
+        {
+          command = "open"; # On macOS; Command that will be executed when the 'hint' is clicked or selected via the 'binding'.
+          hyperlinks = true; # When this is true, all OSC 8 escape sequence hyperlinks will be included in the hints.
           # post_processng = true;                                                  # This is most useful for URIs and applies only to regex matches.
-          persist = false;                                                        # When this is true, hints remain persistent after selection.
-          mouse = {                                                               # Controls whether the hint should be underlined when hovering over the hint text with all 'mods' pressed.
+          persist = false; # When this is true, hints remain persistent after selection.
+          mouse = {
+            # Controls whether the hint should be underlined when hovering over the hint text with all 'mods' pressed.
             enabled = true;
             # mods = "<string>";                                                  # If a particular mod must be held down for the mouse interaction to be allowed.
-          }; 
-          binding = {                                                             # This controls which key binding is used to start the keyboard hint selection process. See: keyboard.bindings for available values.
+          };
+          binding = {
+            # This controls which key binding is used to start the keyboard hint selection process. See: keyboard.bindings for available values.
             key = "O";
             mods = "Control|Shift";
           };
-        }];
-      };
-      keyboard = {
-        bindings = [];                                                            # See alacritty-bindings(5) -- possible `action`s at bottom of file.
-      };
-      debug = {                                                                   # Options for troubleshooting
-        render_timer = false;                                                     # Display the time it takes to draw each frame.
-        persistent_logging = false;                                               # Keep the log file after quitting Alacritty.
-        log_level = "Warn";                                                       # "Off" | "Error" | "Warn" | "Info" | "Debug" | "Trace" - verbosity/logging info detail level
-        renderer = "None";                                                        # "glsl3" | "gles2" | "gles2pure" | "None" - Force use of a specific renderer, "None" will use highest available one.
-        print_events = false;                                                     # Log all window events.
-        highlight_damage = false;                                                 # Highlight window damage information.
-        prefer_egl = false;                                                       # Use EGL as displayAPI if the current platform allows. Note that transparency may not work with EGL on Linux/BSD
-      };
+        }
+      ];
+    };
+    keyboard = {
+      bindings = []; # See alacritty-bindings(5) -- possible `action`s at bottom of file.
+    };
+    debug = {
+      # Options for troubleshooting
+      render_timer = false; # Display the time it takes to draw each frame.
+      persistent_logging = false; # Keep the log file after quitting Alacritty.
+      log_level = "Warn"; # "Off" | "Error" | "Warn" | "Info" | "Debug" | "Trace" - verbosity/logging info detail level
+      renderer = "None"; # "glsl3" | "gles2" | "gles2pure" | "None" - Force use of a specific renderer, "None" will use highest available one.
+      print_events = false; # Log all window events.
+      highlight_damage = false; # Highlight window damage information.
+      prefer_egl = false; # Use EGL as displayAPI if the current platform allows. Note that transparency may not work with EGL on Linux/BSD
     };
   };
 }
-
 # ReceiveChar: Allow receiving char input.
 # None: No action.
 # Paste: Paste contents of system clipboard.

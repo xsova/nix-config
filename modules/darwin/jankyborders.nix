@@ -1,7 +1,4 @@
-{ ... }:
-
 {
-  services.jankyborders = {
     enable = true;
     active_color = "gradient(top_right=0xee33ccff,bottom_left=0xee00ff99)";
     ax_focus = false; # Slower accessibility API.
@@ -14,6 +11,5 @@
     style = "round"; # Style of the border, can be either "round" (default) or square.
     whitelist = [];
     width = 2.0;
-  };
 }
 

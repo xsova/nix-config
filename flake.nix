@@ -47,8 +47,8 @@
       port      = import ./hosts/port      {inherit inputs self;};
     };
     nixosConfigurations = {
-      starboard = import ./hosts/starboard {inherit inputs self;};
-      anchor    = import ./hosts/anchor    {inherit inputs self;};
+      # starboard = import ./hosts/starboard {inherit inputs self;};
+      # anchor    = import ./hosts/anchor    {inherit inputs self;};
     };
   };
 }

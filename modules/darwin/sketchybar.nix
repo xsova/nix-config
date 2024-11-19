@@ -1,7 +1,2 @@
-{ ... }:
-
 {
-  services.sketchybar = {
-    
-  };
 }
