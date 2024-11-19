@@ -92,6 +92,27 @@
       bun
       lua
       (python312Full.withPackages (ps: with ps; [pygobject3 gobject-introspection pyqt6-sip]))
+      zig
+      (rust-bin.fromRustupToolchainFile ./rust-toolchain.toml)
+
+      # Rust stuff
+      taplo
+      cargo-watch
+      cargo-deny
+      cargo-audit
+      cargo-edit
+      cargo-outdated
+      cargo-license
+      cargo-tarpaulin
+      cargo-cross
+      cargo-zigbuild
+      cargo-nextest
+      cargo-spellcheck
+      cargo-modules
+      cargo-bloat
+      cargo-unused-features
+      bacon
+      evcxr # Rust repl
 
       # LSPs
       python311Packages.python-lsp-server

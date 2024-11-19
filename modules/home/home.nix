@@ -18,6 +18,7 @@ in {
     MANPAGER = "sh -c 'col -bx | bat -l man -p'";
     IWD = "($PWD)";
     NODE_EXTRA_CA_CERTS = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+    # RUST_SRC_PATH = "${pkgs.rustToolchain}/lib/rustlib/src/rust/library";
   };
   sessionPath =
     (

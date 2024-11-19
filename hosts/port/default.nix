@@ -59,6 +59,9 @@ inputs.nix-darwin.lib.darwinSystem {
           setNixPath       = true;
           setFlakeRegistry = true;
         };
+        overlays = [
+          inputs.rust-overlay.overlays.default
+        ];
       };
       security.pam.enableSudoTouchIdAuth = true;
       services = {
