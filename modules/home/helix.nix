@@ -160,5 +160,16 @@
         args = ["--handler" "copilot" "--copilotApiKey" ""];
       };
     };
+    grammar = {
+      grammar = [
+        {
+          name = "lua";
+          source = {
+            git = "https://github.com/MuniTanjim/tree-sitter-lua";
+            rev = "887dfd4e83c469300c279314ff1619b1d0b85b91";
+          };
+        }
+      ];
+    };
   };
 }

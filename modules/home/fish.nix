@@ -14,7 +14,16 @@
   };
   preferAbbrs = true;
   shellAbbrs = {
+    lg = "lazygit";
     cl = "clear";
+    cdd = {
+      expansion = "cd ~/Developer/%";
+      setCursor = true;
+    };
+    dv = {
+      expansion = "~/Developer/%";
+      setCursor = true;
+    };
     rbs =
       if darwin
       then "darwin-rebuild switch --flake ~/nix#${host}"
@@ -43,6 +52,7 @@
       expansion = "cd ~/Developer/%";
       setCursor = true;
     };
+    ef = "hx ~/nix/flake.nix";
     enx = {
       expansion = "hx ~/nix/%";
       setCursor = true;
