@@ -17,11 +17,13 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     rust-overlay.url = "github:oxalica/rust-overlay";
     zig-overlay.url = "github:mitchellh/zig-overlay";
+    nur.url = "github:nix-community/nur";
   };
 
   outputs = inputs @ {self, ...}: {
     schemas = inputs.flake-schemas.schemas;
     overlays = with inputs; [
+      nur.overlay
       rust-overlay.overlays.default
       zig-overlay.overlays.default
     ];
@@ -29,7 +31,7 @@
       port = import ./hosts/port { inherit inputs self; };
     };
     nixosConfigurations = {
-      # starboard = import ./hosts/starboard {inherit inputs self;};
+      starboard = import ./hosts/starboard {inherit inputs self;};
       # anchor    = import ./hosts/anchor    {inherit inputs self;};
     };
   };

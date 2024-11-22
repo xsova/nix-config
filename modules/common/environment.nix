@@ -2,23 +2,57 @@
   pkgs,
   inputs,
   darwin ? false,
+  headless ? true,
   ...
-}: {
-  shells = with pkgs; [nushell fish bashInteractive zsh];
-  systemPackages = with pkgs;
-    (
+}: let
+  linux = with pkgs; {
+    cli =
+      if !darwin
+      then [
+        (inputs.pinix.packages.${pkgs.stdenv.hostPlatform.system}.pinix)
+        nom
+        gifsicle
+        imagepick
+        impala
+        playerctl
+        psi-notify
+        psmisc
+        at-spi2-atk
+        greetd.tuigreet
+      ]
+      else [];
+    gui =
+      if !headless
+      then [
+        alacritty
+        firefox
+        gimp
+        iwgtk
+        jetbrains.aqua
+        kitty
+        libreoffice
+        mullvad-browser
+        vscode
+      ]
+      else [];
+  };
+  mac = with pkgs; {
+    cli =
       if darwin
       then [
         m-cli
         pinentry_mac
       ]
-      else [
-        # nixos-rebuild monitoring / progress tools
-        (inputs.pinix.packages.${pkgs.stdenv.hostPlatform.system}.pinix)
-        nom
+      else [];
+    gui =
+      if darwin
+      then [
+        jetbrains.clion
       ]
-    )
-    ++ [
+      else [];
+  };
+  all = with pkgs; {
+    cli = [
       # Consistent UNIX command line tools regardless of the OS
       curl
       coreutils
@@ -37,6 +71,8 @@
       dateutils
       unzip
       gnumake
+
+      # Other
 
       # Nix
       comma
@@ -146,7 +182,19 @@
       btop # Fancy `htop`.
       alejandra # accessible via `nix fmt`
     ];
-
+  };
+  packages = mac.cli ++ mac.gui ++ linux.cli ++ linux.gui ++ all.cli;
+in {
+  shells = with pkgs; [nushell fish bashInteractive zsh];
+  systemPackages = packages;
+  variables =
+    if !darwin
+    then {
+      SPOTIFY_PATH = "${pkgs.spotify}/";
+      JDK_PATH = "${pkgs.jdk11}/";
+      NODEJS_PATH = "${pkgs.nodePackages_latest.nodejs}/";
+    }
+    else {};
   etc."nix/inputs/nixpkgs".source = "${inputs.nixpkgs}";
   extraInit = let
     homeManagerSessionVars = "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh";

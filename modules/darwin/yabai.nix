@@ -7,8 +7,8 @@
     mouse_modifier = "ctrl";
     mouse_action1 = "move";
     mouse_action2 = "resize";
-    top_padding = 32;
-    bottom_padding = 10;
+    top_padding = 10;
+    bottom_padding = 0;
     left_padding = 10;
     right_padding = 10;
     window_gap = 10;
@@ -59,6 +59,7 @@
     done
 
     yabai -m rule --add app="^Arc$" title="" manage=off # hopefully this works.
+    yabai -m rule --add app="^Sizzy$" space=^1
     yabai -m rule --add app="^Arc$" space=^3
     yabai -m rule --add app="^Aqua$" title="^Settings$" manage=off
     yabai -m rule --add app="^Chromium$" title="^Playwright Inspector$" space=^7
