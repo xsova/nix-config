@@ -52,7 +52,8 @@
           N = ["search_prev"];
         };
         g = {
-          b = ["find_till_char" "collapse_selection"];
+          space = "page_down";
+          backspace = "page_up";
         };
         # Engram layout
         h = "move_char_left";

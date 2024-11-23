@@ -3,9 +3,10 @@
   inputs,
   darwin ? false,
   headless ? true,
+  host,
   ...
 }: let
-  linux = with pkgs; {
+  pkgsToInstall = with pkgs; {
     cli =
       if !darwin
       then [
@@ -19,8 +20,26 @@
         psmisc
         at-spi2-atk
         greetd.tuigreet
+        vulnix
+        clamav
+        chkrootkit
+        pass-wayland
+        pass2csv
+        passExtensions.pass-tomb
+        passExtensions.pass-update
+        passExtensions.pass-otp
+        passExtensions.pass-import
+        passExtensions.pass-audit
+        tomb
+        pwgen
+        pwgen-source
+        pamixer
+        pavucontrol
       ]
-      else [];
+      else [
+        m-cli
+        pinentry_mac
+      ];
     gui =
       if !headless
       then [
@@ -33,21 +52,36 @@
         libreoffice
         mullvad-browser
         vscode
-      ]
-      else [];
-  };
-  mac = with pkgs; {
-    cli =
-      if darwin
-      then [
-        m-cli
-        pinentry_mac
-      ]
-      else [];
-    gui =
-      if darwin
-      then [
-        jetbrains.clion
+
+        # Hyprland stuff
+        pyprland
+        hyprpicker
+        hyprcursor
+        hyprlock
+        hypridle
+        hyprpaper
+        avizo
+        cliphist
+        dunst
+        egl-wayland
+        grim
+        poweralertd
+        qt6.qtwayland
+        rofi-wayland
+        slurp
+        waybar
+        wayland
+        wayland-protocols
+        wayland-scanner
+        wayland-utils
+        wl-clipboard
+        wl-clip-persist
+        wlogout
+        wlrctl
+        wlr-randr
+        wl-screenrec
+        wtype
+        xwayland
       ]
       else [];
   };
@@ -71,6 +105,10 @@
       dateutils
       unzip
       gnumake
+      lldb
+      clang
+      clang-tools
+      gtest
 
       # Other
 
@@ -129,6 +167,7 @@
       lua
       (python312Full.withPackages (ps: with ps; [pygobject3 gobject-introspection pyqt6-sip]))
       zig
+      zls
       (rust-bin.fromRustupToolchainFile ./rust-toolchain.toml)
 
       # Rust stuff
@@ -183,17 +222,46 @@
       alejandra # accessible via `nix fmt`
     ];
   };
-  packages = mac.cli ++ mac.gui ++ linux.cli ++ linux.gui ++ all.cli;
+
+  nixos-hosts = with pkgs; (
+    if host == "starboard"
+    then [
+      wlsunset
+      brightnessctl
+      qmk-udev-rules
+      linuxKernel.packages.linux_zen.framework-laptop-kmod
+      linux-firmware
+      inputs.fw-fanctrl.nixosModules.default
+      alsa-lib
+      alsa-utils
+      flac
+      pulsemixer
+    ]
+    else []
+  );
+  packages = pkgsToInstall.cli ++ pkgsToInstall.gui ++ all.cli ++ nixos-hosts;
 in {
   shells = with pkgs; [nushell fish bashInteractive zsh];
   systemPackages = packages;
   variables =
     if !darwin
-    then {
-      SPOTIFY_PATH = "${pkgs.spotify}/";
-      JDK_PATH = "${pkgs.jdk11}/";
-      NODEJS_PATH = "${pkgs.nodePackages_latest.nodejs}/";
-    }
+    then let
+      env = {
+        gui =
+          if !headless
+          then {
+            SPOTIFY_PATH = "${pkgs.spotify}/";
+            NIXOS_OZONE_WL = "1";
+            WLR_NO_HARDWARE_CURSORS = "1";
+          }
+          else {};
+        cli = {
+          JDK_PATH = "${pkgs.jdk11}/";
+          NODEJS_PATH = "${pkgs.nodePackages_latest.nodejs}/";
+        };
+      };
+    in
+      env.gui // env.cli
     else {};
   etc."nix/inputs/nixpkgs".source = "${inputs.nixpkgs}";
   extraInit = let

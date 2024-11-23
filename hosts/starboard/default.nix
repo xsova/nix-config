@@ -9,100 +9,72 @@ inputs.nixpkgs.lib.nixosSystem {
   modules = let
     user = "bryce";
     host = "starboard";
-  in [
-    inputs.hardware.nixosModules.framework-13-7040-amd
-    inputs.home-manager.nixosModules.home-manager
-    inputs.nix-index.nixosModules.nix-index
-    inputs.lix.nixosModules.default
-    ({
-      inputs,
-      pkgs,
-      ...
-    }: {
-      system = {
-        configurationRevision = self.rev or self.dirtyRev or null;
-        stateVersion = "24.05";
-      };
-      time.timeZone = "America/Chicago";
-      boot.loader = {
-        systemd-boot.enable = true;
-        efi.canTouchEfiVariables = true;
-      };
-      environment = import ../../modules/common/environment.nix {inherit pkgs inputs;};
-      nixpkgs = let
-        platform = "x86_64-linux";
-      
-        import ../../modules/common/nixpkgs.nix {inherit platform self;};
-      users.users = {
-        ${user} = {
-          name = user;
-          initialPassword = "password";
-          isNormalUser = true;
-          extraGroups = ["wheel"];
-          home = "/home/${user}";
-          shell = pkgs.fish;
+    headless = false;
+  in
+    [
+      ({
+        inputs,
+        pkgs,
+        config,
+        lib,
+        ...
+      }: {
+        system = import ../../modules/nixos/system.nix {inherit self;};
+        time = import ../../modules/nixos/time.nix;
+        boot = import ../../modules/nixos/boot.nix;
+        environment = import ../../modules/common/environment.nix {inherit headless host pkgs inputs;};
+        nixpkgs = let platform = "x86_64-linux"; in import ../../modules/common/nixpkgs.nix {inherit platform self;};
+        users.users = import ../../modules/nixos/user.nix {inherit user pkgs;};
+        networking = import ../../modules/nixos/networking.nix;
+        zramSwap.enable = true;
+        services = {
+          clamav.daemon.enable = true;
+          fail2ban.enable = true;
+          fstrim.enable = true;
+          fwupd.enable = true;
+          libinput.enable = true;
+          ollama.enable = true;
+          power-profiles-daemon.enable = true;
+          tumbler.enable = true;
+          colord.enable = true;
+          dbus = import ../../modules/nixos/dbus.nix;
+          dnscypt-proxy2 = import ../../modules/nixos/dnscrypt-proxy2.nix;
+          fprintd = import ../../modules/nixos/fprintd.nix {inherit pkgs;};
+          greetd = import ../../modules/nixos/display-manager.nix {inherit pkgs;};
+          keyd = import ../../modules/nixos/keyd.nix;
+          openssh = import ../../modules/nixos/openssh.nix;
+          pipewire = import ../../modules/nixos/pipewire.nix;
+          udev = import ../../modules/nixos/udev.nix;
+          xserver = import ../../modules/nixos/xserver.nix;
         };
-      };
-      networking = {
-        networkmanager = {
-          enable = true;
-          wifi.backend = "iwd";
+        console.useXkbConfig = true;
+        security = import ../../modules/nixos/security.nix {inherit pkgs;};
+        nix = import ../../modules/common/nix-settings.nix {inherit inputs;};
+        programs = {
+          fish.enable = true;
+          light.enable = true;
+          dconf.enable = true;
+          thunar.enable = true;
+          hyprland = import ../../modules/nixos/hyprland.nix {inherit inputs pkgs;};
         };
-        wireless.iwd = {
-          enable = true;
-          settings = {
-            General = {
-              EnableNetworkConnection = true;
-            };
-            Network = {
-              EnableIPv6 = true;
-            };
-            Scan = {
-              DisablePeriodicScan = true;
-            };
+        hardware = import ../../modules/nixos/framework-hardware.nix {inherit pkgs config;};
+        systemd.services.dnscrypt-proxy2.serviceConfig.StateDirectory = "dnscrypt-proxy";
+        i18n = import ../../modules/nixos/locale.nix;
+        home-manager = {
+          useGlobalPkgs = true;
+          backupFileExtension = "bak";
+          users = {
+            ${user} = import ../../modules/home/users/user.nix {inherit pkgs user host lib inputs;};
+            root = import ../../modules/home/users/root.nix;
           };
         };
-        enableIPv6 = false;
-        hostName = "framework";
-        firewall = {
-          enable = true;
-          allowedTCPPorts = [80 443];
-        };
-        nameservers = ["127.0.0.1" "[::1]"];
-        dhcpcd.enable = false;
-        dhcpcd.extraConfig = "nohook resolv.conf";
-        networkmanager.dns = "none";
-      };
-      services = {
-        dnscypt-proxy2 = import ../../modules/nixos/dnscrypt-proxy2.nix;
-      };
-      nix = import ../../modules/common/nix-settings.nix {inherit inputs;};
-      programs.fish.enable = true;
-      systemd.services.dnscrypt-proxy2.serviceConfig = {
-        StateDirectory = "dnscrypt-proxy";
-      };
-    })
-    # ./boot.nix
-    # ./cli.nix
-    ../../hosts/port
-    ./configuration.nix
-    ./desktop.nix
-    ./display-manager.nix
-    ./environment-variables.nix
-    ./gui.nix
-    ./hardware-configuration.nix
-    ./hardware.nix
-    ./home.nix
-    ./hyprland.nix
-    ./locale.nix
-    ./lsp.nix
-    ./networking.nix
-    ./programs.nix
-    ./programming-languages.nix
-    ./security.nix
-    ./services.nix
-    ./sound.nix
-    ./ssh.nix
-    ./wayland.nix
-  ];
+      })
+    ]
+    ++ [
+      inputs.hardware.nixosModules.framework-13-7040-amd
+      inputs.home-manager.nixosModules.home-manager
+      inputs.nix-index.nixosModules.nix-index
+      inputs.lix.nixosModules.default
+      ./hardware-configuration.nix # This is automatically generated by nixos.
+    ];
 }

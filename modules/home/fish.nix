@@ -2,6 +2,7 @@
   lib,
   darwin ? false,
   host,
+  pkgs,
   ...
 }: {
   enable = true;
@@ -119,6 +120,8 @@
   '';
   loginShellInit = let
     profiles = [
+      "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/bin"
+      "${pkgs.zls}/bin"
       "/etc/profiles/per-user/$USER"
       "$HOME/.nix-profile"
       "(set -q XDG_STATE_HOME; and echo $XDG_STATE_HOME; or echo $HOME/.local/state)/nix/profile"
