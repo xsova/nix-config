@@ -21,7 +21,7 @@ inputs.nix-darwin.lib.darwinSystem {
       config,
       ...
     }: {
-      environment = import ../../modules/common/environment.nix {inherit darwin pkgs inputs;};
+      environment = import ../../modules/common/environment.nix {inherit host darwin pkgs inputs;};
       fonts = import ../../modules/common/fonts.nix {inherit pkgs;};
       programs.fish.enable = true;
       home-manager = {
@@ -30,7 +30,7 @@ inputs.nix-darwin.lib.darwinSystem {
           ${user} = {
             home = import ../../modules/home/home.nix {inherit pkgs user darwin;};
             programs = {
-              fish = import ../../modules/home/fish.nix {inherit lib darwin host;};
+              fish = import ../../modules/home/fish.nix {inherit pkgs lib darwin host;};
               alacritty = import ../../modules/home/alacritty.nix {inherit pkgs lib;};
               helix = import ../../modules/home/helix.nix {inherit pkgs lib;};
               starship = import ../../modules/home/starship.nix;
