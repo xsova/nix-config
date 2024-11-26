@@ -25,6 +25,18 @@
       expansion = "~/Developer/%";
       setCursor = true;
     };
+    fcp = {
+      expansion = "fish_clipboard_copy";
+      position = "anywhere";
+    };
+    fc = {
+      expansion = "fish_clipboard_copy";
+      position = "anywhere";
+    };
+    fcc = {
+      expansion = "fish_clipboard_copy";
+      position = "anywhere";
+    };
     rbs =
       if darwin
       then "darwin-rebuild switch --flake ~/nix#${host}"
@@ -58,6 +70,10 @@
       expansion = "hx ~/nix/%";
       setCursor = true;
     };
+    msp = {
+      expansion = "~/Developer/exchange-automated-ui/";
+      position = "anywhere";
+    };
     fw = {
       expansion = "~/nix/hosts/framework/%";
       setCursor = true;
@@ -66,10 +82,6 @@
     fzf = {
       expansion = "fzf --preview \"bat --color=always --style=numbers --line-range=:500 {}\"";
       setCursor = true;
-    };
-    msp = {
-      expansion = "~/Developer/exchange-automated-ui/";
-      position = "anywhere";
     };
     msps = {
       expansion = "~/Developer/exchange-automated-ui/src/%";

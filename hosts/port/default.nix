@@ -34,6 +34,7 @@ inputs.nix-darwin.lib.darwinSystem {
                 helix = import ../../modules/home/helix.nix {inherit pkgs lib;};
                 starship = import ../../modules/home/starship.nix;
                 direnv = import ../../modules/home/direnv.nix;
+                git = import ../../modules/home/git.nix {inherit user;};
               };
             };
           };

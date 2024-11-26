@@ -109,6 +109,7 @@
       clang
       clang-tools
       gtest
+      llvm
 
       # Other
 

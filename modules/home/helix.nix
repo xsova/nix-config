@@ -99,6 +99,16 @@
   languages = {
     language = [
       {
+        name = "modal";
+        file-types = ["mdl" "modal" "ml"];
+        shebangs = ["modal" "/usr/bin/env modal"];
+        indent = {
+         tab-width = 1;
+         unit = "\t";
+        };
+        scope = "source.modal";
+      }
+      {
         name = "fish";
         language-servers = ["fish-lsp"];
       }
