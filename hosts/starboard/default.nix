@@ -38,7 +38,7 @@ inputs.nixpkgs.lib.nixosSystem {
           tumbler.enable = true;
           colord.enable = true;
           dbus = import ../../modules/nixos/dbus.nix;
-          dnscypt-proxy2 = import ../../modules/nixos/dnscrypt-proxy2.nix;
+          # dnscypt-proxy2 = import ../../modules/nixos/dnscrypt-proxy2.nix;
           fprintd = import ../../modules/nixos/fprintd.nix {inherit pkgs;};
           greetd = import ../../modules/nixos/display-manager.nix {inherit pkgs;};
           keyd = import ../../modules/nixos/keyd.nix;

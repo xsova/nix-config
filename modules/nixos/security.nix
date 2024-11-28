@@ -2,7 +2,7 @@
   rtkit.enable = true;
   tpm2 = {
     enable = true;
-    pkcs1.enable = true;
+    # pkcs1.enable = true;
     tctiEnvironment.enable = true;
   };
   apparmor = {
