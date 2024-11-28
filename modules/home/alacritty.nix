@@ -2,7 +2,156 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  catppuccin_macchiato = {
+    primary = {
+      background = "#24273a";
+      foreground = "#cad3f5";
+      dim_foreground = "#8087a2";
+      bright_foreground = "#cad3f5";
+    };
+    cursor = {
+      text = "#24273a";
+      cursor = "#f4dbd6";
+    };
+    vi_mode_cursor = {
+      text = "#24273a";
+      cursor = "#f4dbd6";
+    };
+    search = {
+      matches = {
+        foreground = "#24273a";
+        background = "#a5adcb";
+      };
+      focused_match = {
+        foreground = "#24273a";
+        background = "#a5adcb";
+      };
+    };
+    footer_bar = {
+      foreground = "#24273a";
+      background = "#a5adcb";
+    };
+    hints = {
+      start = {
+        foreground = "#24273a";
+        background = "#a5adcb";
+      };
+      end = {
+        foreground = "#24273a";
+        background = "#eed49f";
+      };
+    };
+    selection = {
+      text = "#24273a";
+      background = "#f4dbd6";
+    };
+    normal = {
+      black = "#494d64";
+      red = "#ed8796";
+      green = "#a6da95";
+      yellow = "#eed49f";
+      blue = "#8aadf4";
+      magenta = "#f5bde6";
+      cyan = "#8bd5ca";
+      white = "#b8c0e0";
+    };
+    bright = {
+      black = "#5b6078";
+      red = "#ed8796";
+      green = "#a6da95";
+      yellow = "#eed49f";
+      blue = "#8aadf4";
+      magenta = "#f5bed6";
+      cyan = "#8bd5ca";
+      white = "#a5adcb";
+    };
+    indexed_colors = [
+      {
+        index = 16;
+        color = "#f5a97f";
+      }
+      {
+        index = 17;
+        color = "#f4dbd6";
+      }
+    ];
+  };
+  # catppuccin_latte = {
+  #   primary = {
+  #     background = "#eff1f5";
+  #     foreground = "#4c4f69";
+  #     dim_foreground = "#8c8fa1";
+  #     bright_foreground = "#4c4f69";
+  #   };
+  #   cursor = {
+  #     text = "#eff1f5";
+  #     cursor = "#dc8a79";
+  #   };
+  #   vi_mode_cursor = {
+  #     text = "eff1f5";
+  #     cursor = "#7287fd";
+  #   };
+  #   search = {
+  #     matches = {
+  #       foreground = "#eff1f5";
+  #       background = "#6c6f85";
+  #     };
+  #     focused_match = {
+  #       foreground = "#eff1f5";
+  #       background = "#40a02b";
+  #     };
+  #   };
+  #   footer_bar = {
+  #     foreground = "#eff1f5";
+  #     background = "#6c6f85";
+  #   };
+  #   hints = {
+  #     start = {
+  #       foreground = "#eff1f5";
+  #       background = "#df8e1d";
+  #     };
+  #     end = {
+  #       foreground = "#eff1f5";
+  #       background = "#6c6f85";
+  #     };
+  #   };
+  #   selection = {
+  #     text = "#eff1f5";
+  #     backgroud = "#dc8a78";
+  #   };
+  #   normal = {
+  #     black = "#bcc0cc";
+  #     red = "#d20f39";
+  #     green = "#40a02b";
+  #     yellow = "#df8e1d";
+  #     blue = "#1e66f5";
+  #     magenta = "#ea76cb";
+  #     cyan = "#179299";
+  #     white = "#5c5f77";
+  #   };
+  #   bright = {
+  #     black = "#acb0be";
+  #     red = "#d20f39";
+  #     green = "#40a02b";
+  #     yellow = "#df8e1d";
+  #     blue = "#1e66f5";
+  #     magenta = "#ea76cb";
+  #     cyan = "#179299";
+  #     white = "#5c5f77";
+  #   };
+  #   indexed_colors = [
+  #     {
+  #       index = 16;
+  #       color = "#fe640b";
+  #     }
+  #     {
+  #       index = 17;
+  #       color = "#dc8a78";
+  #     }
+  #   ];
+  # };
+in {
   enable = true;
   settings = {
     general = {
@@ -75,92 +224,7 @@
       }; # Determines the locations of the glyphs within their cells with the default being at the bottom.
       builtin_box_drawing = true; # When true, Alacritty will use a custom built-in font for box drawing characters (U+2500-U+259F), legacy computing symbols (U+1FB00-U+1FB3B), and powerline symbols (U+E0B0-U+E0B3).
     };
-    colors = {
-      # Colors are specified using their hexadecimal values with a `#` prefix: #RRGGBB.
-      cursor = {
-        # Colors which should be used to draw the terminal cursor. Allowed values are hexadecimal colors like #RRGGBB, or "CellForeground"/"CellBackground".
-        text = "CellBackground";
-        cursor = "CellForeground";
-      };
-      vi_mode_cursor = {
-        # Colors for the cursor when vi mode is active.
-        text = "CellBackground";
-        cursor = "CellForeground";
-      };
-      search = {
-        matches = {
-          # Highlighting matched searched text.
-          foreground = "#181818";
-          background = "#ac4242";
-        };
-        focused_match = {
-          # Highlighting the focused matched searched text.
-          foreground = "#181818";
-          background = "#f4bf75";
-        };
-      };
-      hints = {
-        start = {
-          # First character in the hint label.
-          foreground = "#181818";
-          background = "#f4bf75";
-        };
-        end = {
-          # All characters after the first one in the hint label.
-          foreground = "#181818";
-          background = "#ac4242";
-        };
-      };
-      line_indicator = {
-        # Color used for the indicator displaying the position in history during search and vi mode.
-        foreground = "None";
-        background = "None";
-      };
-      footer_bar = {
-        # Color used for the footer bar on the bottom, used by search input, hyperlink URI preview, etc.
-        foreground = "#181818";
-        background = "#d8d8d8";
-      };
-      selection = {
-        # Colors used for drawing selections.
-        text = "CellBackground";
-        background = "CellForeground";
-      };
-      normal = {
-        black = "#181818";
-        red = "#ac4242";
-        green = "#90a959";
-        yellow = "#f4bf75";
-        blue = "#6a9fb5";
-        magenta = "#aa759f";
-        cyan = "#75b5aa";
-        white = "#d8d8d8";
-      };
-      bright = {
-        black = "#6b6b6b";
-        red = "#c55555";
-        green = "#aac474";
-        yellow = "#feca88";
-        blue = "#82b8c8";
-        magenta = "#c28cb8";
-        cyan = "#93d3c3";
-        white = "#f8f8f8";
-      };
-      dim = {
-        # If the dim colors are not set, they will be calculated automatically based on the `colors.normal` colors.
-        black = "#0f0f0f";
-        red = "#712b2b";
-        green = "#5f6f3a";
-        yellow = "#a17e4d";
-        blue = "#456877";
-        magenta = "#704d68";
-        cyan = "#4d7770";
-        white = "#8e8e8e";
-      };
-      indexed_colors = []; # The indexed colors include all colors from 16 to 256. When these are not set, they're filled with sensible defaults.
-      transparent_background_colors = false; # Whether or not window.opacity applies to all cell backgrounds, or only to the default background. When set to true, all cells will be transparent regardless of their background color.
-      draw_bold_text_with_bright_colors = false; # When true, bold text is drawn using the bright color variants.
-    };
+    colors = catppuccin_macchiato;
     bell = {
       animation = "Linear"; # Visual bell animations effect for flashing the screen when the visual bell is rung. "Ease" | "EaseOut" | "EaseOutSine" | "EaseOutQuad" | "EaseOutCubic" | "EaseOutQuart" | "EaseOutQuint" | "EaseOutExpo" | "EaseOutCirc" | "Linear"
       duration = 0; # Duration of the visual bell flash in milliseconds. A `duration` of `0` will disable the visual bell animation.

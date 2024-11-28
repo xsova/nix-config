@@ -191,7 +191,12 @@
       evcxr # Rust repl
 
       # LSPs
+      ## Python
       python311Packages.python-lsp-server
+      ruff
+      pyright
+      pylyzer
+
       nodePackages_latest.nodemon
       nodePackages_latest.typescript
       nodePackages_latest.typescript-language-server

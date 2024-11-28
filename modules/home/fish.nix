@@ -139,6 +139,7 @@
       "(set -q XDG_STATE_HOME; and echo $XDG_STATE_HOME; or echo $HOME/.local/state)/nix/profile"
       "/run/current-system/sw"
       "/nix/var/nix/profiles/default"
+      "${pkgs.llvm}/bin"
     ];
     mkBinSearchPath =
       lib.concatMapStringsSep " " (path: "${path}/bin");

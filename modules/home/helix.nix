@@ -120,8 +120,26 @@
         name = "nix";
         formatter.command = lib.getExe pkgs.alejandra;
       }
+      {
+        name = "python";
+        language-servers = ["pyright" "ruff" "pylyzer"];
+      }
     ];
     language-server = {
+      rust-analyzer = {
+        command = lib.getExe pkgs.clippy;
+      };
+      pyright = {
+        config.python.analysis.typeCheckingMode = "basic";
+      };
+      ruff = {
+        command = lib.getExe pkgs.ruff;
+        args = ["server"];
+      };
+      pylyzer = {
+        command = lib.getExe pkgs.pylyzer;
+        args = ["--server"];
+      };
       fish-lsp = {
         command = "fish-lsp";
         args = ["start"];
