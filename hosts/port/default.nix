@@ -35,6 +35,8 @@ inputs.nix-darwin.lib.darwinSystem {
                 starship = import ../../modules/home/starship.nix;
                 direnv = import ../../modules/home/direnv.nix;
                 git = import ../../modules/home/git.nix {inherit user;};
+                gh = import ../../modules/home/gh.nix;
+                gitui = import ../../modules/home/gitui.nix;
               };
             };
           };

@@ -12,6 +12,8 @@
       then "darwin-rebuild"
       else "pinix nixos-rebuild";
     ls = "lsd";
+    lls = "lsd --tree";
+    ll = "lsd -l";
   };
   preferAbbrs = true;
   shellAbbrs = {
