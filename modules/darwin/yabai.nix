@@ -62,8 +62,8 @@
     yabai -m rule --add app="^Sizzy$" space=^1
     yabai -m rule --add app="^Arc$" space=^3
     yabai -m rule --add app="^Aqua$" title="^Settings$" manage=off
-    yabai -m rule --add app="^Chromium$" title="^Playwright Inspector$" space=^7
-    yabai -m rule --add app="^Chromium$" space=^8
+    yabai -m rule --add app="^Chromium$" space=^1
+    yabai -m rule --add app="^Chromium$" title="^Playwright Inspector$" space=^1 layer=below
     yabai -m rule --add app="^System Preferences$" manage=off
     yabai -m rule --add app="Chromium" manage=off
     yabai -m rule --add title="Playwright Inspector" space=^2 manage=off

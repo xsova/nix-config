@@ -24,6 +24,7 @@ inputs.nix-darwin.lib.darwinSystem {
         fonts = import ../../modules/common/fonts.nix {inherit pkgs;};
         programs.fish.enable = true;
         home-manager = {
+          backupFileExtension = "home.bak";
           useGlobalPkgs = true;
           users = {
             ${user} = {

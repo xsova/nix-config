@@ -111,7 +111,12 @@
       gtest
       llvm
 
-      # Other
+      # Chat clients
+      weechat
+      discordo
+
+      # Not sure
+      rsync
 
       # Nix
       comma

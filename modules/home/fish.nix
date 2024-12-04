@@ -17,8 +17,14 @@
   };
   preferAbbrs = true;
   shellAbbrs = {
+    hm = "home-manager";
     lg = "lazygit";
     cl = "clear";
+    ".c" = {
+      expansion = "~/.config/%";
+      setCursor = true;
+      position = "anywhere";
+    };
     cdd = {
       expansion = "cd ~/Developer/%";
       setCursor = true;
