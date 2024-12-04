@@ -65,7 +65,6 @@ inputs.nixpkgs.lib.nixosSystem {
           backupFileExtension = "bak";
           users = {
             ${user} = import ../../modules/home/users/user.nix {inherit pkgs user host lib inputs;};
-            root = import ../../modules/home/users/root.nix;
           };
         };
       })
