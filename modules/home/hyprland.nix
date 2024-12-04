@@ -4,11 +4,11 @@
   ...
 }: {
   enable = true;
-  package = inputs.hyprland.packages.${pkgs.system}.default;
-  plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
-    hyprbars
-    hyprexpo
-  ];
+  # package = inputs.hyprland.packages.${pkgs.system}.default;
+  # plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
+    # hyprbars
+    # hyprexpo
+  # ];
   systemd = {
     variables = ["--all"];
     extraCommands = [
@@ -18,23 +18,6 @@
   };
   settings = {
     "$mod" = "SUPER";
-    # general = {
-    #   gaps_in = 5;
-    #   gaps_out = 5;
-    #   border_size = 1;
-    #   "col.active_border"   = "rgba(88888888)";
-    #   "col.inactive_border" = "rgba(00000088)";
-    #   allow_tearing = true;
-    #   resize_on_border = true;
-    #   lock_cmd = "pidof hyprlock || hyprlock";
-    #   before_sleep_command = "loginctl lock-session";
-    #   after_sleep_command = "hyprctl dispatch dpms on";
-    # };
-    # listener = {
-    #   timeout = 180;
-    #   on-timeout = "brightnessctl -s set 15%";
-    #   on-resume = "brightnessctl -r";
-    # };
     decoration = {
       rounding = 16;
       blur = {
@@ -49,12 +32,6 @@
         popups = true;
         popups_ignorealpha = 0.2;
       };
-      drop_shadow = true;
-      shadow_ignore_window = true;
-      shadow_offset = "0 15";
-      shadow_range = 100;
-      shadow_scale = 0.97;
-      "col.shadow" = "rgba(00000055)";
     };
     animations = {
       enabled = true;
@@ -65,12 +42,6 @@
         "workspaces, 1, 2, default, slide"
       ];
     };
-    # group = {
-    #   groupbar = {
-    #     font_size = 10;
-    #     gradients = false;
-    #   };
-    # };
     input = {
       kb_layout = "us";
       follow_mouse = 1;

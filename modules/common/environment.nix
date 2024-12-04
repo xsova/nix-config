@@ -232,7 +232,7 @@
       qmk-udev-rules
       linuxKernel.packages.linux_zen.framework-laptop-kmod
       linux-firmware
-      inputs.fw-fanctrl.nixosModules.default
+      # inputs.fw-fanctrl.nixosModules.default
       alsa-lib
       alsa-utils
       flac
