@@ -9,7 +9,7 @@
     enable = true;
     packages = with pkgs; [
       apparmor-utils
-      apparmar-profiles
+      apparmor-profiles
     ];
   };
   polkit.enable = true;
