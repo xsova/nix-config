@@ -45,9 +45,9 @@
     input = {
       kb_layout = "us";
       follow_mouse = 1;
-      accel_profile = "flat";
+      accel_profile = "adaptive";
       touchpad = {
-        scroll_factor = 0.1;
+        scroll_factor = 1.0;
         natural_scroll = true;
       };
     };

@@ -5,5 +5,5 @@
     options = "caps:escape";
   };
   autoRepeatDelay = 200;
-  autoRepeatInterval = 30;
+  autoRepeatInterval = 40;
 }
