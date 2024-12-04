@@ -23,15 +23,6 @@
         clamav
         chkrootkit
         pass-wayland
-        pass2csv
-        passExtensions.pass-tomb
-        passExtensions.pass-update
-        passExtensions.pass-otp
-        passExtensions.pass-import
-        passExtensions.pass-audit
-        tomb
-        pwgen
-        pwgen-source
         pamixer
         pavucontrol
       ]
@@ -118,26 +109,26 @@
       rsync
 
       # Nix
-      comma
-      nix-index
-      cachix
+      # comma
+      # nix-index
+      # cachix
 
       # Search
       fd # A better `find`.
-      tealdeer # Faster `tldr`.
-      autojump # Faster `cd`
+      # tealdeer # Faster `tldr`.
+      # autojump # Faster `cd`
       ripgrep # Faster grep.
       fzf # Directory fuzzy finder
 
       # Text Processors
       jq # Query JSON.
-      fx # Interactively navigate through JSON.
-      yq-go # Query YAML.
+      # fx # Interactively navigate through JSON.
+      # yq-go # Query YAML.
       bat # Preview with code highlight.
       vim # Basic editor
 
       # System
-      home-manager # Nix tool to manage configs.
+      # home-manager # Nix tool to manage configs.
 
       # Security
       gnupg # To manage GNUPG keys.
@@ -229,7 +220,7 @@
       procs # Fancy `ps`.
       htop # Fancy `top`.
       btop # Fancy `htop`.
-      alejandra # accessible via `nix fmt`
+      # alejandra # accessible via `nix fmt`
     ];
   };
 
