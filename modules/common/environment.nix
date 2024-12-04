@@ -13,7 +13,6 @@
         (inputs.pinix.packages.${pkgs.stdenv.hostPlatform.system}.pinix)
         nom
         gifsicle
-        imagepick
         impala
         playerctl
         psi-notify
