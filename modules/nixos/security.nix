@@ -12,8 +12,5 @@
       apparmar-profiles
     ];
   };
-  pam.services.hyprlock = {
-    enable = true;
-  };
   polkit.enable = true;
 }
