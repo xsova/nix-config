@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, linux ? false,  ... }:
 
 {
     home.sessionVariables = {
@@ -8,5 +8,5 @@
       HOSTNAME = "(hostname -s)";
       IWD = "($PWD)";
       NODE_EXTRA_CA_CERTS = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-    };
+    } // (if linux then { WINIT_X11_SCALE_FACTOR = 1; } else {});
 }

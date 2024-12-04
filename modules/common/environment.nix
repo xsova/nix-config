@@ -8,9 +8,14 @@
 }: let
   pkgsToInstall = with pkgs; {
     cli =
-      if !darwin
+      if darwin
       then [
+        m-cli
+        pinentry_mac
+      ]
+      else [
         (inputs.pinix.packages.${pkgs.stdenv.hostPlatform.system}.pinix)
+        linux-firmware
         nom
         gifsicle
         impala
@@ -25,14 +30,11 @@
         pass-wayland
         pamixer
         pavucontrol
-      ]
-      else [
-        m-cli
-        pinentry_mac
       ];
     gui =
-      if !headless
-      then [
+      if headless
+      then []
+      else [
         alacritty
         firefox
         gimp
@@ -42,9 +44,8 @@
         libreoffice
         mullvad-browser
         vscode
-
-        # Hyprland stuff
         pyprland
+
         hyprpicker
         hyprcursor
         hyprlock
@@ -72,8 +73,7 @@
         wl-screenrec
         wtype
         xwayland
-      ]
-      else [];
+      ];
   };
   all = with pkgs; {
     cli = [
@@ -232,7 +232,6 @@
       qmk-udev-rules
       linuxKernel.packages.linux_zen.framework-laptop-kmod
       linux-firmware
-      # inputs.fw-fanctrl.nixosModules.default
       alsa-lib
       alsa-utils
       flac
@@ -249,13 +248,20 @@ in {
     then let
       env = {
         gui =
-          if !headless
+          if headless
           then {
-            SPOTIFY_PATH = "${pkgs.spotify}/";
-            NIXOS_OZONE_WL = "1";
-            WLR_NO_HARDWARE_CURSORS = "1";
           }
-          else {};
+          else let
+            yes = "1";
+            # no = "0";
+          in {
+            SPOTIFY_PATH = "${pkgs.spotify}/";
+            NIXOS_OZONE_WL = yes;
+            WLR_NO_HARDWARE_CURSORS = yes;
+            WLR_EGL_NO_MODIFIERS = yes;
+            XDG_SESSION_TYPE = "wayland"; # So ozone-based browser / electryon apps can run on Wayland
+            MOZ_ENABLE_WAYLAND = yes; # So firefox can run on Wayland
+          };
         cli = {
           JDK_PATH = "${pkgs.jdk11}/";
           NODEJS_PATH = "${pkgs.nodePackages_latest.nodejs}/";
@@ -267,5 +273,8 @@ in {
   etc."nix/inputs/nixpkgs".source = "${inputs.nixpkgs}";
   extraInit = let
     homeManagerSessionVars = "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh";
-  in ''[[ -f ${homeManagerSessionVars} ]] && source ${homeManagerSessionVars} '';
+  in ''
+    [[ -f ${homeManagerSessionVars} ]] && source ${homeManagerSessionVars}
+    export alias sudo=/run/wrappers/bin/sudo
+  '';
 }

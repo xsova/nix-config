@@ -3,6 +3,10 @@
   config,
   ...
 }: {
+  # pulseaudio = {
+    # enable = true;
+    # extraConfig = "load-module module-combine-sink";
+  # };
   bluetooth.enable = false;
   wirelessRegulatoryDatabase = true;
   cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;

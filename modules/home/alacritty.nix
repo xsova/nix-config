@@ -167,7 +167,7 @@ in {
       };
       position = "None"; # Window startup position. "None" | { x = <integer>; y = <integer>; }; (has no effect on Wayland)
       padding = {
-        # Blank space added around the wendow in pixels.
+        # Blank space added around the window in pixels.
         x = 10;
         y = 10;
       };
@@ -192,28 +192,23 @@ in {
       multiplier = 3; # Number of lines scrolled per scroll input.
     };
     font = {
-      # If the family is not specified, all will fall back to `font.normal`.
       normal = {
-        # family = "TerminalVector";
-        # style = "Normal";
         family = "MD IO Trial";
         style = "Regular";
-        # family = "JetbrainsMono Nerd Font";
-        # style = "Regular";
       };
-      # bold = {
-      #   family = "MD IO Trial";
-      #   style = "Bold";
-      # };
-      # italic = {
-      #   family = "MD IO Trial";
-      #   style = "Italic";
-      # };
-      # bold_italic = {
-      #   family = "MD IO Trial";
-      #   style = "Bold Italic";
-      # };
-      size = 13.0; # Font size in points.
+      bold = {
+        family = "MD IO Trial";
+        style = "Bold";
+      };
+      italic = {
+        family = "MD IO Trial";
+        style = "Italic";
+      };
+      bold_italic = {
+        family = "MD IO Trial";
+        style = "Bold Italic";
+      };
+      size = 10.0; # Font size in points.
       offset = {
         x = 0;
         y = 0;

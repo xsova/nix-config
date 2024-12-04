@@ -26,7 +26,9 @@ in {
       then {
         PLAYDATE_SDK_PATH = "/Users/${user}/Developer/PlaydateSDK";
       }
-      else {}
+      else {
+        WINIT_X11_SCALE_FACTOR = 1;
+      }
     );
   sessionPath =
     (

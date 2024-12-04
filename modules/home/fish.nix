@@ -1,20 +1,25 @@
 {
-  lib,
   darwin ? false,
   host,
-  pkgs,
   ...
 }: {
   enable = true;
-  shellAliases = {
-    nixos-rebuild =
+  shellAliases =
+    {
+      ls = "lsd";
+      lls = "lsd --tree";
+      ll = "lsd -l";
+    }
+    // (
       if darwin
-      then "darwin-rebuild"
-      else "pinix nixos-rebuild";
-    ls = "lsd";
-    lls = "lsd --tree";
-    ll = "lsd -l";
-  };
+      then {
+        nixos-rebuild = "darwin-rebuild";
+      }
+      else {
+        mixer = "pulsemixer";
+        sudo = "/run/wrappers/bin/sudo";
+      }
+    );
   preferAbbrs = true;
   shellAbbrs = {
     hm = "home-manager";
@@ -129,6 +134,9 @@
         source "$HOME/.nix-profile/profile.d/hm-session-vars.sh"
       end
     '';
+    printPath = ''
+      printf "%s\n" $PATH
+    '';
   };
   shellInit = ''
     set -x current_shell fish
@@ -137,23 +145,36 @@
     set -q __fish_cache_dir;   or set -Ux __fish_cache_dir $XDG_CACHE_HOME/fish
     set -q __fish_plugins_dir; or set -Ux __fish_plugins_dir $__fish_config_dir/plugins
     set -q fisher_path;        or set -gx fisher_path $__fish_config_dir/.fisher
+
   '';
-  loginShellInit = let
-    profiles = [
-      "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/bin"
-      "${pkgs.zls}/bin"
-      "/etc/profiles/per-user/$USER"
-      "$HOME/.nix-profile"
-      "(set -q XDG_STATE_HOME; and echo $XDG_STATE_HOME; or echo $HOME/.local/state)/nix/profile"
-      "/run/current-system/sw"
-      "/nix/var/nix/profiles/default"
-      "${pkgs.llvm}/bin"
-    ];
-    mkBinSearchPath =
-      lib.concatMapStringsSep " " (path: "${path}/bin");
-  in ''
-    fish_add_path --move --prepend --path ${mkBinSearchPath profiles}
-    set fish_user_paths $fish_user_paths
-    __setup_hm_session_vars
-  '';
+  loginShellInit =
+    if darwin
+    then ''
+      # Nix-Darwin PATH
+      fish_add_path /Users/$USER/.nix-profile/bin
+      fish_add_path /Users/$USER/.local/bin
+      fish_add_path /Users/$USER/bin
+      fish_add_path /usr/local/bin
+      fish_add_path /usr/bin
+      fish_add_path /sbin
+      fish_add_path /bin
+      fish_add_path /Applications
+      fish_add_path /Users/$USER/Applications
+      fish_add_path /Library/Frameworks/Python.framework/Versions/Current/bin
+    ''
+    else ''
+      # NixOS PATH
+      fish_add_path --move --append /run/wrappers/bin
+      fish_add_path /home/$USER/bin
+      fish_add_path /home/$USER/.nix-profile/bin
+      fish_add_path /run/current-system/sw/bin
+      fish_add_path /nix/var/nix/profiles/default/bin
+      fish_add_path /home/bryce/.local/bin
+      fish_add_path /home/bryce/go/bin
+      fish_add_path /usr/bin
+      fish_add_path /usr/local/bin
+      fish_add_path /usr/sbin
+      fish_add_path /sbin
+      fish_add_path /bin
+    '';
 }

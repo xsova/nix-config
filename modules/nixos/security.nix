@@ -1,16 +1,13 @@
 {pkgs, ...}: {
   rtkit.enable = true;
+  polkit.enable = true;
   tpm2 = {
     enable = true;
-    # pkcs1.enable = true;
+    pkcs11.enable = true;
     tctiEnvironment.enable = true;
   };
-  apparmor = {
+  sudo = {
     enable = true;
-    packages = with pkgs; [
-      apparmor-utils
-      apparmor-profiles
-    ];
+    wheelNeedsPassword = true;
   };
-  polkit.enable = true;
 }

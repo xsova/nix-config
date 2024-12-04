@@ -8,7 +8,7 @@
 }: {
   home = import ../../../modules/home/home.nix {inherit pkgs user;};
   programs = {
-    fish = import ../../../modules/home/fish.nix {inherit pkgs lib host;};
+    fish = import ../../../modules/home/fish.nix {inherit host;};
     alacritty = import ../../../modules/home/alacritty.nix {inherit pkgs lib;};
     helix = import ../../../modules/home/helix.nix {inherit pkgs lib;};
     starship = import ../../../modules/home/starship.nix;

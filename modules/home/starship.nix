@@ -7,7 +7,7 @@
     scan_timeout = 30;
 
     nix_shell = {
-      symbol = "❄️ ";
+      symbol = "❄️";
       format = "$symbol";
       impure_msg = "[$symbol](bright-purple bold)";
       pure_msg = "[$symbol](bright-blue bold)";
