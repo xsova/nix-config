@@ -208,7 +208,7 @@ in {
         family = "MD IO Trial";
         style = "Bold Italic";
       };
-      size = 10.0; # Font size in points.
+      size = 12.0; # Font size in points.
       offset = {
         x = 0;
         y = 0;

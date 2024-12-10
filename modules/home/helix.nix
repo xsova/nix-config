@@ -5,7 +5,7 @@
 }: {
   enable = true;
   settings = {
-    theme = "catppuccin_macchiato";
+    theme = "fleet_dark";
     editor = {
       mouse = true;
       auto-save = true;
@@ -103,8 +103,8 @@
         file-types = ["mdl" "modal" "ml"];
         shebangs = ["modal" "/usr/bin/env modal"];
         indent = {
-         tab-width = 1;
-         unit = "\t";
+         tab-width = 4;
+         unit = " ";
         };
         scope = "source.modal";
       }
@@ -123,6 +123,20 @@
       {
         name = "python";
         language-servers = ["pyright" "ruff" "pylyzer"];
+      }
+      {
+        name = "zig";
+        indent = {
+          tab-width = 4;
+          unit = " ";
+        };
+      }
+      {
+        name = "typescript";
+        indent = {
+          tab-width = 4;
+          unit = " ";
+        };
       }
     ];
     language-server = {
