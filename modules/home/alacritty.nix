@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  host,
   ...
 }: let
   catppuccin_macchiato = {
@@ -208,7 +209,7 @@ in {
         family = "MD IO Trial";
         style = "Bold Italic";
       };
-      size = 12.0; # Font size in points.
+      size = if host == "port" then 12.0 else if host == "starboard" then 10.5 else 10.0; # Font size in points.
       offset = {
         x = 0;
         y = 0;
