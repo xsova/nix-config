@@ -52,7 +52,7 @@ inputs.nix-darwin.lib.darwinSystem {
           nix-daemon.enable = true;
           jankyborders = import ../../modules/darwin/jankyborders.nix;
           sketchybar = import ../../modules/darwin/sketchybar.nix;
-          skhd = import ../../modules/darwin/skhd.nix {inherit lib pkgs;};
+          skhd = import ../../modules/darwin/skhd.nix;
           yabai = import ../../modules/darwin/yabai.nix;
         };
         system = import ../../modules/darwin/system-configuration.nix {inherit config pkgs self;};

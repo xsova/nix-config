@@ -1,154 +1,168 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
+let
+  terminal = "alacritty";
+  A-S-C = "alt + shift + ctrl";
+  A-C = "alt + ctrl";
+  A-S = "alt + shift";
+  A = "alt";
+  hyper = "alt + shift + ctrl + cmd";
+  display = "yabai -m display";
+  window = "yabai -m window";
+  space = "yabai -m space";
+  config = "yabai -m config";
+  grid = {
+    full = "--grid 1:1:0:0:1:1";
+    halves = {
+      left = "--grid 1:2:0:0:1:1";
+      right = "--grid 1:2:1:0:1:1";
+      top = "--grid 2:1:0:0:1:1";
+      bottom = "--grid 2:1:1:0:1:1";
+    };
+    fourths = {
+      first = "--grid 1:4:0:0:1:1";
+      second = "--grid 1:4:1:0:1:1";
+      third = "--grid 1:4:2:0:1:1";
+      fourth = "--grid 1:4:3:0:1:1";
+      leftThreeFourths = "--grid 1:4:0:0:3:1";
+      rightThreeFourths = "--grid 1:4:1:0:3:1";
+    };
+    thirds = {
+      left = "--grid 1:3:0:0:1:1";
+      center = "--grid 1:3:1:0:1:1";
+      right = "--grid 1:3:2:0:1:1";
+      leftTwoThirds = "--grid 1:3:0:0:2:1";
+      rightTwoThirds = "--grid 1:3:1:0:2:1";
+    };
+  };
+  toggle = {
+    float = "--toggle float";
+    darkMode = "osascript -e 'tell application \"System Events\" to tell appearance preferences to set dark mode to not dark mode'";
+  };
+  direction = {
+      left = "west";
+      right = "east";
+      up = "north";
+      down = "south";
+  };
+  cmd = {
+    swap = {
+      action = "--swap";
+      left = "${cmd.swap.action} ${direction.left}";
+      right = "${cmd.swap.action} ${direction.right}";
+      up = "${cmd.swap.action} ${direction.up}";
+      down = "${cmd.swap.action} ${direction.down}";
+    };
+    focus = {
+      action = "--focus";
+      left = "${cmd.focus.action} ${direction.left}";
+      right = "${cmd.focus.action} ${direction.right}";
+      up = "${cmd.focus.action} ${direction.up}";
+      down = "${cmd.focus.action} ${direction.down}";
+    };
+  };
+in {
   enable = true;
   skhdConfig = ''
-    # CONFIGURATION FOR SKHD -- Keybindings for yabai wm and other stuff.
+    # Launch applications
+    cmd - return     : ${terminal}
 
-    # LIMITS:
-    # cmd (only) | alt (only) + arrows is off-limits, because of text navigation being eaten.
-    # alt + return is off limits because of intellij based ide muscle memory.
-    # cmd + shift - l is off limits for linter in intellij
+    # Change focused display
+    ${A-C} - 1       : ${display} --focus 1
+    ${A-C} - 2       : ${display} --focus 2
+    ${A-C} - 3       : ${display} --focus 3
 
-    # ASSUMPTIONS:
-    # Everything here is based on this layout- you can reasonably assume that the layout would be easy-ish to translate to qwerty
-    # https://configure.zsa.io/moonlander/layouts/yGzoP/latest/0
-
-    # LAYOUT:
-    # #$ bB yY oO uU  '(  ")  lL dD wW vV zZ
-    # @` cC iI eE aA  ,;  .:  hH tT sS nN qQ
-    # /\ gG xX jJ kK  -_  ?!  rR mM fF pP
-
-    # I use homerow mods on a split keyboard with 3x6 + 3 thumbkeys, so c=ctrl, i=alt, e=shift, a=super -- n=ctrl, s=alt, t=shift, h=super
-    # pinky -> index, ctrl - alt - shift - super (for each hand)
-    # I don't have a number row on my base layer, and use thumb keys to access arrows, symbols, numbers, f-keys, etc. All keys are distange <= 1 from homerow
-    # hyper = cmd + ctrl + shift + opt(alt)
-
-    # Open apps
-    cmd - return               : alacritty
-
-    # Screen managemenet
-    alt - c                    : yabai -m display --focus last
-    alt - i                    : yabai -m display --focus prev
-    alt - e                    : yabai -m display --focus next
-    alt - a                    : yabai -m display --focus recent
-    alt + ctrl - c             : yabai -m window --display last; yabai -m display --focus last
-    alt + ctrl - i             : yabai -m window --display prev; yabai -m display --focus prev
-    alt + ctrl - e             : yabai -m window --display next; yabai -m display --focus next
+    # Move window to display
+    ${A-S-C} - 1     : ${window} --display 1
+    ${A-S-C} - 2     : ${window} --display 2
+    ${A-S-C} - 3     : ${window} --display 3
 
     # Change spaces
-    alt - 1                    : yabai -m space --switch 1
-    alt - 2                    : yabai -m space --switch 2
-    alt - 3                    : yabai -m space --switch 3
-    alt - 4                    : yabai -m space --switch 4
-    alt - 5                    : yabai -m space --switch 5
-    alt - 6                    : yabai -m space --switch 6
-    alt - 7                    : yabai -m space --switch 7
-    alt - 8                    : yabai -m space --switch 8
-    alt - 9                    : yabai -m space --switch 9
-    alt - 0                    : yabai -m space --switch 10
-    ctrl - left                : yabai -m space --focus next
-    ctrl - right               : yabai -m space --focus prev
+    ${A} - 1         : ${space} --switch 1
+    ${A} - 2         : ${space} --switch 2
+    ${A} - 3         : ${space} --switch 3
+    ${A} - 4         : ${space} --switch 4
+    ${A} - 5         : ${space} --switch 5
+    ${A} - 6         : ${space} --switch 6
+    ${A} - 7         : ${space} --switch 7
+    ${A} - 8         : ${space} --switch 8
+    ${A} - 9         : ${space} --switch 9
+    ${A} - 0         : ${space} --switch 10
 
     # Move window to space
-    alt + ctrl - 1            : yabai -m window --space 1
-    alt + ctrl - 2            : yabai -m window --space 2
-    alt + ctrl - 3            : yabai -m window --space 3
-    alt + ctrl - 4            : yabai -m window --space 4
-    alt + ctrl - 5            : yabai -m window --space 5
-    alt + ctrl - 6            : yabai -m window --space 6
-    alt + ctrl - 7            : yabai -m window --space 7
-    alt + ctrl - 8            : yabai -m window --space 8
-    alt + ctrl - 9            : yabai -m window --space 9
-    alt + ctrl - 0            : yabai -m window --space 10
+    ${A-S} - 1      : ${window} --space 1
+    ${A-S} - 2      : ${window} --space 2
+    ${A-S} - 3      : ${window} --space 3
+    ${A-S} - 4      : ${window} --space 4
+    ${A-S} - 5      : ${window} --space 5
+    ${A-S} - 6      : ${window} --space 6
+    ${A-S} - 7      : ${window} --space 7
+    ${A-S} - 8      : ${window} --space 8
+    ${A-S} - 9      : ${window} --space 9
+    ${A-S} - 0      : ${window} --space 10
 
     # Focus window
-    alt - h                    : yabai -m window --focus west || $(yabai -m display --focus west)
-    alt - t                    : yabai -m window --focus south || $(yabai -m display --focus south)
-    alt - s                    : yabai -m window --focus north || $(yabai -m display --focus north)
-    alt - n                    : yabai -m window --focus east || $(yabai -m display --focus east)
-    alt - b                    : yabai -m window --focus prev
-    alt - e                    : yabai -m winodw --focus next
-
-    # Space layout management
-    alt - r                    : yabai -m space --rotate 90
+    ${A} - h         : ${window} ${cmd.focus.left}  || $(${display} ${cmd.focus.left})
+    ${A} - t         : ${window} ${cmd.focus.down}  || $(${display} ${cmd.focus.down})
+    ${A} - j         : ${window} ${cmd.focus.down}  || $(${display} ${cmd.focus.down})
+    ${A} - s         : ${window} ${cmd.focus.up}    || $(${display} ${cmd.focus.up})
+    ${A} - k         : ${window} ${cmd.focus.up}    || $(${display} ${cmd.focus.up})
+    ${A} - n         : ${window} ${cmd.focus.right} || $(${display} ${cmd.focus.right})
+    ${A} - l         : ${window} ${cmd.focus.right} || $(${display} ${cmd.focus.right})
 
     # Swap managed window
-    shift + alt - h            : yabai -m window --swap west || $(yabai -m window --)
-    shift + alt - t            : yabai -m window --swap south
-    shift + alt - s            : yabai -m window --swap north
-    shift + alt - n            : yabai -m window --swap east
+    # TODO Make a tool to parse json to get next westmost window (on another display)
+    ${A-S} - h      : ${window} ${cmd.swap.left}
+    ${A-S} - j      : ${window} ${cmd.swap.down}
+    ${A-S} - t      : ${window} ${cmd.swap.down}
+    ${A-S} - s      : ${window} ${cmd.swap.up}
+    ${A-S} - k      : ${window} ${cmd.swap.up}
+    ${A-S} - n      : ${window} ${cmd.swap.right}
+    ${A-S} - l      : ${window} ${cmd.swap.right}
 
     # Move managed window
-    shift + alt + ctrl - h     : yabai -m window --warp west
-    shift + alt + ctrl - t     : yabai -m window --warp south
-    shift + alt + ctrl - s     : yabai -m window --warp north
-    shift + alt + ctrl - n     : yabai -m window --warp east
+    ${A-S-C} - h    : ${window} --warp west
+    ${A-S-C} - t    : ${window} --warp south
+    ${A-S-C} - s    : ${window} --warp north
+    ${A-S-C} - n    : ${window} --warp east
 
-    # Grid works like this:    `1:4` = divide the screen into one row and four columns
-    #                          `3:0` = starts at x = 3, y = 0 (in a zero based array of positions based on previous two numbers)
-    #                          `1:1` = spans 1 column horizontally and vertically.
+    # Move unmanaged window
+    ${A-C} - return : ${window} ${toggle.float} ${grid.full}
+    ${A-C} - left   : ${window} ${toggle.float} ${grid.halves.left}
+    ${A-C} - right  : ${window} ${toggle.float} ${grid.halves.right}
+    ${A-C} - up     : ${window} ${toggle.float} ${grid.halves.top}
+    ${A-C} - down   : ${window} ${toggle.float} ${grid.halves.bottom}
+    ${A-C} - h      : ${window} ${toggle.float} ${grid.fourths.first}
+    ${A-C} - t      : ${window} ${toggle.float} ${grid.fourths.second}
+    ${A-C} - s      : ${window} ${toggle.float} ${grid.fourths.third}
+    ${A-C} - n      : ${window} ${toggle.float} ${grid.fourths.fourth}
+    ${A-C} - l      : ${window} ${toggle.float} ${grid.fourths.leftThreeFourths}
+    ${A-C} - v      : ${window} ${toggle.float} ${grid.fourths.rightThreeFourths}
+    ${A-C} - i      : ${window} ${toggle.float} ${grid.thirds.left}
+    ${A-C} - e      : ${window} ${toggle.float} ${grid.thirds.center}
+    ${A-C} - a      : ${window} ${toggle.float} ${grid.thirds.right}
+    ${A-C} - y      : ${window} ${toggle.float} ${grid.thirds.leftTwoThirds}
+    ${A-C} - u      : ${window} ${toggle.float} ${grid.thirds.rightTwoThirds}
 
-    # Toggle floating, fill    screen
-    ctrl + alt - return        : yabai -m window --toggle float --grid 1:1:0:0:1:1 # Full screen
-    ctrl + alt - left          : yabai -m window --toggle float --grid 1:2:0:0:1:1 # Left half
-    ctrl + alt - right         : yabai -m window --toggle float --grid 1:2:1:0:1:1 # Right half
-    ctrl + alt - up            : yabai -m window --toggle float --grid 2:1:0:0:1:1 # Top half
-    ctrl + alt - down          : yabai -m window --toggle float --grid 2:1:1:0:1:1 # Bottom half
+    # Increase window size
+    ${A-S} - left   : ${window} --resize left:-20:0
+    ${A-S} - right  : ${window} --resize right:20:0
+    ${A-S} - up     : ${window} --resize top:0:-20
+    ${A-S} - down   : ${window} --resize bottom:0:20
 
-    # Fourths
-    ctrl + alt - h             : yabai -m window --toggle float --grid 1:4:0:0:1:1 # First fourth
-    ctrl + alt - t             : yabai -m window --toggle float --grid 1:4:1:0:1:1 # Second fourth
-    ctrl + alt - s             : yabai -m window --toggle float --grid 1:4:2:0:1:1 # Third fourth
-    ctrl + alt - n             : yabai -m window --toggle float --grid 1:4:3:0:1:1 # Fourth fourth
-    ctrl + alt - l             : yabai -m window --toggle float --grid 1:4:0:0:3:1 # First through third fourths
-    ctrl + alt - v             : yabai -m window --toggle float --grid 1:4:1:0:3:1 # Second through last fourths
+    # Decrease window size
+    ${A-S-C} - left   : ${window} -- resize left:20:0
+    ${A-S-C} - right  : ${window} -- resize right:-20:0
+    ${A-S-C} - up     : ${window} -- resize top:0:20
+    ${A-S-C} - down   : ${window} -- resize bottom:0:-20
 
-    # Thirds
-    ctrl + alt - i             : yabai -m window --toggle float --grid 1:3:0:0:1:1 # Left third
-    ctrl + alt - e             : yabai -m window --toggle float --grid 1:3:1:0:1:1 # Middle third
-    ctrl + alt - a             : yabai -m window --toggle float --grid 1:3:2:0:1:1 # Right third
-    ctrl + alt - y             : yabai -m window --toggle float --grid 1:3:0:0:2:1 # Left 2/3
-    ctrl + alt - u             : yabai -m window --toggle float --grid 1:3:1:0:2:1 # Right 2/3
+    # Space layout
+    ${A} - r        : ${space} --rotate 90
+    ${A-S} - r      : ${space} --balance
+    ${hyper} - t    : ${window} --toggle split
+    ${hyper} - u    : ${config} layout bsp
+    ${hyper} - y    : ${config} layout managed
+    ${hyper} - o    : ${config} layout float
 
-    # Insertion point based on focused container
-    ctrl + alt + shift - l     : yabai -m window --insert west
-    ctrl + alt + shift - d     : yabai -m window --insert south
-    ctrl + alt + shift - w     : yabai -m window --insert north
-    ctrl + alt + shift - v     : yabai -m window --insert east
-
-    #  Resize windowm
-    ctrl - sound_up            : yabai -m window --resize left:-20:0 # Make the left side bigger by 20px
-    ctrl - sound_down          : yabai -m window --resize left:20:0 # Make the left side smaller by 20px
-    cmd  - sound_up            : yabai -m window --resize right:20:0 # Make the right side bigger by 20px
-    cmd  - sound_down          : yabai -m window --resize right:-20:0 # Make the right side smaller by 20px
-
-    # Move displays
-    ctrl + alt  - next          : yabai -m window --display next; yabai -m window --focus recent
-    ctrl + alt  - previous      : yabai -m window --display prev; yabai -m window --focus recent
-
-    # Focus other displays
-    ctrl - next                 : yabai -m display --focus next
-    ctrl - previous             : yabai -m display --focus prev
-
-    # Balance windows
-    shift + alt - r            : yabai -m space --balance
-
-    # Restart skhd
-    meh - r                    : skhd --restart-service
-
-    # Stop/Start/Restart yabai
-    hyper - r                  : launchctl kickstart -k "org.nixos.yabai"
-
-    # Toggle window split type
-    hyper - t                  : yabai -m window --toggle split
-    hyper - u                  : yabai -m config layout bsp
-    hyper - y                  : yabai -m config layout managed
-    hyper - o                  : yabai -m config layout float
-
-    #  Toggle dark mode & light mode
-    hyper - z                  : osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'
+    # Dark mode toggle
+    ${hyper} - z    : ${toggle.darkMode}
   '';
 }
