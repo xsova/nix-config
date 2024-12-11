@@ -77,6 +77,7 @@
   };
   all = with pkgs; {
     cli = [
+      SDL2.dev
       # Consistent UNIX command line tools regardless of the OS
       curl
       coreutils
