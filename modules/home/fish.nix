@@ -6,7 +6,7 @@
   enable = true;
   shellAliases =
     {
-      ls = "lsd";
+      ls = "lsd --classify";
       lls = "lsd --tree";
       ll = "lsd -l";
     }
@@ -22,6 +22,7 @@
     );
   preferAbbrs = true;
   shellAbbrs = {
+    l = "ls";
     hm = "home-manager";
     lg = "lazygit";
     cl = "clear";

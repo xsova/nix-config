@@ -1,7 +1,7 @@
 {
   pkgs,
   lib,
-  host,
+  host ? "test",
   ...
 }: let
   catppuccin_macchiato = {
@@ -90,7 +90,7 @@
   #     cursor = "#dc8a79";
   #   };
   #   vi_mode_cursor = {
-  #     text = "eff1f5";
+  #     text = "#eff1f5";
   #     cursor = "#7287fd";
   #   };
   #   search = {
@@ -209,7 +209,12 @@ in {
         family = "MD IO Trial";
         style = "Bold Italic";
       };
-      size = if host == "port" then 12.0 else if host == "starboard" then 10.5 else 10.0; # Font size in points.
+      size =
+        if host == "port"
+        then 12.0
+        else if host == "starboard"
+        then 11.0
+        else 11.0; # Font size in points.
       offset = {
         x = 0;
         y = 0;

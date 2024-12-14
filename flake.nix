@@ -6,7 +6,6 @@
     fw-fanctrl        = { url = "github:TamtamHero/fw-fanctrl/packaging/nix";                               inputs.nixpkgs.follows = "nixpkgs";   };
     home-manager      = { url = "github:nix-community/home-manager";                                        inputs.nixpkgs.follows = "nixpkgs";   };
     hyprland-plugins  = { url = "github:hyprwm/hyprland-plugins";                                           inputs.hyprland.follows = "hyprland"; };
-    # lix               = { url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz"; inputs.nixpkgs.follows = "nixpkgs";   };
     nix-darwin        = { url = "github:LnL7/nix-darwin";                                                   inputs.nixpkgs.follows = "nixpkgs";   };
     nix-index         = { url = "github:nix-community/nix-index-database";                                  inputs.nixpkgs.follows = "nixpkgs";   };
     flake-schemas.url = "https://flakehub.com/f/DeterminateSystems/flake-schemas/0.1.5.tar.gz";

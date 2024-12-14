@@ -62,6 +62,5 @@ inputs.nix-darwin.lib.darwinSystem {
     ++ [
       inputs.nix-index.darwinModules.nix-index
       inputs.home-manager.darwinModules.default
-      inputs.lix.nixosModules.default
     ];
 }

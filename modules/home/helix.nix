@@ -5,18 +5,28 @@
 }: {
   enable = true;
   settings = {
-    theme = "fleet_dark";
+    theme = "catppuccin_frappe";
     editor = {
       mouse = true;
       auto-save = true;
       cursorline = false;
       cursorcolumn = false;
       cursor-shape = {
+        # Can be block, bar, underline, or hidden.
         insert = "block";
         normal = "block";
         select = "underline";
       };
-      lsp.display-messages = true;
+      # lsp.display-messages = true;
+      lsp = {
+        enable = true;
+        display-messages = true;
+        auto-signature-help = false;
+        display-inlay-hints = false; # This is what will show var/fn types inline
+        display-signature-help-docs = true;
+        snippets = true;
+        goto-reference-include-declaration = true;
+      };
       file-picker.hidden = false;
     };
     keys = {
@@ -52,8 +62,8 @@
           N = ["search_prev"];
         };
         g = {
-          space = "page_down";
-          backspace = "page_up";
+          space = "half_page_down";
+          backspace = "half_page_up";
         };
         # Engram layout
         h = "move_char_left";
@@ -64,7 +74,7 @@
         T = "half_page_down";
         s = "move_visual_line_up";
         S = "half_page_up";
-        p = "select_regex"; # 'p'ickError: Could not get runtime dependencies from /opt/homebrew/Library/Taps/qmk/homebrew-qmk/Formula/qmk.rb!
+        p = "select_regex";
       };
       insert.esc = ["collapse_selection" "normal_mode"];
       select = {
@@ -128,14 +138,14 @@
         name = "zig";
         indent = {
           tab-width = 4;
-          unit = " ";
+          unit = "    ";
         };
       }
       {
         name = "typescript";
         indent = {
           tab-width = 4;
-          unit = " ";
+          unit = "    ";
         };
       }
     ];
