@@ -8,7 +8,7 @@ inputs.nix-darwin.lib.darwinSystem {
   specialArgs = {inherit inputs;};
   modules = let
     user = "bryce";
-    host = "port";
+    host = "shell";
     darwin = true;
     platform = "aarch64-darwin";
   in

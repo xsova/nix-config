@@ -11,7 +11,9 @@
       if darwin
       then [
         m-cli
+        darwin.apple-sdk
         pinentry_mac
+        jetbrains.idea-ultimate
       ]
       else [
         (inputs.pinix.packages.${pkgs.stdenv.hostPlatform.system}.pinix)
@@ -78,6 +80,9 @@
   all = with pkgs; {
     cli = [
       SDL2.dev
+      protobuf
+      rustc
+      glow
       # Consistent UNIX command line tools regardless of the OS
       curl
       coreutils

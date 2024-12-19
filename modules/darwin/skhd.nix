@@ -5,9 +5,9 @@
     cmd - return : alacritty
 
     # Changed focused display
-    ctrl + alt - 1         : yabai -m display --focus 1
-    ctrl + alt - 2         : yabai -m display --focus 2
-    ctrl + alt - 3         : yabai -m display --focus 3
+    # ctrl + alt - 1         : yabai -m display --focus 1
+    # ctrl + alt - 2         : yabai -m display --focus 2
+    # ctrl + alt - 3         : yabai -m display --focus 3
 
     # Move window to display
     ctrl + alt + shift - 1 : yabai -m window --display 1
@@ -45,6 +45,18 @@
     alt + shift - 8        : yabai -m window --space 8
     alt + shift - 9        : yabai -m window --space 9
     alt + shift - 0        : yabai -m window --space 10
+
+    # New MacOS bug?
+    alt + ctrl - 1        : yabai -m window --space 1
+    alt + ctrl - 2        : yabai -m window --space 2
+    alt + ctrl - 3        : yabai -m window --space 3
+    alt + ctrl - 4        : yabai -m window --space 4
+    alt + ctrl - 5        : yabai -m window --space 5
+    alt + ctrl - 6        : yabai -m window --space 6
+    alt + ctrl - 7        : yabai -m window --space 7
+    alt + ctrl - 8        : yabai -m window --space 8
+    alt + ctrl - 9        : yabai -m window --space 9
+    alt + ctrl - 0        : yabai -m window --space 10
 
     # Focus window
     alt - h                : yabai -m window --focus west || $(yabai -m display --focus west)

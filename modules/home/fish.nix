@@ -107,6 +107,11 @@
       setCursor = true;
       position = "anywhere";
     };
+    npp = "npx playwright test";
+    nppw = {
+      expansion = "npx playwright test ~/dev/rtg/tests/tests/manual/%.manual.spec.ts";
+      setCursor = true;
+    };
     nx = {
       expansion = "~/nix/%";
       setCursor = true;
@@ -141,12 +146,11 @@
   };
   shellInit = ''
     set -x current_shell fish
-    set -q __fish_config_dir;  or set -Ux __fish_config_dir $XDG_CONFIG_HOME/fish
-    set -q __fish_data_dir;    or set -Ux __fish_data_dir $XDG_DATA_HOME/fish
-    set -q __fish_cache_dir;   or set -Ux __fish_cache_dir $XDG_CACHE_HOME/fish
-    set -q __fish_plugins_dir; or set -Ux __fish_plugins_dir $__fish_config_dir/plugins
-    set -q fisher_path;        or set -gx fisher_path $__fish_config_dir/.fisher
-
+    # set -q __fish_config_dir;  or set -Ux __fish_config_dir $XDG_CONFIG_HOME/fish
+    # set -q __fish_data_dir;    or set -Ux __fish_data_dir $XDG_DATA_HOME/fish
+    # set -q __fish_cache_dir;   or set -Ux __fish_cache_dir $XDG_CACHE_HOME/fish
+    # set -q __fish_plugins_dir; or set -Ux __fish_plugins_dir $__fish_config_dir/plugins
+    # set -q fisher_path;        or set -gx fisher_path $__fish_config_dir/.fisher
   '';
   loginShellInit =
     if darwin
