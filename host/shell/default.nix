@@ -33,7 +33,7 @@ inputs.nix-darwin.lib.darwinSystem {
                 fish = import ../../modules/home/fish.nix {inherit pkgs lib darwin host;};
                 alacritty = import ../../modules/home/alacritty.nix {inherit pkgs lib;};
                 helix = import ../../modules/home/helix.nix {inherit pkgs lib;};
-                starship = import ../../modules/home/starship.nix;
+                # starship = import ../../modules/home/starship.nix;
                 direnv = import ../../modules/home/direnv.nix;
                 git = import ../../modules/home/git.nix {inherit user;};
                 gh = import ../../modules/home/gh.nix;
