@@ -1,6 +1,8 @@
 {
     enable = true;
-    active_color = "gradient(top_right=0xee33ccff,bottom_left=0xee00ff99)";
+    # active_color = "gradient(top_right=0xee33ccff,bottom_left=0xee00ff99)";
+    # active_color = "0xaa72dec2";
+    active_color = "0xaaffffff";
     ax_focus = false; # Slower accessibility API.
     background_color = "";
     blacklist = [];
@@ -10,6 +12,6 @@
     order = "above"; # Whether borders are drawn above or below windows (other option is "above").
     style = "round"; # Style of the border, can be either "round" (default) or square.
     whitelist = [];
-    width = 2.0;
+    width = 1.0;
 }
 
