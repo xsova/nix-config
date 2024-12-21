@@ -11,7 +11,7 @@
       if darwin
       then [
         m-cli
-        darwin.apple-sdk
+        apple-sdk
         pinentry_mac
         jetbrains.idea-ultimate
       ]
@@ -171,6 +171,7 @@
       zig
       zls
       (rust-bin.fromRustupToolchainFile ./rust-toolchain.toml)
+      fish-lsp
 
       # Rust stuff
       taplo
