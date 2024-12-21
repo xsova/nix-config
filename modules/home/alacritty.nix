@@ -3,156 +3,7 @@
   lib,
   host ? "test",
   ...
-}: let
-  catppuccin_macchiato = {
-    primary = {
-      background = "#24273a";
-      foreground = "#cad3f5";
-      dim_foreground = "#8087a2";
-      bright_foreground = "#cad3f5";
-    };
-    cursor = {
-      text = "#24273a";
-      cursor = "#f4dbd6";
-    };
-    vi_mode_cursor = {
-      text = "#24273a";
-      cursor = "#f4dbd6";
-    };
-    search = {
-      matches = {
-        foreground = "#24273a";
-        background = "#a5adcb";
-      };
-      focused_match = {
-        foreground = "#24273a";
-        background = "#a5adcb";
-      };
-    };
-    footer_bar = {
-      foreground = "#24273a";
-      background = "#a5adcb";
-    };
-    hints = {
-      start = {
-        foreground = "#24273a";
-        background = "#a5adcb";
-      };
-      end = {
-        foreground = "#24273a";
-        background = "#eed49f";
-      };
-    };
-    selection = {
-      text = "#24273a";
-      background = "#f4dbd6";
-    };
-    normal = {
-      black = "#494d64";
-      red = "#ed8796";
-      green = "#a6da95";
-      yellow = "#eed49f";
-      blue = "#8aadf4";
-      magenta = "#f5bde6";
-      cyan = "#8bd5ca";
-      white = "#b8c0e0";
-    };
-    bright = {
-      black = "#5b6078";
-      red = "#ed8796";
-      green = "#a6da95";
-      yellow = "#eed49f";
-      blue = "#8aadf4";
-      magenta = "#f5bed6";
-      cyan = "#8bd5ca";
-      white = "#a5adcb";
-    };
-    indexed_colors = [
-      {
-        index = 16;
-        color = "#f5a97f";
-      }
-      {
-        index = 17;
-        color = "#f4dbd6";
-      }
-    ];
-  };
-  # catppuccin_latte = {
-  #   primary = {
-  #     background = "#eff1f5";
-  #     foreground = "#4c4f69";
-  #     dim_foreground = "#8c8fa1";
-  #     bright_foreground = "#4c4f69";
-  #   };
-  #   cursor = {
-  #     text = "#eff1f5";
-  #     cursor = "#dc8a79";
-  #   };
-  #   vi_mode_cursor = {
-  #     text = "#eff1f5";
-  #     cursor = "#7287fd";
-  #   };
-  #   search = {
-  #     matches = {
-  #       foreground = "#eff1f5";
-  #       background = "#6c6f85";
-  #     };
-  #     focused_match = {
-  #       foreground = "#eff1f5";
-  #       background = "#40a02b";
-  #     };
-  #   };
-  #   footer_bar = {
-  #     foreground = "#eff1f5";
-  #     background = "#6c6f85";
-  #   };
-  #   hints = {
-  #     start = {
-  #       foreground = "#eff1f5";
-  #       background = "#df8e1d";
-  #     };
-  #     end = {
-  #       foreground = "#eff1f5";
-  #       background = "#6c6f85";
-  #     };
-  #   };
-  #   selection = {
-  #     text = "#eff1f5";
-  #     backgroud = "#dc8a78";
-  #   };
-  #   normal = {
-  #     black = "#bcc0cc";
-  #     red = "#d20f39";
-  #     green = "#40a02b";
-  #     yellow = "#df8e1d";
-  #     blue = "#1e66f5";
-  #     magenta = "#ea76cb";
-  #     cyan = "#179299";
-  #     white = "#5c5f77";
-  #   };
-  #   bright = {
-  #     black = "#acb0be";
-  #     red = "#d20f39";
-  #     green = "#40a02b";
-  #     yellow = "#df8e1d";
-  #     blue = "#1e66f5";
-  #     magenta = "#ea76cb";
-  #     cyan = "#179299";
-  #     white = "#5c5f77";
-  #   };
-  #   indexed_colors = [
-  #     {
-  #       index = 16;
-  #       color = "#fe640b";
-  #     }
-  #     {
-  #       index = 17;
-  #       color = "#dc8a78";
-  #     }
-  #   ];
-  # };
-in {
+}: {
   enable = true;
   settings = {
     general = {
@@ -210,9 +61,9 @@ in {
         style = "Bold Italic";
       };
       size =
-        if host == "port"
+        if host == "shell"
         then 12.0
-        else if host == "starboard"
+        else if host == "core"
         then 11.0
         else 11.0; # Font size in points.
       offset = {
@@ -225,7 +76,57 @@ in {
       }; # Determines the locations of the glyphs within their cells with the default being at the bottom.
       builtin_box_drawing = true; # When true, Alacritty will use a custom built-in font for box drawing characters (U+2500-U+259F), legacy computing symbols (U+1FB00-U+1FB3B), and powerline symbols (U+E0B0-U+E0B3).
     };
-    colors = catppuccin_macchiato;
+    colors = {
+      primary = {
+        background = "#131313";
+        foreground = "#f0f0f0";
+        dim_foreground = "#888888";
+        bright_foreground = "#ffffff";
+      };
+      cursor = {
+        text = "#131313";
+        cursor = "#f0f0f0";
+      };
+      selection = {
+        text = "#f0f0f0";
+        background = "#72dec2";
+      };
+      normal = {
+        black = "#1c1c1c";
+        red = "#fd2d14";
+        # green = "#038554";
+        green = "#72dec2";
+        yellow = "#ffb300";
+        # blue = "#076ce8";
+        blue = "#72dec2";
+        magenta = "#6364ff";
+        cyan = "#72dec2";
+        white = "#f0f0f0";
+      };
+      bright = {
+        black = "#4a4a4a";
+        red = "#dd0102";
+        # green = "#1fc58c";
+        green = "#72dec2";
+        yellow = "#fbc44b";
+        # blue = "#00c6d2";
+        blue = "#72dec2";
+        magenta = "#9b5fe6";
+        # cyan = "#9ffce3";
+        cyan = "#72dec2";
+        white = "#ffffff";
+      };
+      indexed_colors = [
+        {
+          index = 16;
+          color = "#f5a97f";
+        }
+        {
+          index = 17;
+          color = "#f4dbd6";
+        }
+      ];
+    };
     bell = {
       animation = "Linear"; # Visual bell animations effect for flashing the screen when the visual bell is rung. "Ease" | "EaseOut" | "EaseOutSine" | "EaseOutQuad" | "EaseOutCubic" | "EaseOutQuart" | "EaseOutQuint" | "EaseOutExpo" | "EaseOutCirc" | "Linear"
       duration = 0; # Duration of the visual bell flash in milliseconds. A `duration` of `0` will disable the visual bell animation.
