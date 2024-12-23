@@ -12,6 +12,7 @@
     "qmk/qmk/qmk"
   ];
   casks = [
+    "parallels"
     "clion"
     "docker"
     "microsoft-teams"
