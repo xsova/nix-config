@@ -61,15 +61,16 @@
     yabai -m rule --add app="^Arc$" title="" manage=off # hopefully this works.
     yabai -m rule --add app="^Sizzy$" space=^1
     yabai -m rule --add app="^Arc$" space=^3
-    yabai -m rule --add app="^Aqua$" title="^Settings$" manage=off
-    yabai -m rule --add app="^Chromium$" space=^1
-    yabai -m rule --add app="^Chromium$" title="^Playwright Inspector$" space=^1 layer=below
+    yabai -m rule --add app="^Aqua$" layer=above manage=off
     yabai -m rule --add app="^System Preferences$" manage=off
-    yabai -m rule --add app="Chromium" manage=off
-    yabai -m rule --add title="Playwright Inspector" space=^2 manage=off
     yabai -m rule --add app="^(LuLu|Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice|App Store|Steam|Alfred|Activity Monitor)$" manage=off
     yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
     yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
     yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
+    yabai -m rule --add app="^IntelliJ IDEA$" layer=above manage=off
+    # yabai -m rule --add app="^Chromium$" space=^1
+    # yabai -m rule --add app="^Chromium$" title="^Playwright Inspector$" space=^1 layer=below
+    # yabai -m rule --add app="Chromium" manage=off
+    # yabai -m rule --add title="Playwright Inspector" space=^2 manage=off
   '';
 }
