@@ -1,8 +1,8 @@
-{
+{pkgs, ...}: {
   enable = true;
   skhdConfig = ''
     # Launch applications
-    cmd - return : alacritty
+    cmd - return : ${pkgs.alacritty}/bin/alacritty
 
     # Changed focused display
     # ctrl + alt - 1         : yabai -m display --focus 1
@@ -35,18 +35,6 @@
     alt - 0                : yabai -m space --switch 10
 
     # Move window to space
-    alt + shift - 1        : yabai -m window --space 1
-    alt + shift - 2        : yabai -m window --space 2
-    alt + shift - 3        : yabai -m window --space 3
-    alt + shift - 4        : yabai -m window --space 4
-    alt + shift - 5        : yabai -m window --space 5
-    alt + shift - 6        : yabai -m window --space 6
-    alt + shift - 7        : yabai -m window --space 7
-    alt + shift - 8        : yabai -m window --space 8
-    alt + shift - 9        : yabai -m window --space 9
-    alt + shift - 0        : yabai -m window --space 10
-
-    # New MacOS bug?
     alt + ctrl - 1        : yabai -m window --space 1
     alt + ctrl - 2        : yabai -m window --space 2
     alt + ctrl - 3        : yabai -m window --space 3
@@ -75,23 +63,15 @@
     alt + shift - k        : yabai -m window --swap north || $(yabai -m window --display north; yabai -m window --focus last)
     alt + shift - n        : yabai -m window --swap east  || $(yabai -m window --display east; yabai -m window --focus last)
     alt + shift - l        : yabai -m window --swap east  || $(yabai -m window --display east; yabai -m window --focus last)
+
+    # Rotate Space
+    alt - r                : yabai -m space --rotate 90
+
+    # Move floating window
+    alt + ctrl - return    : yabai -m window --toggle float --grid 1:1:0:0:1:1 # Full screen
+    alt + ctrl - left      : yabai -m window --toggle float --grid 1:2:0:0:1:1 # Left half
+    alt + ctrl - right     : yabai -m window --toggle float --grid 1:2:1:0:1:1 # Right half
+    alt + ctrl - up        : yabai -m window --toggle float --grid 2:1:0:0:1:1 # Top half
+    alt + ctrl - down      : yabai -m window --toggle float --grid 2:1:1:0:1:1 # Bottom half
   '';
 }
-
-# Increase window size
-# cmd + ctrl + alt + shift - h : yabai -m window --resize left:-20:0
-# cmd + ctrl + alt + shift - t : yabai -m window --resize bottom:0:20
-# cmd + ctrl + alt + shift - j : yabai -m window --resize bottom:0:20
-# cmd + ctrl + alt + shift - s : yabai -m window --resize top:0:-20
-# cmd + ctrl + alt + shift - k : yabai -m window --resize top:0:-20
-# cmd + ctrl + alt + shift - n : yabai -m window --resize right:20:0
-# cmd + ctrl + alt + shift - l : yabai -m window --resize right:20:0
-# Decrease window size
-# cmd + alt + shift - h : yabai -m window --resize left:20:0
-# cmd + alt + shift - t : yabai -m window --resize bottom:0:-20
-# cmd + alt + shift - j : yabai -m window --resize bottom:0:-20
-# cmd + alt + shift - s : yabai -m window --resize top:0:20
-# cmd + alt + shift - k : yabai -m window --resize top:0:20
-# cmd + alt + shift - n : yabai -m window --resize right:-20:0
-# cmd + alt + shift - l : yabai -m window --resize right:-20:0
-
