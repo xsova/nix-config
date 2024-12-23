@@ -1,11 +1,10 @@
 {
   pkgs,
   user,
-  darwin ? false,
   ...
 }: let
   homeDir =
-    if darwin
+    if pkgs.stdenv.isDarwin
     then "/Users/${user}"
     else "/home/${user}";
 in {
@@ -19,27 +18,18 @@ in {
       MANPAGER = "sh -c 'col -bx | bat -l man -p'";
       IWD = "($PWD)";
       NODE_EXTRA_CA_CERTS = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-      # RUST_SRC_PATH = "${pkgs.rustToolchain}/lib/rustlib/src/rust/library";
     }
     // (
-      if darwin
+      if pkgs.stdenv.isDarwin
       then {
-        PLAYDATE_SDK_PATH = "/Users/${user}/Developer/PlaydateSDK";
+        PLAYDATE_SDK_PATH = "${homeDir}/Developer/PlaydateSDK";
       }
       else {
         WINIT_X11_SCALE_FACTOR = 1;
       }
     );
   sessionPath =
-    (
-      if darwin
-      then [
-        "/opt/homebrew/bin"
-        "/Users/${user}/Developer/PlaydateSDK/bin"
-      ]
-      else []
-    )
-    ++ [
+    [
       "${homeDir}/.nix-profile/bin"
       "${homeDir}/.local/bin"
       "${homeDir}/bin"
@@ -51,5 +41,13 @@ in {
       "/usr/local/bin"
       "/usr/sbin"
       "/sbin"
-    ];
+    ]
+    ++ (
+      if pkgs.stdenv.isDarwin
+      then [
+        "/opt/homebrew/bin"
+        "${homeDir}/Developer/PlaydateSDK/bin"
+      ]
+      else []
+    );
 }

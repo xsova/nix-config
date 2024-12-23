@@ -9,7 +9,6 @@ inputs.nix-darwin.lib.darwinSystem {
   modules = let
     user = "bryce";
     host = "shell";
-    darwin = true;
     platform = "aarch64-darwin";
   in
     [
@@ -20,7 +19,7 @@ inputs.nix-darwin.lib.darwinSystem {
         config,
         ...
       }: {
-        environment = import ../../modules/common/environment.nix {inherit host darwin pkgs inputs;};
+        environment = import ../../modules/common/environment.nix {inherit host pkgs inputs;};
         fonts = import ../../modules/common/fonts.nix {inherit pkgs;};
         programs.fish.enable = true;
         home-manager = {
@@ -28,12 +27,11 @@ inputs.nix-darwin.lib.darwinSystem {
           useGlobalPkgs = true;
           users = {
             ${user} = {
-              home = import ../../modules/home/home.nix {inherit pkgs user darwin;};
+              home = import ../../modules/home/home.nix {inherit pkgs user;};
               programs = {
-                fish = import ../../modules/home/fish.nix {inherit pkgs lib darwin host;};
+                fish = import ../../modules/home/fish.nix {inherit pkgs host;};
                 alacritty = import ../../modules/home/alacritty.nix {inherit pkgs lib;};
                 helix = import ../../modules/home/helix.nix {inherit pkgs lib;};
-                # starship = import ../../modules/home/starship.nix;
                 direnv = import ../../modules/home/direnv.nix;
                 git = import ../../modules/home/git.nix {inherit user;};
                 gh = import ../../modules/home/gh.nix;
@@ -52,7 +50,7 @@ inputs.nix-darwin.lib.darwinSystem {
           nix-daemon.enable = true;
           jankyborders = import ../../modules/darwin/jankyborders.nix;
           sketchybar = import ../../modules/darwin/sketchybar.nix;
-          skhd = import ../../modules/darwin/skhd.nix;
+          skhd = import ../../modules/darwin/skhd.nix {inherit pkgs;};
           yabai = import ../../modules/darwin/yabai.nix;
         };
         system = import ../../modules/darwin/system-configuration.nix {inherit config pkgs self;};

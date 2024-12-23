@@ -1,5 +1,5 @@
 {
-  darwin ? false,
+  pkgs,
   host,
   ...
 }: {
@@ -11,7 +11,7 @@
       ll = "lsd -l";
     }
     // (
-      if darwin
+      if pkgs.stdenv.isDarwin
       then {
         nixos-rebuild = "darwin-rebuild";
       }
@@ -52,7 +52,7 @@
       position = "anywhere";
     };
     rbs =
-      if darwin
+      if pkgs.stdenv.isDarwin
       then "darwin-rebuild switch --flake ~/nix#${host}"
       else "nixos-rebuild switch --flake ~/nix#${host}";
     cat = "bat";
@@ -117,6 +117,8 @@
       setCursor = true;
       position = "anywhere";
     };
+    nf = "nix flake";
+    nfu = "nix flake update";
     nxd = {
       expansion = "nix develop % -c fish";
       setCursor = true;
@@ -146,14 +148,9 @@
   };
   shellInit = ''
     set -x current_shell fish
-    # set -q __fish_config_dir;  or set -Ux __fish_config_dir $XDG_CONFIG_HOME/fish
-    # set -q __fish_data_dir;    or set -Ux __fish_data_dir $XDG_DATA_HOME/fish
-    # set -q __fish_cache_dir;   or set -Ux __fish_cache_dir $XDG_CACHE_HOME/fish
-    # set -q __fish_plugins_dir; or set -Ux __fish_plugins_dir $__fish_config_dir/plugins
-    # set -q fisher_path;        or set -gx fisher_path $__fish_config_dir/.fisher
   '';
   loginShellInit =
-    if darwin
+    if pkgs.stdenv.isDarwin
     then ''
       # Nix-Darwin PATH
       fish_add_path /Users/$USER/.nix-profile/bin
