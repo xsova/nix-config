@@ -88,7 +88,7 @@
         cursor = "#f0f0f0";
       };
       selection = {
-        text = "#f0f0f0";
+        text = "#131313";
         background = "#72dec2";
       };
       normal = {
