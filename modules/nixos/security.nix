@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   rtkit.enable = true;
   polkit.enable = true;
   tpm2 = {

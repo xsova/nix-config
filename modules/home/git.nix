@@ -1,4 +1,5 @@
-{user, ...}: {
+{ user, ... }:
+{
   enable = true;
   userName = user;
   userEmail = "bryce@bryces.email";

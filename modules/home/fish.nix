@@ -2,7 +2,8 @@
   pkgs,
   host,
   ...
-}: {
+}:
+{
   enable = true;
   shellAliases =
     {
@@ -11,17 +12,19 @@
       ll = "lsd -l";
     }
     // (
-      if pkgs.stdenv.isDarwin
-      then {
-        nixos-rebuild = "darwin-rebuild";
-      }
-      else {
-        mixer = "pulsemixer";
-        sudo = "/run/wrappers/bin/sudo";
-      }
+      if pkgs.stdenv.isDarwin then
+        {
+          nixos-rebuild = "darwin-rebuild";
+        }
+      else
+        {
+          mixer = "pulsemixer";
+          sudo = "/run/wrappers/bin/sudo";
+        }
     );
   preferAbbrs = true;
   shellAbbrs = {
+    ":q" = "exit";
     l = "ls";
     hm = "home-manager";
     lg = "lazygit";
@@ -39,6 +42,11 @@
       expansion = "~/Developer/%";
       setCursor = true;
     };
+    tma = {
+      expansion = "tests/manual/%";
+      setCursor = true;
+      position = "anywhere";
+    };
     fcp = {
       expansion = "fish_clipboard_copy";
       position = "anywhere";
@@ -51,10 +59,24 @@
       expansion = "fish_clipboard_copy";
       position = "anywhere";
     };
+    rtg = {
+      expansion = "$rtg/%";
+      setCursor = true;
+      position = "anywhere";
+    };
+    rtgt = {
+      expansion = "$rtg/tests/tests/%";
+      setCursor = true;
+      position = "anywhere";
+    };
+    rtgg = {
+      expansion = "cd $rtg";
+    };
     rbs =
-      if pkgs.stdenv.isDarwin
-      then "darwin-rebuild switch --flake ~/nix#${host}"
-      else "nixos-rebuild switch --flake ~/nix#${host}";
+      if pkgs.stdenv.isDarwin then
+        "darwin-rebuild switch --flake ~/nix#${host}"
+      else
+        "nixos-rebuild switch --flake ~/nix#${host}";
     cat = "bat";
     dots = "ls -ld .*";
     e = "hx";
@@ -84,10 +106,6 @@
       expansion = "hx ~/nix/%";
       setCursor = true;
     };
-    msp = {
-      expansion = "~/Developer/exchange-automated-ui/";
-      position = "anywhere";
-    };
     fw = {
       expansion = "~/nix/hosts/framework/%";
       setCursor = true;
@@ -96,16 +114,6 @@
     fzf = {
       expansion = "fzf --preview \"bat --color=always --style=numbers --line-range=:500 {}\"";
       setCursor = true;
-    };
-    msps = {
-      expansion = "~/Developer/exchange-automated-ui/src/%";
-      setCursor = true;
-      position = "anywhere";
-    };
-    mspst = {
-      expansion = "~/Developer/exchange-automated-ui/src/tests/%";
-      setCursor = true;
-      position = "anywhere";
     };
     npp = "npx playwright test";
     nppw = {
@@ -148,35 +156,38 @@
   };
   shellInit = ''
     set -x current_shell fish
+    set -x __rtg_dir ~/dev/rtg/tests
   '';
   loginShellInit =
-    if pkgs.stdenv.isDarwin
-    then ''
-      # Nix-Darwin PATH
-      fish_add_path /Users/$USER/.nix-profile/bin
-      fish_add_path /Users/$USER/.local/bin
-      fish_add_path /Users/$USER/bin
-      fish_add_path /usr/local/bin
-      fish_add_path /usr/bin
-      fish_add_path /sbin
-      fish_add_path /bin
-      fish_add_path /Applications
-      fish_add_path /Users/$USER/Applications
-      fish_add_path /Library/Frameworks/Python.framework/Versions/Current/bin
-    ''
-    else ''
-      # NixOS PATH
-      fish_add_path --move --append /run/wrappers/bin
-      fish_add_path /home/$USER/bin
-      fish_add_path /home/$USER/.nix-profile/bin
-      fish_add_path /run/current-system/sw/bin
-      fish_add_path /nix/var/nix/profiles/default/bin
-      fish_add_path /home/bryce/.local/bin
-      fish_add_path /home/bryce/go/bin
-      fish_add_path /usr/bin
-      fish_add_path /usr/local/bin
-      fish_add_path /usr/sbin
-      fish_add_path /sbin
-      fish_add_path /bin
-    '';
+    if pkgs.stdenv.isDarwin then
+      ''
+        # Nix-Darwin PATH
+        fish_add_path /Users/$USER/.nix-profile/bin
+        fish_add_path /Users/$USER/.local/bin
+        fish_add_path /Users/$USER/bin
+        fish_add_path /usr/local/bin
+        fish_add_path /usr/bin
+        fish_add_path /sbin
+        fish_add_path /bin
+        fish_add_path /Applications
+        fish_add_path /Users/$USER/Applications
+        fish_add_path /Library/Frameworks/Python.framework/Versions/Current/bin
+        source ~/dev/rtg/tests/.config/fish/config.fish
+      ''
+    else
+      ''
+        # NixOS PATH
+        fish_add_path --move --append /run/wrappers/bin
+        fish_add_path /home/$USER/bin
+        fish_add_path /home/$USER/.nix-profile/bin
+        fish_add_path /run/current-system/sw/bin
+        fish_add_path /nix/var/nix/profiles/default/bin
+        fish_add_path /home/bryce/.local/bin
+        fish_add_path /home/bryce/go/bin
+        fish_add_path /usr/bin
+        fish_add_path /usr/local/bin
+        fish_add_path /usr/sbin
+        fish_add_path /sbin
+        fish_add_path /bin
+      '';
 }

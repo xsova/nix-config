@@ -2,10 +2,11 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   # pulseaudio = {
-    # enable = true;
-    # extraConfig = "load-module module-combine-sink";
+  # enable = true;
+  # extraConfig = "load-module module-combine-sink";
   # };
   bluetooth.enable = false;
   wirelessRegulatoryDatabase = true;

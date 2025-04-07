@@ -5,8 +5,9 @@
   lib,
   inputs,
   ...
-}: {
-  home = import ../../../modules/home/home.nix {inherit pkgs user;};
+}:
+{
+  home = import ../../../modules/home/home.nix { inherit pkgs user; };
   textfox = {
     enable = true;
     profile = "Profile";
@@ -30,9 +31,9 @@
     # sidebery.margin = "1.0rem";
   };
   programs = {
-    fish = import ../../../modules/home/fish.nix {inherit host;};
-    alacritty = import ../../../modules/home/alacritty.nix {inherit host pkgs lib;};
-    helix = import ../../../modules/home/helix.nix {inherit pkgs lib;};
+    fish = import ../../../modules/home/fish.nix { inherit host; };
+    alacritty = import ../../../modules/home/alacritty.nix { inherit host pkgs lib; };
+    helix = import ../../../modules/home/helix.nix { inherit pkgs lib; };
     starship = import ../../../modules/home/starship.nix;
     direnv = import ../../../modules/home/direnv.nix;
     waybar = import ../../../modules/home/waybar.nix;
@@ -46,7 +47,7 @@
       sunset = "17:00";
     };
   };
-  wayland.windowManager.hyprland = import ../../../modules/home/hyprland.nix {inherit inputs pkgs;};
+  wayland.windowManager.hyprland = import ../../../modules/home/hyprland.nix { inherit inputs pkgs; };
   xdg.userDirs = import ../../../modules/home/xdg.nix;
-  imports = [inputs.textfox.homeManagerModules.default];
+  imports = [ inputs.textfox.homeManagerModules.default ];
 }

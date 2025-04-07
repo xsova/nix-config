@@ -1,4 +1,5 @@
-{ host, ... }: {
+{ host, ... }:
+{
   hostName = host;
   networkmanager = {
     enable = true;
@@ -26,9 +27,15 @@
   enableIPv6 = false;
   firewall = {
     enable = true;
-    allowedTCPPorts = [80 443];
+    allowedTCPPorts = [
+      80
+      443
+    ];
   };
-  nameservers = ["127.0.0.1" "[::1]"];
+  nameservers = [
+    "127.0.0.1"
+    "[::1]"
+  ];
   dhcpcd.extraConfig = "nohook resolv.conf";
   resolvconf = {
     enable = true;

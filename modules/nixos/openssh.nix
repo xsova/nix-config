@@ -4,6 +4,6 @@
     PasswordAuthentication = false;
     KbdInteractiveAuthentication = false;
     PermitRootLogin = "no";
-    AllowUsers = ["bryce"];
+    AllowUsers = [ "bryce" ];
   };
 }

@@ -4,9 +4,13 @@
     topBar = {
       layer = "top";
       position = "top";
-      modules-left = ["hyprland/workspaces"];
-      modules-center = ["clock"];
-      modules-right = ["temperature" "network" "battery"];
+      modules-left = [ "hyprland/workspaces" ];
+      modules-center = [ "clock" ];
+      modules-right = [
+        "temperature"
+        "network"
+        "battery"
+      ];
       battery = {
         states = {
           good = 90;
@@ -49,7 +53,7 @@
       margin: 0px;
       padding: 0px;
     }
-    '';
+  '';
   #   .modules-left,
   #   .modules-center,
   #   .modules-right {

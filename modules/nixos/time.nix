@@ -1,1 +1,1 @@
-{timeZone = "America/Chicago";}
+{ timeZone = "America/Chicago"; }

@@ -1,9 +1,10 @@
 { pkgs, inputs, ... }:
 
-let 
+let
   hostname = "wsl"; # FIXME: Add hostname
   username = "bryce"; # FIXME: Add username
-in {
+in
+{
 
   # Import module/files to add them to your system.
   imports = [
@@ -18,8 +19,8 @@ in {
   networking.hostName = "${hostname}";
 
   programs.fish.enable = true;
-  environment.pathsToLink = ["/share/fish"];
-  environment.shells = [pkgs.fish];
+  environment.pathsToLink = [ "/share/fish" ];
+  environment.shells = [ pkgs.fish ];
 
   environment.enableAllTerminfo = true;
 
@@ -51,9 +52,10 @@ in {
     autoPrune.enable = true;
   };
 
-  systemd.user = { # Should make VSCode _just work_ in wsl
+  systemd.user = {
+    # Should make VSCode _just work_ in wsl
     paths.vscode-remote-workaround = {
-      wantedBy = ["default.target"];
+      wantedBy = [ "default.target" ];
       pathConfig.PathChanged = "%h/.vscode-server/bin";
     };
     services.vscode-remote-workaround.script = ''
@@ -68,7 +70,7 @@ in {
 
   nix = {
     settings = {
-      trusted-users = [username];
+      trusted-users = [ username ];
       # FIXME: use your access tokens from secrets.json here to be able to clone private repos on GitHub and GitLab
       # access-tokens = [
       #   "github.com=${secrets.github_token}"

@@ -1,4 +1,4 @@
 {
-    enable = false;
-    config = '''';
+  enable = false;
+  config = '''';
 }

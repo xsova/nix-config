@@ -2,12 +2,8 @@
   pkgs,
   user,
   ...
-}: let
-  homeDir =
-    if pkgs.stdenv.isDarwin
-    then "/Users/${user}"
-    else "/home/${user}";
-in {
+}:
+let homeDir = if pkgs.stdenv.isDarwin then "/Users/${user}" else "/home/${user}"; in {
   stateVersion = "24.05";
   username = user;
   homeDirectory = homeDir;
@@ -20,13 +16,7 @@ in {
       NODE_EXTRA_CA_CERTS = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
     }
     // (
-      if pkgs.stdenv.isDarwin
-      then {
-        PLAYDATE_SDK_PATH = "${homeDir}/Developer/PlaydateSDK";
-      }
-      else {
-        WINIT_X11_SCALE_FACTOR = 1;
-      }
+      if pkgs.stdenv.isDarwin then { PLAYDATE_SDK_PATH = "${homeDir}/Developer/PlaydateSDK"; } else { WINIT_X11_SCALE_FACTOR = 1; }
     );
   sessionPath =
     [
@@ -43,11 +33,12 @@ in {
       "/sbin"
     ]
     ++ (
-      if pkgs.stdenv.isDarwin
-      then [
-        "/opt/homebrew/bin"
-        "${homeDir}/Developer/PlaydateSDK/bin"
-      ]
-      else []
+      if pkgs.stdenv.isDarwin then
+        [
+          "/opt/homebrew/bin"
+          "${homeDir}/Developer/PlaydateSDK/bin"
+        ]
+      else
+        [ ]
     );
 }

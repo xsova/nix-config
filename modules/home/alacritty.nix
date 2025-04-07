@@ -3,7 +3,8 @@
   lib,
   host ? "test",
   ...
-}: {
+}:
+{
   enable = true;
   settings = {
     general = {
@@ -61,11 +62,12 @@
         style = "Bold Italic";
       };
       size =
-        if host == "shell"
-        then 12.0
-        else if host == "core"
-        then 11.0
-        else 11.0; # Font size in points.
+        if host == "shell" then
+          12.0
+        else if host == "core" then
+          11.0
+        else
+          11.0; # Font size in points.
       offset = {
         x = 0;
         y = 0;
@@ -151,7 +153,7 @@
     terminal = {
       shell = {
         program = "${lib.getExe pkgs.fish}"; # Path to your preferred shell. If unspecified, Linux/BSD/macOS: $SHELL, Windows: "powershell".
-        args = ["-l"]; # Args passed to the shell's command.
+        args = [ "-l" ]; # Args passed to the shell's command.
       };
       osc52 = "OnlyCopy"; # Controls ability to write to the system clipboard with the osc 52 esc sequence. "Disabled" | "OnlyCopy" | "OnlyPaste" | "CopyPaste"
     };
@@ -190,7 +192,7 @@
       ];
     };
     keyboard = {
-      bindings = []; # See alacritty-bindings(5) -- possible `action`s at bottom of file.
+      bindings = [ ]; # See alacritty-bindings(5) -- possible `action`s at bottom of file.
     };
     debug = {
       # Options for troubleshooting
@@ -292,4 +294,3 @@
 # SelectLastTab: Select the last tab.
 # CopySelection: Copy from the selection buffer.
 # PasteSelection: Paste from the selection buffer.
-

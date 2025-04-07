@@ -4,5 +4,5 @@
   ...
 }:
 inputs.nixpkgs.lib.nixosSystem {
-  
+
 }

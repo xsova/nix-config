@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./jankyborders.nix
     ./nixpkgs.nix

@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   programs.zellij = {
     default_shell = "fish";
     on_force_close = "detach";

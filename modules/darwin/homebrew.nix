@@ -8,29 +8,44 @@
       start_service = true;
       restart_service = "changed";
     }
-    # "borders"
     "qmk/qmk/qmk"
+    "helix"
   ];
-  casks = [
-    "parallels"
-    "clion"
-    "docker"
-    "microsoft-teams"
-    "microsoft-outlook"
-    "discord"
-    "spotify"
-    "arc"
-    "visual-studio-code"
-    "balenaetcher"
-    "steam"
-    "fleet"
-    "yubico-authenticator"
-    "zen-browser"
-    "sizzy"
-    "protonvpn"
-    "launchcontrol"
-    "betterdisplay"
-  ];
+  casks =
+    let
+      browsers = [
+        "sizzy"
+        "google-chrome"
+        "arc"
+      ];
+      IDEs = [
+        "jetbrains-toolbox"
+        "visual-studio-code"
+        "cursor"
+      ];
+      utilities = [
+        "parallels"
+        "docker"
+        "balenaetcher"
+        "yubico-authenticator"
+        "protonvpn"
+        "launchcontrol"
+        "betterdisplay"
+        "hiddenbar"
+      ];
+      apps = [
+        "alacritty"
+        "ghostty"
+        "discord"
+        "spotify"
+        "steam"
+      ];
+      work = [
+        "microsoft-teams"
+        "microsoft-outlook"
+      ];
+    in
+    browsers ++ IDEs ++ utilities ++ apps ++ work;
   taps = [
     "homebrew/bundle"
     "homebrew/services"
