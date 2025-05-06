@@ -1,4 +1,4 @@
-{ ... }: {
+{
  enable = true;
  # enableBashIntegration = home.shell.enableBashIntegration;
  enableFishIntegration = true;
