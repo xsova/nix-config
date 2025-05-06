@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    catppuccin.url = "github:catppuccin/nix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,6 +27,7 @@
       nixpkgs,
       darwin,
       home-manager,
+      catppuccin,
       ...
     }:
     let
@@ -36,12 +38,7 @@
       specialArgs = {
         inputs = inputs;
         self = self;
-        inherit
-          username
-          email
-          hostname
-          platform
-          ;
+        inherit username email hostname platform catppuccin;
       };
     in
     {
@@ -68,7 +65,12 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = specialArgs;
-              users.${username} = import ./home/default.nix;
+              users.${username} = {
+                imports = [
+                  ./home
+                  catppuccin.homeModules.catppuccin
+                ];
+              };
             };
           }
           inputs.nix-index.darwinModules.nix-index

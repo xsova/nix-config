@@ -9,7 +9,6 @@
   ];
   enable = true;
   settings = {
-    theme = "modus_vivendi";
     editor = {
       mouse = true;
       auto-save = true;
@@ -90,6 +89,7 @@
           "search_selection"
           "search_prev"
         ];
+        C-A-s = "split_selection_on_newline";
         A-S-up = [
           "extend_to_line_bounds"
           "delete_selection"

@@ -25,13 +25,13 @@
         mouse_action1 = "move";
         mouse_action2 = "resize";
         top_padding = 10;
-        bottom_padding = 0;
+        bottom_padding = 10;
         left_padding = 10;
         right_padding = 10;
         window_gap = 10;
         window_placement = "second_child";
         window_topmost = "on";
-        window_opacity = "on";
+        window_opacity = "off";
         focus_follows_mouse = "autoraise";
         mouse_follows_focus = "true";
         debug_output = "false";
@@ -50,6 +50,7 @@
               appleApps = "^(LuLu|Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice|App Store|Steam|Alfred|Activity Monitor)$";
             in
             ''
+
               yabai -m rule --add app="^Arc$" manage=off
               yabai -m rule --add app="^Arc$" title="^$" mouse_follows_focus=off
               yabai -m rule --add app="JetBrains Toolbox" manage=off
@@ -63,13 +64,18 @@
               yabai -m rule --add app="DynamicLake Pro" manage=off
               yabai -m rule --add app="Microsoft Outlook" space=7
               yabai -m rule --add app="Microsoft Teams" space=6
+              yabai -m rule --add app="YabaiIndicator" minimize=on
+              yabai -m rule --add app="Messages" space=4
+              yabai -m rule --add app="Spotify" space=8
+
             '';
           functions = ''
+
             # Create spaces for newly added display.
             setupSpacesForDisplay() {
               local display_id="$1"
               local space_count=$(yabai -m query --spaces | jq "[.[] | select(.display == $display_id)] | length")
-              while [ "$space_count" -lt 10 ]; do
+              while [ "$space_count" -lt 20 ]; do
                 yabai -m space --create --display $display_id
                 space_count=$((space_count + 1))
               done
@@ -82,10 +88,12 @@
                 yabai -m space $space --destroy
               done
             }
+
           '';
           signals =
             let
               arcSignalAction = ''
+
                 app_name=$(yabai -m query --windows --window $YABAI_WINDOW_ID | jq -r ".app")
                 if [ "$app_name" = "Arc" ]; then
                   existing_windows=$(yabai -m query --windows | jq -r "[.[] | select(.app == \"Arc\")] | length")
@@ -93,19 +101,34 @@
                     yabai -m window $YABAI_WINDOW_ID --space 3 --toggle manage
                   fi
                 fi
+
               '';
             in
             ''
+
               yabai -m signal --add label=arc_first_window event=window_created action='${arcSignalAction}'
               yabai -m signal --add event=space_changed action="yabai -m window --focus first"
               yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
               yabai -m signal --add event=display_added action='setupSpacesForDisplay $YABAI_DISPLAY_ID'
               yabai -m signal --add event=display_removed action='cleanupSpacesForDisplay $YABAI_DISPLAY_ID'
+              yabai -m signal --add event=mission_control_exit action='echo "refresh" | nc -U /tmp/yabai-indicator.socket'
+              yabai -m signal --add event=display_added action='echo "refresh" | nc -U /tmp/yabai-indicator.socket'
+              yabai -m signal --add event=display_removed action='echo "refresh" | nc -U /tmp/yabai-indicator.socket'
+              yabai -m signal --add event=window_created action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+              yabai -m signal --add event=window_destroyed action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+              yabai -m signal --add event=window_focused action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+              yabai -m signal --add event=window_moved action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+              yabai -m signal --add event=window_resized action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+              yabai -m signal --add event=window_minimized action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+              yabai -m signal --add event=window_deminimized action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+
             '';
           setupInitialSpaces = ''
+
             yabai -m query --displays | jq -r '.[].id' | while read -r display_id; do
               setupSpacesForDisplay "$display_id"
             done
+
           '';
         in
         ''
@@ -134,13 +157,13 @@
         ctrl + alt + shift - 2 : yabai -m window --display 2
         ctrl + alt + shift - 3 : yabai -m window --display 3
 
-        ctrl + alt - h         : yabai -m display --focus west
-        ctrl + alt - t         : yabai -m display --focus south
-        ctrl + alt - j         : yabai -m display --focus south
-        ctrl + alt - s         : yabai -m display --focus north
-        ctrl + alt - k         : yabai -m display --focus north
-        ctrl + alt - n         : yabai -m display --focus east
-        ctrl + alt - l         : yabai -m display --focus east
+        # ctrl + alt - h         : yabai -m display --focus west
+        # ctrl + alt - t         : yabai -m display --focus south
+        # ctrl + alt - j         : yabai -m display --focus south
+        # ctrl + alt - s         : yabai -m display --focus north
+        # ctrl + alt - k         : yabai -m display --focus north
+        # ctrl + alt - n         : yabai -m display --focus east
+        # ctrl + alt - l         : yabai -m display --focus east
 
         # Change spaces
         alt - 1                : yabai -m space --switch 1
@@ -153,6 +176,16 @@
         alt - 8                : yabai -m space --switch 8
         alt - 9                : yabai -m space --switch 9
         alt - 0                : yabai -m space --switch 10
+        # alt + shift - 1        : yabai -m space --switch 11
+        # alt + shift - 2        : yabai -m space --switch 12
+        # alt + shift - 3        : yabai -m space --switch 13
+        # alt + shift - 4        : yabai -m space --switch 14
+        # alt + shift - 5        : yabai -m space --switch 15
+        # alt + shift - 6        : yabai -m space --switch 16
+        # alt + shift - 7        : yabai -m space --switch 17
+        # alt + shift - 8        : yabai -m space --switch 18
+        # alt + shift - 9        : yabai -m space --switch 19
+        # alt + shift - 0        : yabai -m space --switch 20
 
         # Move window to space
         alt + ctrl - 1         : yabai -m window --space 1
@@ -165,6 +198,16 @@
         alt + ctrl - 8         : yabai -m window --space 8
         alt + ctrl - 9         : yabai -m window --space 9
         alt + ctrl - 0         : yabai -m window --space 10
+        # alt + ctrl + shift - 1 : yabai -m window --space 11
+        # alt + ctrl + shift - 2 : yabai -m window --space 12
+        # alt + ctrl + shift - 3 : yabai -m window --space 13
+        # alt + ctrl + shift - 4 : yabai -m window --space 14
+        # alt + ctrl + shift - 5 : yabai -m window --space 15
+        # alt + ctrl + shift - 6 : yabai -m window --space 16
+        # alt + ctrl + shift - 7 : yabai -m window --space 17
+        # alt + ctrl + shift - 8 : yabai -m window --space 18
+        # alt + ctrl + shift - 9 : yabai -m window --space 19
+        # alt + ctrl + shift - 0 : yabai -m window --space 20
 
         # Focus window
         alt - h                : yabai -m window --focus west  || $(yabai -m display --focus west  )

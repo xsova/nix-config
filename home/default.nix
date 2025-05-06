@@ -10,6 +10,7 @@
     username = username;
     homeDirectory = "/Users/${username}";
     sessionVariables = {
+      LIBRARY_PATH = ''${lib.makeLibraryPath [pkgs.libiconv]}''${LIBRARY_PATH:+$LIBRARY_PATH}'';
       EDITOR = "hx";
       VISUAL = "cursor";
       MANPAGER = "sh -c 'col -bx | bat -l man -p'";
@@ -34,12 +35,14 @@
       "/bin"
     ];
   };
+  catppuccin = import ./catppuccin.nix;
   programs = {
     fish = import ./fish.nix { inherit username; };
     alacritty = import ./alacritty.nix { inherit lib pkgs; };
     helix = import ./helix.nix { inherit lib pkgs; };
     git = import ./git.nix { inherit username; };
     gh = import ./gh.nix;
+    ghostty = ./ghostty.nix;
     gitui = import ./gitui.nix;
   };
 }

@@ -93,7 +93,8 @@
       #   SleepDisabled = false; # Hide sleep button on login screen
       #   autoLoginUser = "Off"; # Auto login the supplied user on boot
       # };
-      spaces.spans-displays = true; # Displays have separate Spaces. false = each physical display has a separate space, true = one space spans across all physical displays
+      # Needs to be `false` for yabai.
+      spaces.spans-displays = false; # Displays have separate Spaces. false = each physical display has a separate space, true = one space spans across all physical displays
     };
   };
   networking = {

@@ -9,6 +9,7 @@
     systemPackages = with pkgs; [
       (rust-bin.fromRustupToolchainFile ./rust-toolchain.toml)
       apple-sdk
+      darwin.libiconv
       bacon
       bat
       btop
@@ -131,6 +132,7 @@
       "helix"
     ];
     casks = [
+      "ghostty"
       "sizzy"
       "arc"
       "jetbrains-toolbox"
