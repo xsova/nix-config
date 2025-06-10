@@ -1,5 +1,4 @@
 {
-  inputs,
   username,
   pkgs,
   platform,
@@ -47,7 +46,10 @@
     };
   };
   nixpkgs = {
-    config.allowUnfree = true;
+    config = {
+      allowUnfree = true;
+      allowBroken = false;
+    };
     hostPlatform = platform;
     buildPlatform = platform;
     flake = {

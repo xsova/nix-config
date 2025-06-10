@@ -3,13 +3,13 @@
   services = {
     jankyborders = {
       enable = true;
-      active_color = "0xaaffffff";
+      active_color = "glow(0xaaffffff)";
       ax_focus = false;
       background_color = "";
       blacklist = [ ];
       blur_radius = 5.0;
       hidpi = true;
-      inactive_color = "0xaa595959";
+      inactive_color = "glow(0xaa595959)";
       order = "above";
       style = "round";
       whitelist = [ ];
@@ -176,16 +176,16 @@
         alt - 8                : yabai -m space --switch 8
         alt - 9                : yabai -m space --switch 9
         alt - 0                : yabai -m space --switch 10
-        # alt + shift - 1        : yabai -m space --switch 11
-        # alt + shift - 2        : yabai -m space --switch 12
-        # alt + shift - 3        : yabai -m space --switch 13
-        # alt + shift - 4        : yabai -m space --switch 14
-        # alt + shift - 5        : yabai -m space --switch 15
-        # alt + shift - 6        : yabai -m space --switch 16
-        # alt + shift - 7        : yabai -m space --switch 17
-        # alt + shift - 8        : yabai -m space --switch 18
-        # alt + shift - 9        : yabai -m space --switch 19
-        # alt + shift - 0        : yabai -m space --switch 20
+        alt + shift - 1        : yabai -m space --switch 11
+        alt + shift - 2        : yabai -m space --switch 12
+        alt + shift - 3        : yabai -m space --switch 13
+        alt + shift - 4        : yabai -m space --switch 14
+        alt + shift - 5        : yabai -m space --switch 15
+        alt + shift - 6        : yabai -m space --switch 16
+        alt + shift - 7        : yabai -m space --switch 17
+        alt + shift - 8        : yabai -m space --switch 18
+        alt + shift - 9        : yabai -m space --switch 19
+        alt + shift - 0        : yabai -m space --switch 20
 
         # Move window to space
         alt + ctrl - 1         : yabai -m window --space 1
@@ -198,16 +198,16 @@
         alt + ctrl - 8         : yabai -m window --space 8
         alt + ctrl - 9         : yabai -m window --space 9
         alt + ctrl - 0         : yabai -m window --space 10
-        # alt + ctrl + shift - 1 : yabai -m window --space 11
-        # alt + ctrl + shift - 2 : yabai -m window --space 12
-        # alt + ctrl + shift - 3 : yabai -m window --space 13
-        # alt + ctrl + shift - 4 : yabai -m window --space 14
-        # alt + ctrl + shift - 5 : yabai -m window --space 15
-        # alt + ctrl + shift - 6 : yabai -m window --space 16
-        # alt + ctrl + shift - 7 : yabai -m window --space 17
-        # alt + ctrl + shift - 8 : yabai -m window --space 18
-        # alt + ctrl + shift - 9 : yabai -m window --space 19
-        # alt + ctrl + shift - 0 : yabai -m window --space 20
+        alt + ctrl + shift - 1 : yabai -m window --space 11
+        alt + ctrl + shift - 2 : yabai -m window --space 12
+        alt + ctrl + shift - 3 : yabai -m window --space 13
+        alt + ctrl + shift - 4 : yabai -m window --space 14
+        alt + ctrl + shift - 5 : yabai -m window --space 15
+        alt + ctrl + shift - 6 : yabai -m window --space 16
+        alt + ctrl + shift - 7 : yabai -m window --space 17
+        alt + ctrl + shift - 8 : yabai -m window --space 18
+        alt + ctrl + shift - 9 : yabai -m window --space 19
+        alt + ctrl + shift - 0 : yabai -m window --space 20
 
         # Focus window
         alt - h                : yabai -m window --focus west  || $(yabai -m display --focus west  )
@@ -236,6 +236,8 @@
         alt + ctrl - right     : yabai -m window --toggle float --grid 1:2:1:0:1:1 # Right half
         alt + ctrl - up        : yabai -m window --toggle float --grid 2:1:0:0:1:1 # Top half
         alt + ctrl - down      : yabai -m window --toggle float --grid 2:1:1:0:1:1 # Bottom half
+
+        alt + ctrl + shift - z : osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'
       '';
     };
   };

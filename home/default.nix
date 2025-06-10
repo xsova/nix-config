@@ -42,7 +42,7 @@
     helix = import ./helix.nix { inherit lib pkgs; };
     git = import ./git.nix { inherit username; };
     gh = import ./gh.nix;
-    ghostty = ./ghostty.nix;
+    ghostty = import ./ghostty.nix;
     gitui = import ./gitui.nix;
   };
 }

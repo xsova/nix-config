@@ -5,8 +5,8 @@
  enableZshIntegration = true;
  package = null;
  clearDefaultKeybinds = false;
- installBatSyntax = true;
- installVimSyntax = true;
+ installBatSyntax = false;
+ installVimSyntax = false;
  settings = {
   font-size = 12;
   font-family = "MD IO Trial";

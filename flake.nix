@@ -4,6 +4,9 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     catppuccin.url = "github:catppuccin/nix";
+    nur.url = "github:nix-community/nur";
+    rust.url = "github:oxalica/rust-overlay";
+    zig.url = "github:mitchellh/zig-overlay";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,9 +19,6 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur.url = "github:nix-community/nur";
-    rust.url = "github:oxalica/rust-overlay";
-    zig.url = "github:mitchellh/zig-overlay";
   };
 
   outputs =

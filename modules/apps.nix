@@ -41,7 +41,6 @@
       direnv
       discordo
       emmet-language-server
-      evcxr
       findutils
       fish-lsp
       fzf
@@ -130,10 +129,10 @@
       "ykman"
       "qmk/qmk/qmk"
       "helix"
+      "imessage-exporter"
     ];
     casks = [
-      "ghostty"
-      "sizzy"
+      "github"
       "arc"
       "jetbrains-toolbox"
       "cursor"
