@@ -8,38 +8,36 @@
     ];
     systemPackages = with pkgs; [
       (rust-bin.fromRustupToolchainFile ./rust-toolchain.toml)
-      apple-sdk
-      darwin.libiconv
-      bacon
+      # apple-sdk
+      # darwin.libiconv
+      # bacon
       bat
       btop
-      cacert
-      caligula
-      cargo-audit
-      cargo-bloat
-      cargo-cross
-      cargo-deny
-      cargo-edit
-      cargo-license
-      cargo-modules
-      cargo-nextest
-      cargo-outdated
-      cargo-spellcheck
-      cargo-tarpaulin
-      cargo-unused-features
-      cargo-watch
-      cargo-zigbuild
+      # cacert
+      # caligula
+      # cargo-audit
+      # cargo-bloat
+      # cargo-cross
+      # cargo-deny
+      # cargo-edit
+      # cargo-license
+      # cargo-modules
+      # cargo-nextest
+      # cargo-outdated
+      # cargo-spellcheck
+      # cargo-tarpaulin
+      # cargo-unused-features
+      # cargo-watch
+      # cargo-zigbuild
       clang
       clang-tools
       cmake
-      cmake-language-server
       coreutils
       curl
-      dateutils
+      # dateutils
       delve
-      diffutils
+      # diffutils
       direnv
-      discordo
       emmet-language-server
       findutils
       fish-lsp
@@ -62,55 +60,52 @@
       lsd
       lsof
       lua
-      lua-language-server
       luajitPackages.luacheck
       m-cli
       markdown-oxide
-      marksman
+      # marksman
       neovim
-      nil
-      nodePackages_latest.bash-language-server
-      nodePackages_latest.nodejs
-      nodePackages_latest.nodemon
-      nodePackages_latest.typescript
-      nodePackages_latest.typescript-language-server
-      nodePackages_latest.vscode-langservers-extracted
-      nodePackages_latest.yaml-language-server
+      # nil
+      nodejs
+      nodemon
+      typescript
+      typescript-language-server
+      vscode-langservers-extracted
+      yaml-language-server
       openssh
       parallel
       pinentry_mac
       pylyzer
       pyright
-      python312Full
+      python312
       ripgrep
-      rustc
+      # rustc
       shellcheck
       shfmt
       slint-lsp
-      sumneko-lua-language-server
+      lua-language-server
       taplo
       tree
       unzip
       vim
-      w3m
-      watch
+      # w3m
+      # watch
       weechat
       wget
       yubikey-agent
       zellij
       zig
       zls
-      SDL2.dev
+      # SDL2.dev
     ];
     variables = {
       JDK_PATH = "${pkgs.jdk11}/";
-      NODEJS_PATH = "${pkgs.nodePackages_latest.nodejs}/";
+      NODEJS_PATH = "${pkgs.nodejs}/";
     };
-    # etc."nix/inputs/nixpkgs".source = "${pkgs}";
-    extraInit = ''
-      [[ -f /etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh ]] && source /etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh
-      export alias sudo=/run/wrappers/bin/sudo
-    '';
+    # extraInit = ''
+    #   # [[ -f /etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh ]] && source /etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh
+    #   export alias sudo=/run/wrappers/bin/sudo
+    # '';
   };
   homebrew = {
     enable = true;
@@ -129,26 +124,22 @@
       "ykman"
       "qmk/qmk/qmk"
       "helix"
-      "imessage-exporter"
     ];
     casks = [
+      # "balenaetche"
+      # "alacritty"
       "github"
       "arc"
       "jetbrains-toolbox"
       "cursor"
       "parallels"
-      "balenaetcher"
-      "yubico-authenticator"
       "protonvpn"
       "launchcontrol"
       "betterdisplay"
       "hiddenbar"
-      "alacritty"
       "discord"
       "spotify"
       "steam"
-      "microsoft-teams"
-      "microsoft-outlook"
     ];
     taps = [
       "homebrew/bundle"

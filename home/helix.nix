@@ -4,9 +4,6 @@
   ...
 }:
 {
-  extraPackages = with pkgs; [
-    typescript-language-server
-  ];
   enable = true;
   settings = {
     editor = {
@@ -278,16 +275,8 @@
       }
       {
         name = "nix";
-        scope = "source.nix";
-        injection-regex = "nix";
-        file-types = [ "nix" ];
-        shebangs = [ ];
-        roots = [ ];
-        language-servers = [ "nil" ];
-        indent = {
-          tab-width = 2;
-          unit = "  ";
-        };
+        language-servers = [ "nixd" ];
+        auto-format = true;
       }
       {
         name = "python";
@@ -295,38 +284,6 @@
           "pyright"
           "pylyzer"
         ];
-      }
-      {
-        name = "fortran";
-        scope = "source.fortran";
-        injection-regex = "fortran";
-        file-types = [
-          "f"
-          "for"
-          "f90"
-          "f95"
-          "f03"
-        ];
-        roots = [ "fpm.toml" ];
-        comment-token = "!";
-        language-servers = [ "fortls" ];
-        indent = {
-          tab-width = 4;
-          unit = "    ";
-        };
-      }
-      {
-        name = "odin";
-        auto-format = false;
-        scope = "source.odin";
-        file-types = [ "odin" ];
-        roots = [ "ols.json" ];
-        language-servers = [ "ols" ];
-        comment-token = "//";
-        indent = {
-          tab-width = 4;
-          unit = "\t";
-        };
       }
       {
         name = "zig";
@@ -370,10 +327,6 @@
           "tsconfig.json"
         ];
         language-servers = [ "typescript-language-server" ];
-        # block-comment-tokens = {
-        #   start = "/*";
-        #   end = "*/";
-        # };
         auto-format = true;
         indent = {
           tab-width = 2;
@@ -389,7 +342,7 @@
         ];
         roots = [ ];
         comment-token = "#";
-        language-servers = [ "cmake-language-server" ];
+        # language-servers = [ "cmake-language-server" ];
         injection-regex = "cmake";
         indent = {
           tab-width = 2;
@@ -415,22 +368,6 @@
         };
       }
       {
-        name = "haskell";
-        scope = "source.haskell";
-        injection-regex = "haskell";
-        file-types = [ "hs" ];
-        roots = [
-          "Setup.hs"
-          "stack.yaml"
-          "*.cabal"
-        ];
-        comment-token = "--";
-        indent = {
-          tab-width = 2;
-          unit = "  ";
-        };
-      }
-      {
         name = "yaml";
         scope = "source.yaml";
         file-types = [
@@ -444,38 +381,6 @@
         indent = {
           tab-width = 2;
           unit = "  ";
-        };
-      }
-      {
-        name = "julia";
-        scope = "source.julia";
-        injection-regex = "julia";
-        file-types = [ "jl" ];
-        roots = [ ];
-        comment-token = "#";
-        language-servers = [ "julia" ];
-        indent = {
-          tab-width = 4;
-          unit = "    ";
-        };
-      }
-      {
-        name = "php";
-        scope = "source.php";
-        injection-regex = "php";
-        file-types = [
-          "php"
-          "inc"
-        ];
-        shebangs = [ "php" ];
-        roots = [
-          "composer.json"
-          "index.php"
-        ];
-        language-servers = [ "intelephense" ];
-        indent = {
-          tab-width = 4;
-          unit = "    ";
         };
       }
       {
@@ -523,46 +428,46 @@
           ];
         };
       }
-      {
-        name = "ruby";
-        scope = "source.ruby";
-        injection-regex = "ruby";
-        file-types = [
-          "rb"
-          "rake"
-          "rakefile"
-          "irb"
-          "gemfile"
-          "gemspec"
-          "Rakefile"
-          "Gemfile"
-          "rabl"
-          "jbuilder"
-          "jb"
-        ];
-        shebangs = [ "ruby" ];
-        roots = [ ];
-        comment-token = "#";
-        language-servers = [ "solargraph" ];
-        auto-format = true;
-        indent = {
-          tab-width = 2;
-          unit = "  ";
-        };
-        formatter = {
-          command = "bundle";
-          args = [
-            "exec"
-            "rubocop"
-            "--stdin"
-            "foo.rb"
-            "--fix"
-            "--stderr"
-            "--fail-level"
-            "fatal"
-          ];
-        };
-      }
+      # {
+      #   name = "ruby";
+      #   scope = "source.ruby";
+      #   injection-regex = "ruby";
+      #   file-types = [
+      #     "rb"
+      #     "rake"
+      #     "rakefile"
+      #     "irb"
+      #     "gemfile"
+      #     "gemspec"
+      #     "Rakefile"
+      #     "Gemfile"
+      #     "rabl"
+      #     "jbuilder"
+      #     "jb"
+      #   ];
+      #   shebangs = [ "ruby" ];
+      #   roots = [ ];
+      #   comment-token = "#";
+      #   language-servers = [ "solargraph" ];
+      #   auto-format = true;
+      #   indent = {
+      #     tab-width = 2;
+      #     unit = "  ";
+      #   };
+      #   formatter = {
+      #     command = "bundle";
+      #     args = [
+      #       "exec"
+      #       "rubocop"
+      #       "--stdin"
+      #       "foo.rb"
+      #       "--fix"
+      #       "--stderr"
+      #       "--fail-level"
+      #       "fatal"
+      #     ];
+      #   };
+      # }
       {
         name = "javascript";
         scope = "source.js";
@@ -572,12 +477,7 @@
           "mjs"
           "cjs"
         ];
-        shebangs = [
-          "deno"
-          "node"
-        ];
         roots = [
-          "deno.json"
           "package.json"
           "tsconfig.json"
         ];
@@ -588,7 +488,7 @@
           unit = "  ";
         };
         formatter = {
-          command = "deno";
+          command = lib.getExe pkgs.prettier;
           args = [
             "fmt"
             "-"
@@ -659,26 +559,10 @@
           ];
         };
       }
-      {
-        name = "c-sharp";
-        scope = "source.csharp";
-        injection-regex = "c-?sharp";
-        file-types = [ "cs" ];
-        roots = [
-          "sln"
-          "csproj"
-        ];
-        comment-token = "//";
-        indent = {
-          tab-width = 4;
-          unit = "\t";
-        };
-      }
     ];
     language-server = {
-      ols = {
-        command = lib.getExe pkgs.ols;
-        args = [ ];
+      typescript-language-server = {
+        command = lib.getExe pkgs.typescript-language-server;
       };
       jdtls = {
         command = lib.getExe pkgs.jdt-language-server;
@@ -687,41 +571,19 @@
         command = lib.getExe pkgs.gopls;
       };
       lua-language-server = {
-        command = "lua-language-server";
+        command = lib.getExe pkgs.lua-language-server;
         args = [ ];
       };
-      fortls = {
-        command = lib.getExe pkgs.fortls;
-        args = [ "--lowercase_intrinsics" ];
-      };
-      yaml-language-server = {
-        command = lib.getExe pkgs.yaml-language-server;
-        args = [ "--stdio" ];
-      };
-      cmake-language-server = {
-        command = lib.getExe pkgs.cmake-language-server;
-      };
-      julia = {
-        command = "julia";
-        args = [
-          "--startup-file=no"
-          "--history-file=no"
-          "--quiet"
-          "-e"
-          "using LanguageServer; runserver()"
-        ];
-      };
+      # cmake-language-server = {
+      #   command = lib.getExe pkgs.cmake-language-server;
+      # };
       bash-language-server = {
         command = lib.getExe pkgs.bash-language-server;
         args = [ "start" ];
       };
-      solargraph = {
-        command = lib.getExe pkgs.solargraph;
-        args = [ "stdio" ];
-      };
-      # intelephense = {
-      #   command = lib.getExe pkgs.intelephense;
-      #   args = [ "--stdio" ];
+      # solargraph = {
+      #   command = lib.getExe pkgs.solargraph;
+      #   args = [ "stdio" ];
       # };
       deno = {
         command = lib.getExe pkgs.deno;
@@ -745,14 +607,22 @@
         command = lib.getExe pkgs.golangci-lint-langserver;
         args = [ "--stdio" ];
       };
-      nil = {
-        command = lib.getExe pkgs.nil;
-        config.nil.nix = {
-          binary = lib.getExe pkgs.nix;
-          flake = {
-            autoEvalInputs = true;
+      nixd = {
+        command = lib.getExe pkgs.nixd;
+        args = [ "--semantic-tokens=true" ];
+        config.nixd =
+          let
+            myFlake = "(builtins.getFlake (toString /Users/bryce/nix))";
+            nixOpts = "${myFlake}.darwinConfigurations.port.options";
+          in
+          {
+            nixpkgs.expr = "import ${myFlake}.inputs.nixpkgs { }";
+            formatting.command = [ "nixfmt" ];
+            options = {
+              nixos.expr = nixOpts;
+              home-manager.expr = "${nixOpts}.home-manager.users.type.getSubOptions []";
+            };
           };
-        };
       };
       eslint = {
         command = "golangci-lint-langserver";
@@ -777,163 +647,6 @@
           workingDirectory.mode = "auto";
         };
       };
-      emmet-lsp = {
-        command = "emmet-language-server";
-        args = [ "--stdio" ];
-      };
-      copilot = {
-        command = "helix-gpt";
-        args = [
-          "--handler"
-          "copilot"
-          "--copilotApiKey"
-          ""
-        ];
-      };
-    };
-    grammar = {
-      grammar = [
-        {
-          name = "c-sharp";
-          source = {
-            git = "https://github.com/tree-sitter/tree-sitter-c-sharp";
-            rev = "5b60f99545fea00a33bbfae5be956f684c4c69e2";
-          };
-        }
-        {
-          name = "go";
-          source = {
-            git = "https://github.com/tree-sitter/tree-sitter-go";
-            rev = "0fa917a7022d1cd2e9b779a6a8fc5dc7fad69c75";
-          };
-        }
-        {
-          name = "tsx";
-          source = {
-            git = "https://github.com/tree-sitter/tree-sitter-typescript";
-            rev = "3e897ea5925f037cfae2e551f8e6b12eec2a201a";
-          };
-        }
-        {
-          name = "typescript";
-          source = {
-            git = "https://github.com/tree-sitter/tree-sitter-typescript";
-            rev = "3e897ea5925f037cfae2e551f8e6b12eec2a201a";
-          };
-        }
-        {
-          name = "javascript";
-          source = {
-            git = "https://github.com/tree-sitter/tree-sitter-javascript";
-            rev = "4a95461c4761c624f2263725aca79eeaefd36cad";
-          };
-        }
-        {
-          name = "nix";
-          source = {
-            git = "https://github.com/cstrahan/tree-sitter-nix";
-            rev = "6b71a810c0acd49b980c50fc79092561f7cee307";
-          };
-        }
-        {
-          name = "ruby";
-          source = {
-            git = "https://github.com/tree-sitter/tree-sitter-ruby";
-            rev = "4c600a463d97e36a0ca5ac57e11f3ac8c297a0fa";
-          };
-        }
-        {
-          name = "bash";
-          source = {
-            git = "https://github.com/tree-sitter/tree-sitter-bash";
-            rev = "275effdfc0edce774acf7d481f9ea195c6c403cd";
-          };
-        }
-        {
-          name = "php";
-          source = {
-            git = "https://github.com/tree-sitter/tree-sitter-php";
-            rev = "57f855461aeeca73bd4218754fb26b5ac143f98f";
-          };
-        }
-        {
-          name = "julia";
-          source = {
-            git = "https://github.com/tree-sitter/tree-sitter-julia";
-            rev = "fc60b7cce87da7a1b7f8cb0f9371c3dc8b684500";
-          };
-        }
-        {
-          name = "java";
-          source = {
-            git = "https://github.com/tree-sitter/tree-sitter-java";
-            rev = "bd6186c24d5eb13b4623efac9d944dcc095c0dad";
-          };
-        }
-        {
-          name = "yaml";
-          source = {
-            git = "https://github.com/ikatyang/tree-sitter-yaml";
-            rev = "0e36bed171768908f331ff7dff9d956bae016efb";
-          };
-        }
-        {
-          name = "haskell";
-          source = {
-            git = "https://github.com/tree-sitter/tree-sitter-haskell";
-            rev = "b6ec26f181dd059eedd506fa5fbeae1b8e5556c8";
-          };
-        }
-        {
-          name = "fortran";
-          source = {
-            git = "https://github.com/stadelmanma/tree-sitter-fortran";
-            rev = "f0f2f100952a353e64e26b0fa710b4c296d7af13";
-          };
-        }
-        {
-          name = "odin";
-          source = {
-            git = "https://github.com/MineBill/tree-sitter-odin";
-            rev = "da885f4a387f169b9b69fe0968259ee257a8f69a";
-          };
-        }
-        {
-          name = "sql";
-          source = {
-            git = "https://github.com/DerekStride/tree-sitter-sql";
-            rev = "0caa7fa2ee00e0b770493a79d4efacc1fc376cc5";
-          };
-        }
-        {
-          name = "make";
-          source = {
-            git = "https://github.com/alemuller/tree-sitter-make";
-            rev = "a4b9187417d6be349ee5fd4b6e77b4172c6827dd";
-          };
-        }
-        {
-          name = "cmake";
-          source = {
-            git = "https://github.com/uyha/tree-sitter-cmake";
-            rev = "f6616f1e417ee8b62daf251aa1daa5d73781c596";
-          };
-        }
-        {
-          name = "zig";
-          source = {
-            git = "https://github.com/maxxino/tree-sitter-zig";
-            rev = "8d3224c3bd0890fe08358886ebf54fca2ed448a6";
-          };
-        }
-        {
-          name = "lua";
-          source = {
-            git = "https://github.com/MuniTanjim/tree-sitter-lua";
-            rev = "887dfd4e83c469300c279314ff1619b1d0b85b91";
-          };
-        }
-      ];
     };
   };
 }

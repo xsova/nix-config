@@ -5,36 +5,38 @@
   ...
 }:
 {
-  home = {
-    stateVersion = "24.05";
-    username = username;
-    homeDirectory = "/Users/${username}";
-    sessionVariables = {
-      LIBRARY_PATH = ''${lib.makeLibraryPath [pkgs.libiconv]}''${LIBRARY_PATH:+$LIBRARY_PATH}'';
-      EDITOR = "hx";
-      VISUAL = "cursor";
-      MANPAGER = "sh -c 'col -bx | bat -l man -p'";
-      IWD = "($PWD)";
-      NODE_EXTRA_CA_CERTS = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-      PLAYDATE_SDK_PATH = "/Users/${username}/Developer/PlaydateSDK";
+  home =
+    let
+      homeDir = "/Users/${username}";
+    in
+    {
+      stateVersion = "24.05";
+      username = username;
+      homeDirectory = homeDir;
+      sessionVariables = {
+        LIBRARY_PATH = ''${lib.makeLibraryPath [ pkgs.libiconv ]}''${LIBRARY_PATH:+$LIBRARY_PATH}'';
+        EDITOR = "hx";
+        VISUAL = "cursor";
+        MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+        IWD = "($PWD)";
+        NODE_EXTRA_CA_CERTS = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+        PLAYDATE_SDK_PATH = "${homeDir}/Developer/PlaydateSDK";
+      };
+      sessionPath = [
+        "/run/current-system/sw/bin"
+        "/opt/homebrew/bin"
+        "${homeDir}/.local/bin"
+        "${homeDir}/bin"
+        "${homeDir}/go/bin"
+        "${homeDir}/Developer/PlaydateSDK/bin"
+        "/Library/Frameworks/Python.framework/Versions/Current/bin"
+        "/usr/local/bin"
+        "/usr/bin"
+        "/usr/sbin"
+        "/sbin"
+        "/bin"
+      ];
     };
-    sessionPath = [
-      "/Users/${username}/.nix-profile/bin"
-      "/Users/${username}/.local/bin"
-      "/Users/${username}/bin"
-      "/Users/${username}/go/bin"
-      "/run/current-system/sw/bin"
-      "/nix/var/nix/profiles/default/bin"
-      "/opt/homebrew/bin"
-      "/Library/Frameworks/Python.framework/Versions/Current/bin"
-      "/Users/${username}/Developer/PlaydateSDK/bin"
-      "/usr/local/bin"
-      "/usr/bin"
-      "/usr/sbin"
-      "/sbin"
-      "/bin"
-    ];
-  };
   catppuccin = import ./catppuccin.nix;
   programs = {
     fish = import ./fish.nix { inherit username; };
@@ -43,6 +45,6 @@
     git = import ./git.nix { inherit username; };
     gh = import ./gh.nix;
     ghostty = import ./ghostty.nix;
-    gitui = import ./gitui.nix;
+    # gitui = import ./gitui.nix;
   };
 }

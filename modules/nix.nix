@@ -9,7 +9,7 @@
 {
   nix = {
     enable = true;
-    package = pkgs.nix;
+    package = pkgs.lix;
     gc = {
       automatic = lib.mkDefault true;
       options = lib.mkDefault "--delete-older-than 7d";

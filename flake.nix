@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     catppuccin.url = "github:catppuccin/nix";
-    nur.url = "github:nix-community/nur";
     rust.url = "github:oxalica/rust-overlay";
     zig.url = "github:mitchellh/zig-overlay";
     home-manager = {
@@ -24,7 +23,6 @@
   outputs =
     inputs@{
       self,
-      nixpkgs,
       darwin,
       home-manager,
       catppuccin,
@@ -38,12 +36,17 @@
       specialArgs = {
         inputs = inputs;
         self = self;
-        inherit username email hostname platform catppuccin;
+        inherit
+          username
+          email
+          hostname
+          platform
+          catppuccin
+          ;
       };
     in
     {
       overlays = [
-        inputs.nur.overlays.default
         inputs.rust.overlays.default
         inputs.zig.overlays.default
       ];
@@ -61,7 +64,7 @@
           home-manager.darwinModules.home-manager
           {
             home-manager = {
-              backupFileExtension = ".bak";
+              backupFileExtension = ".home-bak";
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = specialArgs;

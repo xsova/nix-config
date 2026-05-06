@@ -1,7 +1,7 @@
 let
   common = {
     enable = true;
-    flavor = "latte";
+    flavor = "mocha";
   };
 in
 {
